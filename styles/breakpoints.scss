@@ -1,0 +1,71 @@
+/* Variables */
+$min-xs: 322px;
+$min-sm: 568px;
+$min-md: 769px;
+$min-lg: 992px;
+$min-xl: 1201px;
+$min-xxl: 1367px;
+
+/* Functions */
+@function min-breakpoint-value($size) {
+  @if $size == xs {
+    @return $min-xs;
+  }
+  @if $size == sm {
+    @return $min-sm;
+  }
+  @if $size == md {
+    @return $min-md;
+  }
+  @if $size == lg {
+    @return $min-lg;
+  }
+  @if $size == xl {
+    @return $min-xl;
+  }
+  @if $size == xxl {
+    @return $min-xxl;
+  }
+  @return $size;
+}
+
+@function max-breakpoint-value($size) {
+  @if $size == xs {
+    @return ($min-xs - 1);
+  }
+  @if $size == sm {
+    @return ($min-sm - 1);
+  }
+  @if $size == md {
+    @return ($min-md - 1);
+  }
+  @if $size == lg {
+    @return ($min-lg - 1);
+  }
+  @if $size == xl {
+    @return ($min-xl - 1);
+  }
+  @if $size == xxl {
+    @return ($min-xxl - 1);
+  }
+  @return $size;
+}
+
+/* Mixins */
+@mixin min-breakpoint($size) {
+  @media (min-width: min-breakpoint-value($size)) {
+    @content;
+  }
+}
+
+@mixin max-breakpoint($size) {
+  @media (max-width: max-breakpoint-value($size)) {
+    @content;
+  }
+}
+
+@mixin between-breakpoints($min, $max) {
+  @media (min-width: min-breakpoint-value($min)) and (max-width: max-breakpoint-value($max)) {
+    @content;
+  }
+}

@@ -1,0 +1,65 @@
+.textInputContainer {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+
+  .label {
+    text-align: left;
+    display: flex;
+
+    span {
+      background-color: var(--primary-colour);
+      padding: 0 var(--padding-xs);
+      border-radius: var(--border-radius-xs) var(--border-radius-xs) 0 0;
+    }
+  }
+
+  .input {
+    display: flex;
+
+    input,
+    textarea {
+      $outline-width: 2px;
+
+      background-color: rgba(255, 255, 255, 0.05);
+      border: none;
+      border-radius: var(--border-radius-xs);
+      width: 100%;
+      resize: none;
+      padding: var(--padding-xs);
+      outline-offset: calc($outline-width * -1);
+      transition: var(--transition-quick);
+      outline: $outline-width solid transparent;
+
+      &.withLabel {
+        border-top-left-radius: 0;
+      }
+
+      &.withButton {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+
+      &:hover {
+        outline: $outline-width solid var(--primary-colour-darker);
+      }
+
+      &:focus {
+        outline: $outline-width solid var(--primary-colour);
+      }
+    }
+
+    textarea {
+      height: 15em;
+      white-space: pre;
+      overflow-wrap: normal;
+      overflow-x: auto;
+    }
+
+    button {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+  }
+}

@@ -1,0 +1,13 @@
+.chordListContainer {
+  .selectedChords {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--padding-xs);
+
+    button {
+      &:not(.active) {
+        background-color: rgba(255, 255, 255, 0.05);
+      }
+    }
+  }
+}

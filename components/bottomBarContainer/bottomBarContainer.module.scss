@@ -1,0 +1,28 @@
+@import "../../breakpoints.scss";
+
+// @include max-breakpoint(md) {
+//   background-color: green;
+// }
+
+.bottomBarContainer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition);
+  z-index: 1;
+
+  &.closed {
+    bottom: -5rem;
+  }
+
+  .bottomBarContent {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--background-colour-dark);
+    box-shadow: var(--box-shadow);
+    padding: 1rem;
+  }
+}

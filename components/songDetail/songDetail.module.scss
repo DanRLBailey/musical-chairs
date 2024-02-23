@@ -1,0 +1,86 @@
+@import "@/styles/breakpoints.scss";
+
+.songDetailContainer {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--background-colour-light);
+  border-radius: var(--border-radius-md);
+  transition: var(--transition);
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  .header {
+    padding: var(--padding-md);
+    display: flex;
+
+    .name {
+      flex: 1;
+
+      & > div {
+        display: flex;
+        align-items: center;
+
+        span {
+          flex: 1;
+        }
+
+        .difficulty {
+          $width: 10px;
+
+          display: flex;
+          gap: calc($width / 2);
+          position: relative;
+
+          span {
+            width: $width;
+            height: $width;
+            border-radius: $width;
+            background: var(--primary-colour);
+
+            &:nth-of-type(1) {
+              background: var(--primary-colour-light-2);
+            }
+
+            &:nth-of-type(2) {
+              background: var(--primary-colour-light);
+            }
+
+            &:nth-of-type(4) {
+              background: var(--primary-colour-dark);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .footer {
+    display: grid;
+    grid-template-columns: 0.75fr 0.75fr 1.5fr 1fr;
+    padding: var(--padding-md);
+    background-color: var(--background-colour-light-2);
+    border-radius: 0 0 var(--border-radius-md) var(--border-radius-md);
+
+    & > div {
+      flex: 1;
+      display: flex;
+      font-size: var(--font-size-xs);
+      place-items: center;
+      justify-content: center;
+      gap: var(--margin-xxs);
+      position: relative;
+
+      .symbol {
+        color: rgba(255, 255, 255, 0.5);
+      }
+
+      &:hover {
+        .symbol {
+          color: var(--secondary-colour);
+        }
+      }
+    }
+  }
+}

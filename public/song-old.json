@@ -1,0 +1,3008 @@
+{
+  "name": "Line Without A Hook",
+  "artist": "Ricky Montgomery",
+  "slug": "line-without-a-hook-ricky-montgomery",
+  "difficulty": 0,
+  "capo": 0,
+  "key": "A",
+  "tuning": "E A D G B E",
+  "duration": 175,
+  "lines": [
+    {
+      "words": [
+        {
+          "lyric": "[Verse",
+          "chords": []
+        },
+        {
+          "lyric": "1]",
+          "chords": []
+        }
+      ]
+    },
+    {
+      "words": [
+        {
+          "lyric": "I",
+          "chords": [],
+          "timing": 0.7295149904632569
+        },
+        {
+          "lyric": "dont",
+          "chords": [],
+          "timing": 0.8879831163482667
+        },
+        {
+          "lyric": "really",
+          "chords": [],
+          "timing": 1.0254161049041748
+        },
+        {
+          "lyric": "give",
+          "chords": [],
+          "timing": 1.3129440038146973
+        },
+        {
+          "lyric": "a",
+          "chords": [],
+          "timing": 1.4819439141693116
+        },
+        {
+          "lyric": "damn",
+          "chords": [],
+          "timing": 1.646250822616577
+        },
+        {
+          "lyric": "about",
+          "chords": [],
+          "timing": 1.8214320839233398
+        },
+        {
+          "lyric": "the",
+          "chords": [],
+          "timing": 1.9784319103546142
+        },
+        {
+          "lyric": "way",
+          "chords": [],
+          "timing": 2.172811893188477
+        },
+        {
+          "lyric": "you",
+          "chords": [],
+          "timing": 2.34832704196167
+        },
+        {
+          "lyric": "touch",
+          "chords": [
+            {
+              "chord": "G",
+              "timing": 2.5656070286102297
+            }
+          ],
+          "timing": 2.483327032424927
+        },
+        {
+          "lyric": "me",
+          "chords": [],
+          "timing": 2.8166750591278076
+        },
+        {
+          "lyric": "when",
+          "chords": [],
+          "timing": 3.4838279237060545
+        },
+        {
+          "lyric": "were",
+          "chords": [],
+          "timing": 3.793576938964844
+        },
+        {
+          "lyric": "alone",
+          "chords": [
+            {
+              "chord": "Em",
+              "timing": 4.481049062942505
+            }
+          ],
+          "timing": 4.149708935150146
+        }
+      ]
+    },
+    {
+      "words": [
+        {
+          "lyric": "You",
+          "chords": [],
+          "timing": 5.7362410171661375
+        },
+        {
+          "lyric": "can",
+          "chords": [],
+          "timing": 6.017031038146973
+        },
+        {
+          "lyric": "hold",
+          "chords": [
+            {
+              "chord": "C",
+              "timing": 6.376600032424927
+            }
+          ],
+          "timing": 6.368189106811523
+        },
+        {
+          "lyric": "my",
+          "chords": [],
+          "timing": 6.786214066757202
+        },
+        {
+          "lyric": "hand",
+          "chords": [],
+          "timing": 7.285262971389771
+        },
+        {
+          "lyric": "if",
+          "chords": [],
+          "timing": 7.783725948501587
+        },
+        {
+          "lyric": "no",
+          "chords": [
+            {
+              "chord": "D",
+              "timing": 8.254235198364258
+            }
+          ],
+          "timing": 8.266066996185303
+        },
+        {
+          "lyric": "ones",
+          "chords": [],
+          "timing": 8.746311032424927
+        },
+        {
+          "lyric": "home",
+          "chords": [],
+          "timing": 9.251190938964843
+        }
+      ]
+    },
+    {
+      "words": [
+        {
+          "lyric": "Do",
+          "chords": [],
+          "timing": 9.550527908447267
+        },
+        {
+          "lyric": "you",
+          "chords": [],
+          "timing": 9.795528032424928
+        },
+        {
+          "lyric": "like",
+          "chords": [
+            {
+              "chord": "G",
+              "timing": 10.165344807357789
+            }
+          ],
+          "timing": 10.135457954223632
+        },
+        {
+          "lyric": "it",
+          "chords": [],
+          "timing": 10.55016602861023
+        },
+        {
+          "lyric": "when",
+          "chords": [],
+          "timing": 11.150740146865845
+        },
+        {
+          "lyric": "Im",
+          "chords": [],
+          "timing": 11.418866938964843
+        },
+        {
+          "lyric": "away?",
+          "chords": [
+            {
+              "chord": "Em",
+              "timing": 12.026073938964844
+            }
+          ],
+          "timing": 11.750883839782714
+        }
+      ]
+    },
+    {
+      "words": [
+        {
+          "lyric": "If",
+          "chords": [],
+          "timing": 13.034302950408936
+        },
+        {
+          "lyric": "I",
+          "chords": [],
+          "timing": 13.184303045776367
+        },
+        {
+          "lyric": "went",
+          "chords": [],
+          "timing": 13.334849994277954
+        },
+        {
+          "lyric": "and",
+          "chords": [],
+          "timing": 13.475850026702881
+        },
+        {
+          "lyric": "hurt",
+          "chords": [],
+          "timing": 13.634125164031982
+        },
+        {
+          "lyric": "my",
+          "chords": [],
+          "timing": 13.78712504196167
+        },
+        {
+          "lyric": "body",
+          "chords": [
+            {
+              "chord": "C",
+              "timing": 13.946969087738037
+            }
+          ],
+          "timing": 13.92507895803833
+        },
+        {
+          "lyric": "baby,",
+          "chords": [],
+          "timing": 14.25337498474121
+        },
+        {
+          "lyric": "would",
+          "chords": [],
+          "timing": 14.58660904196167
+        },
+        {
+          "lyric": "you",
+          "chords": [],
+          "timing": 14.71437187411499
+        },
+        {
+          "lyric": "love",
+          "chords": [],
+          "timing": 14.862371876022339
+        },
+        {
+          "lyric": "me",
+          "chords": [],
+          "timing": 15.183052043869019
+        },
+        {
+          "lyric": "the",
+          "chords": [],
+          "timing": 15.487240923706056
+        },
+        {
+          "lyric": "same?",
+          "chords": [
+            {
+              "chord": "D",
+              "timing": 15.798782106811524
+            }
+          ],
+          "timing": 15.815302135421753
+        }
+      ]
+    },
+    {
+      "words": [
+        {
+          "lyric": "I",
+          "chords": [],
+          "timing": 16.151663059127806
+        },
+        {
+          "lyric": "can",
+          "chords": [],
+          "timing": 16.436817019073487
+        },
+        {
+          "lyric": "feel",
+          "chords": [],
+          "timing": 16.818178045776367
+        },
+        {
+          "lyric": "all",
+          "chords": [],
+          "timing": 17.12631195613098
+        },
+        {
+          "lyric": "my",
+          "chords": [],
+          "timing": 17.41529404005432
+        },
+        {
+          "lyric": "bones",
+          "chords": [
+            {
+              "chord": "G",
+              "timing": 17.72748400953674
+            }
+          ],
+          "timing": 17.719205064849852
+        },
+        {
+          "lyric": "coming",
+          "chords": [],
+          "timing": 18.034554830245973
+        },
+        {
+          "lyric": "back",
+          "chords": [],
+          "timing": 18.69059394277954
+        },
+        {
+          "lyric": "and",
+          "chords": [],
+          "timing": 18.979990047683717
+        },
+        {
+          "lyric": "Im",
+          "chords": [],
+          "timing": 19.28700704005432
+        },
+        {
+          "lyric": "craving",
+          "chords": [
+            {
+              "chord": "Em",
+              "timing": 19.60777195803833
+            }
+          ],
+          "timing": 19.625042870300295
+        },
+        {
+          "lyric": "motion",
+          "chords": [],
+          "timing": 20.552237003814696
+        }
+      ]
+    },
+    {
+      "words": [
+        {
+          "lyric": "Mama",
+          "chords": [
+            {
+              "chord": "C",
+              "timing": 21.52804105531311
+            }
+          ],
+          "timing": 21.476231813079835
+        },
+        {
+          "lyric": "never",
+          "chords": [],
+          "timing": 21.85037495803833
+        },
+        {
+          "lyric": "really",
+          "chords": [],
+          "timing": 22.195911982833863
+        },
+        {
+          "lyric": "learned",
+          "chords": [],
+          "timing": 22.506613923706055
+        },
+        {
+          "lyric": "how",
+          "chords": [],
+          "timing": 22.833640074386597
+        },
+        {
+          "lyric": "to",
+          "chords": [],
+          "timing": 23.150177933242798
+        },
+        {
+          "lyric": "live",
+          "chords": [
+            {
+              "chord": "D",
+              "timing": 23.371124062942506
+            }
+          ],
+          "timing": 23.43489294468689
+        },
+        {
+          "lyric": "by",
+          "chords": [],
+          "timing": 23.76773701144409
+        },
+        {
+          "lyric": "herself",
+          "chords": [],
+          "timing": 24.083751921798704
+        }
+      ]
+    },
+    {
+      "words": [
+        {
+          "lyric": "Its",
+          "chords": [],
+          "timing": 24.66219211253357
+        },
+        {
+          "lyric": "a",
+          "chords": [],
+          "timing": 24.972661940872193
+        },
+        {
+          "lyric": "curse",
+          "chords": [
+            {
+              "chord": "G",
+              "timing": 25.30743215258789
+            }
+          ],
+          "timing": 25.285017851226808
+        },
+        {
+          "lyric": "and",
+          "chords": [],
+          "timing": 26.524019122070314
+        },
+        {
+          "lyric": "its",
+          "chords": [],
+          "timing": 26.855229982833862
+        },
+        {
+          "lyric": "growing",
+          "chords": [
+            {
+              "chord": "Em",
+              "timing": 27.229395917984007
+            }
+          ],
+          "timing": 27.18153099809265
+        },
+        {
+          "lyric": "youre",
+          "chords": [],
+          "timing": 28.48618708773804
+        },
+        {
+          "lyric": "a",
+          "chords": [],
+          "timing": 28.76636806866455
+        },
+        {
+          "lyric": "pond",
+          "chords": [
+            {
+              "chord": "C",
+              "timing": 29.11780509536743
+            }
+          ],
+          "timing": 29.08289504196167
+        },
+        {
+          "lyric": "and",
+          "chords": [],
+          "timing": 29.528061076293945
+        },
+        {
+          "lyric": "Im",
+          "chords": [],
+          "timing": 30.041800866485595
+        },
+        {
+          "lyric": "an",
+          "chords": [],
+          "timing": 30.54591119645691
+        },
+        {
+          "lyric": "ocean",
+          "chords": [
+            {
+              "chord": "D",
+              "timing": 31.048400923706055
+            }
+          ],
+          "timing": 30.98416597138977
+        }
+      ]
+    },
+    {
+      "words": [
+        {
+          "lyric": "All",
+          "chords": [
+            {
+              "chord": "G",
+              "timing": 32.876177064849855
+            }
+          ],
+          "timing": 32.9135609256134
+        },
+        {
+          "lyric": "my",
+          "chords": [],
+          "timing": 33.83141990463257
+        },
+        {
+          "lyric": "emotions",
+          "chords": [
+            {
+              "chord": "Em",
+              "timing": 34.739336053405765
+            }
+          ],
+          "timing": 34.40576502098084
+        },
+        {
+          "lyric": "feel",
+          "chords": [
+            {
+              "chord": "C",
+              "timing": 36.626878106811525
+            }
+          ],
+          "timing": 36.672242102996826
+        },
+        {
+          "lyric": "like",
+          "chords": [],
+          "timing": 37.61655499046326
+        },
+        {
+          "lyric": "explosions",
+          "chords": [
+            {
+              "chord": "D",
+              "timing": 38.53354995422363
+            }
+          ],
+          "timing": 38.284195969482425
+        },
+        {
+          "lyric": "when",
+          "chords": [],
+          "timing": 39.203265834060666
+        },
+        {
+          "lyric": "you",
+          "chords": [],
+          "timing": 39.5348639923706
+        },
+        {
+          "lyric": "are",
+          "chords": [],
+          "timing": 39.82925411825561
+        },
+        {
+          "lyric": "around",
+          "chords": [
+            {
+              "chord": "G",
+              "timing": 40.47712396948242
+            }
+          ],
+          "timing": 40.1320421411438
+        }
+      ]
+    },
+    {
+      "words": [
+        {
+          "lyric": "And",
+          "chords": [],
+          "timing": 41.709305994277955
+        },
+        {
+          "lyric": "Ive",
+          "chords": [],
+          "timing": 41.87130593515015
+        },
+        {
+          "lyric": "found",
+          "chords": [
+            {
+              "chord": "Em",
+              "timing": 42.41680409918213
+            }
+          ],
+          "timing": 42.5895550629425
+        },
+        {
+          "lyric": "a",
+          "chords": [],
+          "timing": 43.75978180163574
+        },
+        {
+          "lyric": "way",
+          "chords": [
+            {
+              "chord": "C",
+              "timing": 44.25326982643127
+            }
+          ],
+          "timing": 44.121390912261965
+        },
+        {
+          "lyric": "to",
+          "chords": [],
+          "timing": 44.86719284550476
+        },
+        {
+          "lyric": "kill",
+          "chords": [],
+          "timing": 45.181691047683714
+        },
+        {
+          "lyric": "the",
+          "chords": [],
+          "timing": 45.84442698474121
+        },
+        {
+          "lyric": "sound",
+          "chords": [
+            {
+              "chord": "D",
+              "timing": 46.17222406866455
+            }
+          ],
+          "timing": 46.1344079961853
+        }
+      ]
+    },
+    {
+      "words": [
+        {
+          "lyric": "",
+          "chords": []
+        }
+      ]
+    },
+    {
+      "words": [
+        {
+          "lyric": "[Chorus]",
+          "chords": []
+        }
+      ]
+    },
+    {
+      "words": [
+        {
+          "lyric": "Oh",
+          "chords": [
+            {
+              "chord": "G",
+              "timing": 48.02926301525879
+            }
+          ],
+          "timing": 48.07347997138977
+        },
+        {
+          "lyric": "baby,",
+          "chords": [],
+          "timing": 48.3657440038147
+        },
+        {
+          "lyric": "I",
+          "chords": [],
+          "timing": 49.0177198588562
+        },
+        {
+          "lyric": "am",
+          "chords": [],
+          "timing": 49.325171851226806
+        },
+        {
+          "lyric": "a",
+          "chords": [],
+          "timing": 49.660020969482424
+        },
+        {
+          "lyric": "wreck",
+          "chords": [
+            {
+              "chord": "Em",
+              "timing": 49.97524604196167
+            }
+          ],
+          "timing": 49.95886203433228
+        },
+        {
+          "lyric": "when",
+          "chords": [],
+          "timing": 50.53330803814697
+        },
+        {
+          "lyric": "Im",
+          "chords": [],
+          "timing": 50.84407990653992
+        },
+        {
+          "lyric": "without",
+          "chords": [
+            {
+              "chord": "C",
+              "timing": 51.824924061035155
+            }
+          ],
+          "timing": 51.504201061035154
+        },
+        {
+          "lyric": "you",
+          "chords": [],
+          "timing": 52.40648394468689
+        }
+      ]
+    },
+    {
+      "words": [
+        {
+          "lyric": "I",
+          "chords": [],
+          "timing": 53.34247812207031
+        },
+        {
+          "lyric": "need",
+          "chords": [
+            {
+              "chord": "D",
+              "timing": 53.73047999046326
+            }
+          ],
+          "timing": 53.728217047683714
+        },
+        {
+          "lyric": "you",
+          "chords": [],
+          "timing": 54.32638904196167
+        },
+        {
+          "lyric": "here",
+          "chords": [],
+          "timing": 54.634901036239626
+        },
+        {
+          "lyric": "to",
+          "chords": [],
+          "timing": 55.28754698283386
+        },
+        {
+          "lyric": "stay",
+          "chords": [
+            {
+              "chord": "G",
+              "timing": 55.60469005340576
+            }
+          ],
+          "timing": 55.60780713160705
+        }
+      ]
+    },
+    {
+      "words": [
+        {
+          "lyric": "I",
+          "chords": [],
+          "timing": 56.23053803623962
+        },
+        {
+          "lyric": "broke",
+          "chords": [],
+          "timing": 56.61900893133545
+        },
+        {
+          "lyric": "all",
+          "chords": [],
+          "timing": 56.92220390272522
+        },
+        {
+          "lyric": "my",
+          "chords": [],
+          "timing": 57.241033979019164
+        },
+        {
+          "lyric": "bones",
+          "chords": [
+            {
+              "chord": "Em",
+              "timing": 57.531249028610226
+            }
+          ],
+          "timing": 57.53633803242493
+        },
+        {
+          "lyric": "that",
+          "chords": [],
+          "timing": 58.057777011444095
+        },
+        {
+          "lyric": "day",
+          "chords": [],
+          "timing": 58.40164908964539
+        },
+        {
+          "lyric": "I",
+          "chords": [],
+          "timing": 59.04688997329712
+        },
+        {
+          "lyric": "found",
+          "chords": [
+            {
+              "chord": "C",
+              "timing": 59.422220061035155
+            }
+          ],
+          "timing": 59.38811812397766
+        },
+        {
+          "lyric": "you",
+          "chords": [],
+          "timing": 59.92076507247925
+        }
+      ]
+    },
+    {
+      "words": [
+        {
+          "lyric": "Crying",
+          "chords": [
+            {
+              "chord": "D",
+              "timing": 61.27626298664856
+            }
+          ],
+          "timing": 61.29353302479553
+        },
+        {
+          "lyric": "at",
+          "chords": [],
+          "timing": 62.29241595613098
+        },
+        {
+          "lyric": "the",
+          "chords": [],
+          "timing": 62.87975984741211
+        },
+        {
+          "lyric": "lake",
+          "chords": [
+            {
+              "chord": "G",
+              "timing": 63.229835910354616
+            }
+          ],
+          "timing": 63.218906977111814
+        }
+      ]
+    },
+    {
+      "words": [
+        {
+          "lyric": "Was",
+          "chords": [],
+          "timing": 63.54187093896484
+        },
+        {
+          "lyric": "it",
+          "chords": [],
+          "timing": 63.824793877929686
+        },
+        {
+          "lyric": "something",
+          "chords": [],
+          "timing": 64.15962184169007
+        },
+        {
+          "lyric": "I",
+          "chords": [],
+          "timing": 64.62485611634827
+        },
+        {
+          "lyric": "said",
+          "chords": [
+            {
+              "chord": "Em",
+              "timing": 65.11388997520447
+            }
+          ],
+          "timing": 65.10208696757508
+        },
+        {
+          "lyric": "to",
+          "chords": [],
+          "timing": 65.60940405912781
+        },
+        {
+          "lyric": "make",
+          "chords": [],
+          "timing": 66.01991490463257
+        },
+        {
+          "lyric": "you",
+          "chords": [],
+          "timing": 66.56576410108947
+        },
+        {
+          "lyric": "feel",
+          "chords": [
+            {
+              "chord": "C",
+              "timing": 66.9263580114441
+            }
+          ],
+          "timing": 66.96760797711181
+        },
+        {
+          "lyric": "like",
+          "chords": [],
+          "timing": 67.50864600953675
+        },
+        {
+          "lyric": "youre",
+          "chords": [],
+          "timing": 67.88041403814697
+        },
+        {
+          "lyric": "a",
+          "chords": [],
+          "timing": 68.4706290743866
+        },
+        {
+          "lyric": "burden?",
+          "chords": [
+            {
+              "chord": "D",
+              "timing": 68.8261219408722
+            }
+          ],
+          "timing": 68.82655401907348
+        }
+      ]
+    },
+    {
+      "words": [
+        {
+          "lyric": "Oh,",
+          "chords": [],
+          "timing": 69.82166114877319
+        },
+        {
+          "lyric": "and",
+          "chords": [],
+          "timing": 70.40030216212463
+        },
+        {
+          "lyric": "if",
+          "chords": [
+            {
+              "chord": "G",
+              "timing": 70.75420807820129
+            }
+          ],
+          "timing": 70.75763186839295
+        },
+        {
+          "lyric": "I",
+          "chords": [],
+          "timing": 71.0717271411438
+        },
+        {
+          "lyric": "could",
+          "chords": [],
+          "timing": 71.36864714305115
+        },
+        {
+          "lyric": "take",
+          "chords": [],
+          "timing": 71.70405487983703
+        },
+        {
+          "lyric": "it",
+          "chords": [],
+          "timing": 72.04036195803833
+        },
+        {
+          "lyric": "all",
+          "chords": [],
+          "timing": 72.18603003051757
+        },
+        {
+          "lyric": "back",
+          "chords": [
+            {
+              "chord": "Em",
+              "timing": 72.75434522315979
+            }
+          ],
+          "timing": 72.70059701907348
+        },
+        {
+          "lyric": "I",
+          "chords": [],
+          "timing": 73.1409812193451
+        },
+        {
+          "lyric": "swear",
+          "chords": [],
+          "timing": 73.62742318501282
+        },
+        {
+          "lyric": "that",
+          "chords": [],
+          "timing": 74.15118218501281
+        },
+        {
+          "lyric": "I",
+          "chords": [
+            {
+              "chord": "C",
+              "timing": 74.58736709536743
+            }
+          ],
+          "timing": 74.53465389318848
+        },
+        {
+          "lyric": "would",
+          "chords": [],
+          "timing": 76.14181404959106
+        },
+        {
+          "lyric": "pull",
+          "chords": [
+            {
+              "chord": "D",
+              "timing": 76.46044200190735
+            }
+          ],
+          "timing": 76.52004304768371
+        },
+        {
+          "lyric": "you",
+          "chords": [],
+          "timing": 77.14705287792968
+        },
+        {
+          "lyric": "from",
+          "chords": [],
+          "timing": 77.46478200572204
+        },
+        {
+          "lyric": "the",
+          "chords": [],
+          "timing": 78.08436420027161
+        },
+        {
+          "lyric": "tide",
+          "chords": [
+            {
+              "chord": "G",
+              "timing": 78.37739505722045
+            },
+            {
+              "chord": "Em",
+              "timing": 80.196626917984
+            },
+            {
+              "chord": "C",
+              "timing": 82.18888887792968
+            }
+          ],
+          "timing": 78.38363679782104
+        }
+      ]
+    },
+    {
+      "words": [
+        {
+          "lyric": "",
+          "chords": []
+        }
+      ]
+    },
+    {
+      "words": [
+        {
+          "lyric": "[Verse",
+          "chords": []
+        },
+        {
+          "lyric": "2]",
+          "chords": []
+        }
+      ]
+    },
+    {
+      "words": [
+        {
+          "lyric": "Oh",
+          "chords": [
+            {
+              "chord": "D",
+              "timing": 84.06335483787537
+            }
+          ],
+          "timing": 84.01645515068054
+        },
+        {
+          "lyric": "woah",
+          "chords": [],
+          "timing": 84.34060695803834
+        },
+        {
+          "lyric": "woah",
+          "chords": [],
+          "timing": 84.66824400190735
+        },
+        {
+          "lyric": "woah",
+          "chords": [],
+          "timing": 84.96470089128113
+        },
+        {
+          "lyric": "I",
+          "chords": [],
+          "timing": 85.27528811253357
+        },
+        {
+          "lyric": "said",
+          "chords": [],
+          "timing": 85.59966389891052
+        },
+        {
+          "lyric": "no",
+          "chords": [
+            {
+              "chord": "G",
+              "timing": 85.96364795422363
+            }
+          ],
+          "timing": 85.91789017356872
+        }
+      ]
+    },
+    {
+      "words": [
+        {
+          "lyric": "I",
+          "chords": [],
+          "timing": 87.179291917984
+        },
+        {
+          "lyric": "said",
+          "chords": [],
+          "timing": 87.4819399408722
+        },
+        {
+          "lyric": "no",
+          "chords": [
+            {
+              "chord": "Em",
+              "timing": 87.89099294850159
+            }
+          ],
+          "timing": 87.80175714305115
+        }
+      ]
+    },
+    {
+      "words": [
+        {
+          "lyric": "Listen",
+          "chords": [],
+          "timing": 89.05913517738342
+        },
+        {
+          "lyric": "close",
+          "chords": [
+            {
+              "chord": "C",
+              "timing": 89.78325388746643
+            }
+          ],
+          "timing": 89.70561296948242
+        },
+        {
+          "lyric": "its",
+          "chords": [],
+          "timing": 90.94691607629395
+        },
+        {
+          "lyric": "a",
+          "chords": [],
+          "timing": 91.29570916593933
+        },
+        {
+          "lyric": "no",
+          "chords": [
+            {
+              "chord": "D",
+              "timing": 91.64570687602234
+            }
+          ],
+          "timing": 91.58244499046326
+        }
+      ]
+    },
+    {
+      "words": [
+        {
+          "lyric": "The",
+          "chords": [],
+          "timing": 93.18664403242492
+        },
+        {
+          "lyric": "wind",
+          "chords": [
+            {
+              "chord": "G",
+              "timing": 93.55519003433227
+            }
+          ],
+          "timing": 93.50398999427796
+        },
+        {
+          "lyric": "is",
+          "chords": [],
+          "timing": 93.8084690591278
+        },
+        {
+          "lyric": "poundin",
+          "chords": [],
+          "timing": 94.12244094850159
+        },
+        {
+          "lyric": "on",
+          "chords": [
+            {
+              "chord": "Em",
+              "timing": 95.40217017738343
+            }
+          ],
+          "timing": 95.40990798664856
+        },
+        {
+          "lyric": "my",
+          "chords": [],
+          "timing": 95.70675004196167
+        },
+        {
+          "lyric": "back",
+          "chords": [],
+          "timing": 96.00426491989136
+        }
+      ]
+    },
+    {
+      "words": [
+        {
+          "lyric": "And",
+          "chords": [],
+          "timing": 96.66811210490417
+        },
+        {
+          "lyric": "Ive",
+          "chords": [],
+          "timing": 96.80711204386901
+        },
+        {
+          "lyric": "found",
+          "chords": [
+            {
+              "chord": "C",
+              "timing": 97.3602051449585
+            }
+          ],
+          "timing": 97.23465386839294
+        },
+        {
+          "lyric": "hope",
+          "chords": [],
+          "timing": 97.71447803242492
+        },
+        {
+          "lyric": "in",
+          "chords": [],
+          "timing": 98.15597686839294
+        },
+        {
+          "lyric": "a",
+          "chords": [],
+          "timing": 98.70427694277954
+        },
+        {
+          "lyric": "heart",
+          "chords": [
+            {
+              "chord": "D",
+              "timing": 99.17913996566773
+            }
+          ],
+          "timing": 99.16330003051758
+        },
+        {
+          "lyric": "attack",
+          "chords": [],
+          "timing": 99.69218388555907
+        }
+      ]
+    },
+    {
+      "words": [
+        {
+          "lyric": "Oh,",
+          "chords": [],
+          "timing": 100.48011804196167
+        },
+        {
+          "lyric": "at",
+          "chords": [],
+          "timing": 100.79035791035462
+        },
+        {
+          "lyric": "last",
+          "chords": [
+            {
+              "chord": "G",
+              "timing": 101.11523090844726
+            }
+          ],
+          "timing": 101.11175708201598
+        },
+        {
+          "lyric": "it",
+          "chords": [],
+          "timing": 102.35416187792968
+        },
+        {
+          "lyric": "is",
+          "chords": [],
+          "timing": 102.67764792370606
+        },
+        {
+          "lyric": "passed",
+          "chords": [
+            {
+              "chord": "Em",
+              "timing": 103.00608791035461
+            }
+          ],
+          "timing": 102.97413599809265
+        }
+      ]
+    },
+    {
+      "words": [
+        {
+          "lyric": "Now",
+          "chords": [],
+          "timing": 104.21736803242493
+        },
+        {
+          "lyric": "Ive",
+          "chords": [],
+          "timing": 104.53388401525879
+        },
+        {
+          "lyric": "got",
+          "chords": [
+            {
+              "chord": "C",
+              "timing": 104.93685190463256
+            }
+          ],
+          "timing": 104.92619620980835
+        },
+        {
+          "lyric": "it",
+          "chords": [],
+          "timing": 105.13219606103516
+        },
+        {
+          "lyric": "and",
+          "chords": [],
+          "timing": 105.6253459961853
+        },
+        {
+          "lyric": "you",
+          "chords": [],
+          "timing": 105.90031406866456
+        },
+        {
+          "lyric": "cant",
+          "chords": [],
+          "timing": 106.15572606866455
+        },
+        {
+          "lyric": "have",
+          "chords": [
+            {
+              "chord": "D",
+              "timing": 106.81513692752075
+            }
+          ],
+          "timing": 106.85727903814697
+        },
+        {
+          "lyric": "it",
+          "chords": [],
+          "timing": 107.66240398664856
+        }
+      ]
+    },
+    {
+      "words": [
+        {
+          "lyric": "",
+          "chords": []
+        }
+      ]
+    },
+    {
+      "words": [
+        {
+          "lyric": "[Chorus]",
+          "chords": []
+        }
+      ]
+    },
+    {
+      "words": [
+        {
+          "lyric": "Oh",
+          "chords": [
+            {
+              "chord": "G",
+              "timing": 108.71112383596802
+            }
+          ],
+          "timing": 108.66208805340577
+        },
+        {
+          "lyric": "baby,",
+          "chords": [],
+          "timing": 108.95262112779236
+        },
+        {
+          "lyric": "I",
+          "chords": [],
+          "timing": 109.60375895994568
+        },
+        {
+          "lyric": "am",
+          "chords": [],
+          "timing": 109.89367206484985
+        },
+        {
+          "lyric": "a",
+          "chords": [],
+          "timing": 110.22275604005432
+        },
+        {
+          "lyric": "wreck",
+          "chords": [
+            {
+              "chord": "Em",
+              "timing": 110.57426401144409
+            }
+          ],
+          "timing": 110.54438423078919
+        },
+        {
+          "lyric": "when",
+          "chords": [],
+          "timing": 111.12701482070923
+        },
+        {
+          "lyric": "Im",
+          "chords": [],
+          "timing": 111.42602100953674
+        },
+        {
+          "lyric": "without",
+          "chords": [
+            {
+              "chord": "C",
+              "timing": 112.45503712588501
+            }
+          ],
+          "timing": 112.07098587220764
+        },
+        {
+          "lyric": "you",
+          "chords": [],
+          "timing": 112.95853293133545
+        }
+      ]
+    },
+    {
+      "words": [
+        {
+          "lyric": "I",
+          "chords": [],
+          "timing": 113.98483490653992
+        },
+        {
+          "lyric": "need",
+          "chords": [
+            {
+              "chord": "D",
+              "timing": 114.41515685313415
+            }
+          ],
+          "timing": 114.3658749256134
+        },
+        {
+          "lyric": "you",
+          "chords": [],
+          "timing": 114.94960408392333
+        },
+        {
+          "lyric": "here",
+          "chords": [],
+          "timing": 115.29454185313415
+        },
+        {
+          "lyric": "to",
+          "chords": [],
+          "timing": 115.89464106484985
+        },
+        {
+          "lyric": "stay",
+          "chords": [
+            {
+              "chord": "G",
+              "timing": 116.22435201525879
+            }
+          ],
+          "timing": 116.23569419454957
+        }
+      ]
+    },
+    {
+      "words": [
+        {
+          "lyric": "I",
+          "chords": [],
+          "timing": 116.87803215068054
+        },
+        {
+          "lyric": "broke",
+          "chords": [],
+          "timing": 117.25087094277954
+        },
+        {
+          "lyric": "all",
+          "chords": [],
+          "timing": 117.52816689128113
+        },
+        {
+          "lyric": "my",
+          "chords": [],
+          "timing": 117.82603698664856
+        },
+        {
+          "lyric": "bones",
+          "chords": [
+            {
+              "chord": "Em",
+              "timing": 118.13698790463256
+            }
+          ],
+          "timing": 118.14798013542175
+        },
+        {
+          "lyric": "that",
+          "chords": [],
+          "timing": 118.69307396948243
+        },
+        {
+          "lyric": "day",
+          "chords": [],
+          "timing": 119.085512125885
+        },
+        {
+          "lyric": "I",
+          "chords": [],
+          "timing": 119.66642106675721
+        },
+        {
+          "lyric": "found",
+          "chords": [
+            {
+              "chord": "C",
+              "timing": 120.07413999427796
+            }
+          ],
+          "timing": 120.03105295994568
+        },
+        {
+          "lyric": "you",
+          "chords": [],
+          "timing": 120.54690589700317
+        }
+      ]
+    },
+    {
+      "words": [
+        {
+          "lyric": "Crying",
+          "chords": [
+            {
+              "chord": "D",
+              "timing": 121.91258807438659
+            }
+          ],
+          "timing": 121.93314893133545
+        },
+        {
+          "lyric": "at",
+          "chords": [],
+          "timing": 122.86915308773804
+        },
+        {
+          "lyric": "the",
+          "chords": [],
+          "timing": 123.47277213542175
+        },
+        {
+          "lyric": "lake",
+          "chords": [
+            {
+              "chord": "G",
+              "timing": 123.8763081335144
+            }
+          ],
+          "timing": 123.83262310108948
+        }
+      ]
+    },
+    {
+      "words": [
+        {
+          "lyric": "Was",
+          "chords": [],
+          "timing": 124.14445304196167
+        },
+        {
+          "lyric": "it",
+          "chords": [],
+          "timing": 124.43599603814697
+        },
+        {
+          "lyric": "something",
+          "chords": [],
+          "timing": 124.78633304386902
+        },
+        {
+          "lyric": "I",
+          "chords": [],
+          "timing": 125.27006595803833
+        },
+        {
+          "lyric": "said",
+          "chords": [
+            {
+              "chord": "Em",
+              "timing": 125.762207
+            }
+          ],
+          "timing": 125.74678083978272
+        },
+        {
+          "lyric": "to",
+          "chords": [],
+          "timing": 126.26366094087219
+        },
+        {
+          "lyric": "make",
+          "chords": [],
+          "timing": 126.69707803623962
+        },
+        {
+          "lyric": "you",
+          "chords": [],
+          "timing": 127.18850699046325
+        },
+        {
+          "lyric": "feel",
+          "chords": [
+            {
+              "chord": "C",
+              "timing": 127.69165187983704
+            }
+          ],
+          "timing": 127.60396602479553
+        },
+        {
+          "lyric": "like",
+          "chords": [],
+          "timing": 128.12177490844726
+        },
+        {
+          "lyric": "youre",
+          "chords": [],
+          "timing": 128.55805611825562
+        },
+        {
+          "lyric": "a",
+          "chords": [],
+          "timing": 129.09870491035463
+        },
+        {
+          "lyric": "burden?",
+          "chords": [
+            {
+              "chord": "D",
+              "timing": 129.4833668626709
+            }
+          ],
+          "timing": 129.48095697138976
+        }
+      ]
+    },
+    {
+      "words": [
+        {
+          "lyric": "Oh,",
+          "chords": [],
+          "timing": 130.38658402098085
+        },
+        {
+          "lyric": "and",
+          "chords": [],
+          "timing": 131.02549795613098
+        },
+        {
+          "lyric": "if",
+          "chords": [
+            {
+              "chord": "G",
+              "timing": 131.37151794659422
+            }
+          ],
+          "timing": 131.38006013923646
+        },
+        {
+          "lyric": "I",
+          "chords": [],
+          "timing": 131.73250804196167
+        },
+        {
+          "lyric": "could",
+          "chords": [],
+          "timing": 132.0138129485016
+        },
+        {
+          "lyric": "take",
+          "chords": [],
+          "timing": 132.34135496376038
+        },
+        {
+          "lyric": "it",
+          "chords": [],
+          "timing": 132.675392
+        },
+        {
+          "lyric": "all",
+          "chords": [],
+          "timing": 132.82386819836427
+        },
+        {
+          "lyric": "back",
+          "chords": [
+            {
+              "chord": "Em",
+              "timing": 133.36138495422364
+            }
+          ],
+          "timing": 133.30864296757508
+        },
+        {
+          "lyric": "I",
+          "chords": [],
+          "timing": 133.7247061449585
+        },
+        {
+          "lyric": "swear",
+          "chords": [],
+          "timing": 134.21656601716614
+        },
+        {
+          "lyric": "that",
+          "chords": [],
+          "timing": 134.8563069732971
+        },
+        {
+          "lyric": "I",
+          "chords": [
+            {
+              "chord": "C",
+              "timing": 135.18812493133544
+            }
+          ],
+          "timing": 135.20565109536744
+        },
+        {
+          "lyric": "would",
+          "chords": [],
+          "timing": 136.71932500572206
+        },
+        {
+          "lyric": "pull",
+          "chords": [
+            {
+              "chord": "D",
+              "timing": 137.08906197520446
+            }
+          ],
+          "timing": 137.06916286648558
+        },
+        {
+          "lyric": "you",
+          "chords": [],
+          "timing": 137.6853421106262
+        },
+        {
+          "lyric": "from",
+          "chords": [],
+          "timing": 138.02804809536744
+        },
+        {
+          "lyric": "the",
+          "chords": [],
+          "timing": 138.669648125885
+        }
+      ]
+    },
+    {
+      "words": [
+        {
+          "lyric": "",
+          "chords": []
+        }
+      ]
+    },
+    {
+      "words": [
+        {
+          "lyric": "[Bridge]",
+          "chords": []
+        }
+      ]
+    },
+    {
+      "words": [
+        {
+          "lyric": "Tide",
+          "chords": [
+            {
+              "chord": "Am",
+              "timing": 139.01006190844726
+            }
+          ],
+          "timing": 138.98951403433227
+        },
+        {
+          "lyric": "oh",
+          "chords": [
+            {
+              "chord": "G",
+              "timing": 140.8826019408722
+            }
+          ],
+          "timing": 140.904581082016
+        },
+        {
+          "lyric": "oh",
+          "chords": [
+            {
+              "chord": "Bm",
+              "timing": 141.84804201335143
+            },
+            {
+              "chord": "Am",
+              "timing": 142.79641901525878
+            }
+          ],
+          "timing": 141.8077868817444
+        },
+        {
+          "lyric": "oh",
+          "chords": [],
+          "timing": 143.08080509536742
+        },
+        {
+          "lyric": "oh",
+          "chords": [],
+          "timing": 143.68763601716614
+        },
+        {
+          "lyric": "oh",
+          "chords": [
+            {
+              "chord": "G",
+              "timing": 144.71100788365175
+            }
+          ],
+          "timing": 144.2801020743866
+        },
+        {
+          "lyric": "oh",
+          "chords": [],
+          "timing": 144.9661579923706
+        },
+        {
+          "lyric": "oh",
+          "chords": [
+            {
+              "chord": "Bm",
+              "timing": 145.6323609332428
+            }
+          ],
+          "timing": 145.6060979809265
+        },
+        {
+          "lyric": "oh",
+          "chords": [],
+          "timing": 145.90707309727478
+        },
+        {
+          "lyric": "oh.",
+          "chords": [],
+          "timing": 146.2519470514984
+        }
+      ]
+    },
+    {
+      "words": [
+        {
+          "lyric": "Darlin",
+          "chords": [
+            {
+              "chord": "Am",
+              "timing": 146.581700956131
+            }
+          ],
+          "timing": 146.58984199427795
+        },
+        {
+          "lyric": "when",
+          "chords": [],
+          "timing": 147.53226095422363
+        },
+        {
+          "lyric": "Im",
+          "chords": [],
+          "timing": 148.04813812779236
+        },
+        {
+          "lyric": "fast",
+          "chords": [
+            {
+              "chord": "G",
+              "timing": 148.46307799809264
+            }
+          ],
+          "timing": 148.47596403623962
+        },
+        {
+          "lyric": "asleep",
+          "chords": [
+            {
+              "chord": "Bm",
+              "timing": 149.43307897901917
+            }
+          ],
+          "timing": 149.01756294277953
+        },
+        {
+          "lyric": "Ive",
+          "chords": [],
+          "timing": 149.9276860038147
+        },
+        {
+          "lyric": "seen",
+          "chords": [
+            {
+              "chord": "Am",
+              "timing": 150.32849406103514
+            }
+          ],
+          "timing": 150.32918896185302
+        },
+        {
+          "lyric": "this",
+          "chords": [],
+          "timing": 150.84869203242494
+        },
+        {
+          "lyric": "person",
+          "chords": [],
+          "timing": 151.27832307820128
+        },
+        {
+          "lyric": "watching",
+          "chords": [
+            {
+              "chord": "G",
+              "timing": 152.31315897520446
+            }
+          ],
+          "timing": 152.1667061564026
+        },
+        {
+          "lyric": "me",
+          "chords": [
+            {
+              "chord": "Bm",
+              "timing": 153.23021283978272
+            }
+          ],
+          "timing": 152.80962609155273
+        },
+        {
+          "lyric": "sayin,",
+          "chords": [
+            {
+              "chord": "Am",
+              "timing": 154.14953617929078
+            }
+          ],
+          "timing": 153.16981018310548
+        }
+      ]
+    },
+    {
+      "words": [
+        {
+          "lyric": "Is",
+          "chords": [],
+          "timing": 154.4747869485016
+        },
+        {
+          "lyric": "it",
+          "chords": [],
+          "timing": 154.78992800190736
+        },
+        {
+          "lyric": "worth",
+          "chords": [],
+          "timing": 155.1030390896454
+        },
+        {
+          "lyric": "it?",
+          "chords": [
+            {
+              "chord": "G",
+              "timing": 156.06547288365172
+            }
+          ],
+          "timing": 155.65393601907348
+        },
+        {
+          "lyric": "Is",
+          "chords": [],
+          "timing": 156.38084206484984
+        },
+        {
+          "lyric": "it",
+          "chords": [],
+          "timing": 156.67449716021727
+        },
+        {
+          "lyric": "worth",
+          "chords": [
+            {
+              "chord": "Bm",
+              "timing": 157.0167298550415
+            }
+          ],
+          "timing": 156.9936630705719
+        },
+        {
+          "lyric": "it?",
+          "chords": [],
+          "timing": 157.5875289408722
+        },
+        {
+          "lyric": "Tell",
+          "chords": [
+            {
+              "chord": "Am",
+              "timing": 157.96427895803834
+            }
+          ],
+          "timing": 157.9362810305176
+        },
+        {
+          "lyric": "me",
+          "chords": [],
+          "timing": 158.41780586076354
+        },
+        {
+          "lyric": "is",
+          "chords": [],
+          "timing": 158.87893206103516
+        },
+        {
+          "lyric": "it",
+          "chords": [],
+          "timing": 159.31099299046326
+        },
+        {
+          "lyric": "worth",
+          "chords": [
+            {
+              "chord": "D",
+              "timing": 159.89715994277955
+            }
+          ],
+          "timing": 159.7662881926422
+        },
+        {
+          "lyric": "it?",
+          "chords": [
+            {
+              "chord": "G",
+              "timing": 161.7596520038147
+            },
+            {
+              "chord": "Em",
+              "timing": 163.6645599961853
+            },
+            {
+              "chord": "C",
+              "timing": 165.54801996566772
+            },
+            {
+              "chord": "D",
+              "timing": 167.46452494850158
+            }
+          ],
+          "timing": 160.77205887602233
+        }
+      ]
+    },
+    {
+      "words": [
+        {
+          "lyric": "Oh",
+          "chords": [
+            {
+              "chord": "G",
+              "timing": 169.3824309332428
+            },
+            {
+              "chord": "Em",
+              "timing": 171.26397306866454
+            },
+            {
+              "chord": "C",
+              "timing": 173.13228195613098
+            },
+            {
+              "chord": "D",
+              "timing": 174.98211993324279
+            }
+          ],
+          "timing": 168.38347503242494
+        },
+        {
+          "lyric": "cause",
+          "chords": [],
+          "timing": 175.87785591798402
+        },
+        {
+          "lyric": "there",
+          "chords": [],
+          "timing": 176.19625387792968
+        },
+        {
+          "lyric": "is",
+          "chords": [],
+          "timing": 176.5174130076294
+        },
+        {
+          "lyric": "something",
+          "chords": [
+            {
+              "chord": "G",
+              "timing": 176.88027898855592
+            }
+          ],
+          "timing": 176.818069
+        },
+        {
+          "lyric": "and",
+          "chords": [],
+          "timing": 177.84857592370605
+        },
+        {
+          "lyric": "there",
+          "chords": [],
+          "timing": 178.1477769256134
+        },
+        {
+          "lyric": "is",
+          "chords": [],
+          "timing": 178.48771403623962
+        },
+        {
+          "lyric": "nothing",
+          "chords": [
+            {
+              "chord": "Em",
+              "timing": 178.77752310299684
+            }
+          ],
+          "timing": 178.7846379141693
+        }
+      ]
+    },
+    {
+      "words": [
+        {
+          "lyric": "There",
+          "chords": [],
+          "timing": 179.69522804577636
+        },
+        {
+          "lyric": "is",
+          "chords": [],
+          "timing": 180.33363506484986
+        },
+        {
+          "lyric": "nothing",
+          "chords": [
+            {
+              "chord": "C",
+              "timing": 180.6819379809265
+            }
+          ],
+          "timing": 180.68478200953675
+        },
+        {
+          "lyric": "in",
+          "chords": [],
+          "timing": 181.59771197520448
+        },
+        {
+          "lyric": "between",
+          "chords": [
+            {
+              "chord": "D",
+              "timing": 182.57474401335145
+            }
+          ],
+          "timing": 182.26272582070922
+        }
+      ]
+    },
+    {
+      "words": [
+        {
+          "lyric": "And,",
+          "chords": [],
+          "timing": 183.18668400572204
+        },
+        {
+          "lyric": "in",
+          "chords": [],
+          "timing": 183.4845080076294
+        },
+        {
+          "lyric": "my",
+          "chords": [],
+          "timing": 184.10140787983704
+        },
+        {
+          "lyric": "eyes",
+          "chords": [
+            {
+              "chord": "G",
+              "timing": 184.48395286076354
+            }
+          ],
+          "timing": 184.47570396948242
+        },
+        {
+          "lyric": "there",
+          "chords": [],
+          "timing": 185.05666612969972
+        },
+        {
+          "lyric": "is",
+          "chords": [],
+          "timing": 185.3801049885559
+        },
+        {
+          "lyric": "a",
+          "chords": [],
+          "timing": 186.01212896566773
+        },
+        {
+          "lyric": "tiny",
+          "chords": [
+            {
+              "chord": "Em",
+              "timing": 186.35195796566774
+            }
+          ],
+          "timing": 186.3398629809265
+        },
+        {
+          "lyric": "dancer",
+          "chords": [
+            {
+              "chord": "C",
+              "timing": 188.2779171564026
+            }
+          ],
+          "timing": 187.267529
+        },
+        {
+          "lyric": "watching",
+          "chords": [],
+          "timing": 188.54474009918212
+        },
+        {
+          "lyric": "over",
+          "chords": [],
+          "timing": 189.181789961853
+        },
+        {
+          "lyric": "me",
+          "chords": [
+            {
+              "chord": "D",
+              "timing": 190.16681609536744
+            }
+          ],
+          "timing": 190.12625908773805
+        }
+      ]
+    },
+    {
+      "words": [
+        {
+          "lyric": "Hes",
+          "chords": [],
+          "timing": 190.71980911825563
+        },
+        {
+          "lyric": "singin",
+          "chords": [],
+          "timing": 191.04309497711182
+        },
+        {
+          "lyric": "shes",
+          "chords": [
+            {
+              "chord": "G",
+              "timing": 192.03130203242492
+            }
+          ],
+          "timing": 191.96566402861023
+        },
+        {
+          "lyric": "a,",
+          "chords": [],
+          "timing": 192.61037398474122
+        },
+        {
+          "lyric": "shes",
+          "chords": [],
+          "timing": 192.95464191798402
+        },
+        {
+          "lyric": "a",
+          "chords": [],
+          "timing": 193.61526808392335
+        },
+        {
+          "lyric": "lady",
+          "chords": [
+            {
+              "chord": "Em",
+              "timing": 193.9619759523163
+            }
+          ],
+          "timing": 193.94040098283386
+        },
+        {
+          "lyric": "and",
+          "chords": [],
+          "timing": 195.506847917984
+        },
+        {
+          "lyric": "I",
+          "chords": [
+            {
+              "chord": "C",
+              "timing": 195.86832592370607
+            }
+          ],
+          "timing": 195.85929096566773
+        },
+        {
+          "lyric": "am",
+          "chords": [],
+          "timing": 196.4565430114441
+        },
+        {
+          "lyric": "just",
+          "chords": [],
+          "timing": 196.78482613160705
+        },
+        {
+          "lyric": "a",
+          "chords": [],
+          "timing": 197.44387312016298
+        },
+        {
+          "lyric": "boy",
+          "chords": [
+            {
+              "chord": "D",
+              "timing": 197.7434049446869
+            }
+          ],
+          "timing": 197.7554488226166
+        }
+      ]
+    },
+    {
+      "words": [
+        {
+          "lyric": "Hes",
+          "chords": [],
+          "timing": 198.3721689961853
+        },
+        {
+          "lyric": "singing",
+          "chords": [],
+          "timing": 198.74285514686585
+        },
+        {
+          "lyric": "shes",
+          "chords": [
+            {
+              "chord": "G",
+              "timing": 199.6492619885559
+            }
+          ],
+          "timing": 199.59886708964538
+        },
+        {
+          "lyric": "a,",
+          "chords": [],
+          "timing": 200.28371084359742
+        },
+        {
+          "lyric": "shes",
+          "chords": [],
+          "timing": 200.59183900190735
+        },
+        {
+          "lyric": "a",
+          "chords": [],
+          "timing": 201.19770597520446
+        },
+        {
+          "lyric": "lady",
+          "chords": [
+            {
+              "chord": "Em",
+              "timing": 201.5322971049042
+            }
+          ],
+          "timing": 201.52603813542174
+        },
+        {
+          "lyric": "and",
+          "chords": [],
+          "timing": 203.0554679961853
+        },
+        {
+          "lyric": "I",
+          "chords": [
+            {
+              "chord": "C",
+              "timing": 203.46620997520446
+            }
+          ],
+          "timing": 203.40584301335144
+        },
+        {
+          "lyric": "am",
+          "chords": [],
+          "timing": 204.04565400190734
+        },
+        {
+          "lyric": "just",
+          "chords": [],
+          "timing": 204.34990182643128
+        },
+        {
+          "lyric": "a",
+          "chords": [],
+          "timing": 205.0053128474121
+        },
+        {
+          "lyric": "line",
+          "chords": [
+            {
+              "chord": "D",
+              "timing": 205.34404001716615
+            }
+          ],
+          "timing": 205.33542696757507
+        },
+        {
+          "lyric": "without",
+          "chords": [],
+          "timing": 205.98534682070922
+        },
+        {
+          "lyric": "a-",
+          "chords": [],
+          "timing": 206.86775214686585
+        }
+      ]
+    },
+    {
+      "words": [
+        {
+          "lyric": "",
+          "chords": []
+        }
+      ]
+    },
+    {
+      "words": [
+        {
+          "lyric": "[Chorus]",
+          "chords": []
+        }
+      ]
+    },
+    {
+      "words": [
+        {
+          "lyric": "Oh",
+          "chords": [
+            {
+              "chord": "G",
+              "timing": 207.21385397520447
+            }
+          ],
+          "timing": 207.21704700953674
+        },
+        {
+          "lyric": "baby,",
+          "chords": [],
+          "timing": 207.5255341373291
+        },
+        {
+          "lyric": "I",
+          "chords": [],
+          "timing": 208.16960608773803
+        },
+        {
+          "lyric": "am",
+          "chords": [],
+          "timing": 208.48081091607665
+        },
+        {
+          "lyric": "a",
+          "chords": [],
+          "timing": 208.79234006484987
+        },
+        {
+          "lyric": "wreck",
+          "chords": [
+            {
+              "chord": "Em",
+              "timing": 209.111172
+            }
+          ],
+          "timing": 209.11544092370605
+        },
+        {
+          "lyric": "when",
+          "chords": [],
+          "timing": 209.71179895040893
+        },
+        {
+          "lyric": "Im",
+          "chords": [],
+          "timing": 210.0513011296997
+        },
+        {
+          "lyric": "without",
+          "chords": [
+            {
+              "chord": "C",
+              "timing": 210.98193815640258
+            }
+          ],
+          "timing": 210.65482105340575
+        },
+        {
+          "lyric": "you",
+          "chords": [],
+          "timing": 211.46046285694885
+        }
+      ]
+    },
+    {
+      "words": [
+        {
+          "lyric": "I",
+          "chords": [],
+          "timing": 212.42967907629395
+        },
+        {
+          "lyric": "need",
+          "chords": [
+            {
+              "chord": "D",
+              "timing": 212.89870390081788
+            }
+          ],
+          "timing": 212.81672782643128
+        },
+        {
+          "lyric": "you",
+          "chords": [],
+          "timing": 213.47665395994568
+        },
+        {
+          "lyric": "here",
+          "chords": [],
+          "timing": 213.7880302117157
+        },
+        {
+          "lyric": "to",
+          "chords": [],
+          "timing": 214.37199491607666
+        },
+        {
+          "lyric": "stay",
+          "chords": [
+            {
+              "chord": "G",
+              "timing": 214.7822970362396
+            }
+          ],
+          "timing": 214.74737489318846
+        }
+      ]
+    },
+    {
+      "words": [
+        {
+          "lyric": "I",
+          "chords": [],
+          "timing": 215.35611698092652
+        },
+        {
+          "lyric": "broke",
+          "chords": [],
+          "timing": 215.75052710490417
+        },
+        {
+          "lyric": "all",
+          "chords": [],
+          "timing": 216.03461198283387
+        },
+        {
+          "lyric": "my",
+          "chords": [],
+          "timing": 216.33265402670287
+        },
+        {
+          "lyric": "bones",
+          "chords": [
+            {
+              "chord": "Em",
+              "timing": 216.711006792099
+            }
+          ],
+          "timing": 216.6650889485016
+        },
+        {
+          "lyric": "that",
+          "chords": [],
+          "timing": 217.1146160667572
+        },
+        {
+          "lyric": "day",
+          "chords": [],
+          "timing": 217.5209188703003
+        },
+        {
+          "lyric": "I",
+          "chords": [],
+          "timing": 217.9939940629425
+        },
+        {
+          "lyric": "found",
+          "chords": [
+            {
+              "chord": "C",
+              "timing": 218.55850504959108
+            }
+          ],
+          "timing": 218.49202304005433
+        },
+        {
+          "lyric": "you",
+          "chords": [],
+          "timing": 219.10664016975403
+        }
+      ]
+    },
+    {
+      "words": [
+        {
+          "lyric": "Crying",
+          "chords": [
+            {
+              "chord": "D",
+              "timing": 220.46495202098083
+            }
+          ],
+          "timing": 220.4850660629425
+        },
+        {
+          "lyric": "at",
+          "chords": [],
+          "timing": 221.35667404768373
+        },
+        {
+          "lyric": "the",
+          "chords": [],
+          "timing": 221.97665485694884
+        },
+        {
+          "lyric": "lake",
+          "chords": [
+            {
+              "chord": "G",
+              "timing": 222.40020296376036
+            }
+          ],
+          "timing": 222.35025407247926
+        }
+      ]
+    },
+    {
+      "words": [
+        {
+          "lyric": "Was",
+          "chords": [],
+          "timing": 222.68608094277954
+        },
+        {
+          "lyric": "it",
+          "chords": [],
+          "timing": 222.95118419073486
+        },
+        {
+          "lyric": "something",
+          "chords": [],
+          "timing": 223.27884605149842
+        },
+        {
+          "lyric": "I",
+          "chords": [],
+          "timing": 223.74269788937377
+        },
+        {
+          "lyric": "said",
+          "chords": [
+            {
+              "chord": "Em",
+              "timing": 224.26315995422362
+            }
+          ],
+          "timing": 224.26379902288818
+        },
+        {
+          "lyric": "to",
+          "chords": [],
+          "timing": 224.67951797329712
+        },
+        {
+          "lyric": "make",
+          "chords": [],
+          "timing": 225.14866900953675
+        },
+        {
+          "lyric": "you",
+          "chords": [],
+          "timing": 225.65294104768373
+        },
+        {
+          "lyric": "feel",
+          "chords": [
+            {
+              "chord": "C",
+              "timing": 226.15531493515016
+            }
+          ],
+          "timing": 226.09555203051758
+        },
+        {
+          "lyric": "like",
+          "chords": [],
+          "timing": 226.6313069485016
+        },
+        {
+          "lyric": "youre",
+          "chords": [],
+          "timing": 227.00278388365174
+        },
+        {
+          "lyric": "a",
+          "chords": [],
+          "timing": 227.62832480735779
+        },
+        {
+          "lyric": "burden?",
+          "chords": [
+            {
+              "chord": "D",
+              "timing": 228.0787519599457
+            }
+          ],
+          "timing": 227.99753114686584
+        }
+      ]
+    },
+    {
+      "words": [
+        {
+          "lyric": "Oh,",
+          "chords": [],
+          "timing": 228.94042186839295
+        },
+        {
+          "lyric": "and",
+          "chords": [],
+          "timing": 229.60589904386902
+        },
+        {
+          "lyric": "if",
+          "chords": [
+            {
+              "chord": "G",
+              "timing": 229.96197309536743
+            }
+          ],
+          "timing": 229.95594499809266
+        },
+        {
+          "lyric": "I",
+          "chords": [],
+          "timing": 230.23661409346008
+        },
+        {
+          "lyric": "could",
+          "chords": [],
+          "timing": 230.54701707629394
+        },
+        {
+          "lyric": "take",
+          "chords": [],
+          "timing": 230.87454488365174
+        },
+        {
+          "lyric": "it",
+          "chords": [],
+          "timing": 231.22020398283385
+        },
+        {
+          "lyric": "all",
+          "chords": [],
+          "timing": 231.35920416021727
+        },
+        {
+          "lyric": "back",
+          "chords": [
+            {
+              "chord": "Em",
+              "timing": 231.88922204577636
+            }
+          ],
+          "timing": 231.81711405912782
+        },
+        {
+          "lyric": "I",
+          "chords": [],
+          "timing": 232.2314920514984
+        },
+        {
+          "lyric": "swear",
+          "chords": [],
+          "timing": 232.7223478397827
+        },
+        {
+          "lyric": "that",
+          "chords": [],
+          "timing": 233.25202195422364
+        },
+        {
+          "lyric": "I",
+          "chords": [
+            {
+              "chord": "C",
+              "timing": 233.76545504577638
+            }
+          ],
+          "timing": 233.66857515068054
+        },
+        {
+          "lyric": "would",
+          "chords": [],
+          "timing": 235.28304977874757
+        },
+        {
+          "lyric": "pull",
+          "chords": [
+            {
+              "chord": "D",
+              "timing": 235.61760406484984
+            }
+          ],
+          "timing": 235.6213931487732
+        },
+        {
+          "lyric": "you",
+          "chords": [],
+          "timing": 236.260061207901
+        },
+        {
+          "lyric": "from",
+          "chords": [],
+          "timing": 236.5735529103546
+        },
+        {
+          "lyric": "the",
+          "chords": [],
+          "timing": 237.2289869523163
+        },
+        {
+          "lyric": "tide",
+          "chords": [
+            {
+              "chord": "G",
+              "timing": 237.54875405912782
+            }
+          ],
+          "timing": 237.57119388555907
+        }
+      ]
+    }
+  ],
+  "link": "https://www.youtube.com/watch?v=8JW6qzPCkE8"
+}

@@ -1,0 +1,20 @@
+.chordPillContainer {
+  background-color: var(--background-colour-light-2);
+  padding: 0 var(--padding-xs);
+  border-radius: 50px;
+  position: relative;
+  font-weight: bold;
+  cursor: pointer;
+  min-width: 2rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--text-colour-grey);
+
+  &.active {
+    background-color: var(--primary-colour);
+  }
+
+  &.missingChordTiming {
+    color: var(--text-alert-colour);
+  }
+}

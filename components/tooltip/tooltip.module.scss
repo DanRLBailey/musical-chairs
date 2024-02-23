@@ -1,0 +1,34 @@
+.tooltipContainer {
+  position: absolute;
+  font-weight: normal;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--background-colour-light);
+  box-shadow: var(--box-shadow-harsh);
+  padding: var(--padding-xxs) var(--padding-xs);
+  border-radius: var(--border-radius-xs);
+  transition: var(--transition);
+  top: -30px;
+  opacity: 0;
+  pointer-events: none;
+  font-size: 0.8rem;
+  color: var(--text-colour-grey);
+  white-space: nowrap;
+
+  &::after {
+    position: absolute;
+    content: "";
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    width: 10px;
+    height: 10px;
+    background-color: var(--background-colour-light);
+  }
+
+  &.hover {
+    top: -40px;
+    opacity: 1;
+    pointer-events: all;
+  }
+}
