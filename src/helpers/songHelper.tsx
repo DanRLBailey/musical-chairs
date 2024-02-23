@@ -1,4 +1,4 @@
-import { Chord, Line, Song, Word } from "../../types/songTypes";
+import { Chord, Line, Song, Word } from "@/types/songTypes";
 
 interface PartsFromSong {
   (song: Song): { allLines: Line[]; allWords: Word[]; allChords: Chord[] };
