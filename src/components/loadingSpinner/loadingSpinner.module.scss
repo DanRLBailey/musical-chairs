@@ -1,0 +1,41 @@
+.loadingSpinnerContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .spinner {
+    transform-origin: center;
+    animation: spinner_zKoa 2s linear infinite;
+    color: rgba(255, 255, 255, 0.7);
+    stroke: currentColor;
+
+    circle {
+      stroke-linecap: round;
+      animation: spinner_YpZS 1.5s ease-in-out infinite;
+    }
+  }
+}
+
+@keyframes spinner_zKoa {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spinner_YpZS {
+  0% {
+    stroke-dasharray: 0 150;
+    stroke-dashoffset: 0;
+  }
+  47.5% {
+    stroke-dasharray: 42 150;
+    stroke-dashoffset: -16;
+  }
+  95%,
+  100% {
+    stroke-dasharray: 42 150;
+    stroke-dashoffset: -59;
+  }
+}
