@@ -7,14 +7,14 @@ import {
   getIndecesOfLatestChord,
   getIndecesOfLatestWord,
   getPartsFromSong,
-} from "../../helpers/songHelper";
+} from "@/helpers/songHelper";
 import { ChordList } from "../chordList/chordList";
 import { SidebarContainer } from "../sidebarContainer/sidebarContainer";
 import { TextInput } from "../textInput/textInput";
 import ReactPlayer from "react-player";
 import { BottomBarContainer } from "../bottomBarContainer/bottomBarContainer";
 import { MusicPlayer } from "../musicPlayer/musicPlayer";
-import oldSong from "../../../../public/song-old.json";
+import oldSong from "@/public/song-old.json";
 import { ChordPill } from "../chordPill/chordPill";
 
 interface AddSongComponentProps {

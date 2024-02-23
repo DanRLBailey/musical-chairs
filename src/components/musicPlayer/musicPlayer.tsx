@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import styles from "./musicPlayer.module.scss";
 import ReactPlayer from "react-player";
 import { Chord, Song } from "../../types/songTypes";
-import { getPartsFromSong } from "../../helpers/songHelper";
+import { getPartsFromSong } from "@/helpers/songHelper";
 import { Toggle } from "../toggle/toggle";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import PauseIcon from "@mui/icons-material/Pause";
@@ -27,6 +27,13 @@ export const MusicPlayer = (props: MusicPlayerProps) => {
   const [currentTime, setCurrentTime] = useState<number>(0);
   const [volume, setVolume] = useState<number>(0.2);
   const [addWordToggle, setAddWordToggle] = useState<boolean>(false);
+  const [hasWindow, setHasWindow] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setHasWindow(true);
+    }
+  }, []);
 
   const { allChords, allWords } = getPartsFromSong(props.song);
 
@@ -100,19 +107,21 @@ export const MusicPlayer = (props: MusicPlayerProps) => {
   return (
     <div className={styles.musicPlayerContainer}>
       <div style={{ display: "none" }}>
-        <ReactPlayer
-          ref={player}
-          url={props.song.link as string}
-          playing={playing}
-          onReady={() => {
-            setMaxTime(player.current.getDuration());
-          }}
-          progressInterval={1}
-          onProgress={() => setCurrentTime(player.current.getCurrentTime())}
-          width="auto"
-          height="inherit"
-          volume={volume}
-        />
+        {hasWindow && (
+          <ReactPlayer
+            ref={player}
+            url={props.song.link as string}
+            playing={playing}
+            onReady={() => {
+              setMaxTime(player.current.getDuration());
+            }}
+            progressInterval={1}
+            onProgress={() => setCurrentTime(player.current.getCurrentTime())}
+            width="auto"
+            height="inherit"
+            volume={volume}
+          />
+        )}
       </div>
       <button onClick={() => setPlaying(!playing)}>
         {!playing ? <PlayArrowIcon /> : <PauseIcon />}

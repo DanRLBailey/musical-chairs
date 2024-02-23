@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styles from "./sidebarContainer.module.scss";
-// import { Link } from "react-router-dom";
+import Link from "next/link";
 
 interface SidebarContainerProps {
   children: React.ReactElement | React.ReactElement[];
@@ -16,8 +16,7 @@ export const SidebarContainer = (props: SidebarContainerProps) => {
       <div className={styles.sidebarContent}>
         <div className={styles.mainContent}>
           <div className={styles.homePageLink}>
-            <span>Musical Chairs</span>
-            {/* <Link to={"/"}>Musical Chairs</Link> */}
+            <Link href={"/"}>Musical Chairs</Link>
           </div>
           {props.children}
         </div>

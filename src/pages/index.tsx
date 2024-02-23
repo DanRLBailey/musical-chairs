@@ -1,6 +1,6 @@
 import styles from "./index.module.scss";
 import songs from "@/public/song-temp.json"; //TODO: Replace with rds call
-// import { Link } from "react-router-dom";
+import Link from "next/link";
 import { useState } from "react";
 import { SongDetail } from "@/components/songDetail/songDetail";
 import { SidebarContainer } from "@/components/sidebarContainer/sidebarContainer";
@@ -30,12 +30,16 @@ export default function HomePage() {
             )
             .map((song, index) => {
               return (
-                <span key={index}>
-                  <SongDetail song={song} />
-                </span>
-                // <Link key={index} to={`/song/${song.slug}`}>
+                // <span key={index}>
                 //   <SongDetail song={song} />
-                // </Link>
+                // </span>
+                <Link
+                  href={`song/${song.slug.toLowerCase().replaceAll(" ", "-")}`}
+                  className={styles.song}
+                  key={index}
+                >
+                  <SongDetail song={song} />
+                </Link>
               );
             })}
         </div>
