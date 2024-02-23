@@ -17,6 +17,7 @@ import { MusicPlayer } from "../musicPlayer/musicPlayer";
 import oldSong from "@/public/song-old.json";
 import { ChordPill } from "../chordPill/chordPill";
 import { LoadingSpinner } from "../loadingSpinner/loadingSpinner";
+import { useRouter } from "next/router";
 
 interface AddSongComponentProps {
   existingSong?: Song;
@@ -33,6 +34,8 @@ export const SongComponent = (props: AddSongComponentProps) => {
   const [allChords, setAllChords] = useState<Chord[]>([]);
   const [allChordsInSong, setAllChordsInSong] = useState<string[]>([]); //List the chords at the top of the page
   const [currentChordIndex, setCurrentChordIndex] = useState<number>(-1);
+
+  const router = useRouter();
 
   // function convertOldSong() {
   //   const nSong: Song = {
@@ -315,6 +318,45 @@ export const SongComponent = (props: AddSongComponentProps) => {
     });
   };
 
+  const handleSaveButtonClick = () => {
+    const postNewSong = () => {
+      song.slug = `${song.name.toLowerCase().split(" ").join("-")}-${song.artist
+        .toLowerCase()
+        .split(" ")
+        .join("-")}`;
+
+      fetch("/api/postSong", {
+        method: "POST",
+        body: JSON.stringify(song),
+      })
+        .then((res) => res.json())
+        .then((json) => {
+          console.log(json); //TODO: Update to notification
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    };
+
+    const updateExistingSong = () => {
+      fetch("/api/updateSong", {
+        method: "POST",
+        body: JSON.stringify(song),
+      })
+        .then((res) => res.json())
+        .then((json) => {
+          console.log(json); //TODO: Update to notification
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    };
+
+    const { pathname } = router;
+
+    pathname.includes("edit") ? updateExistingSong() : postNewSong();
+  };
+
   let overallChordIndex = -1;
 
   return (
@@ -394,21 +436,7 @@ export const SongComponent = (props: AddSongComponentProps) => {
                 type="textArea"
               />
               <ChordList onChordPressed={(chord) => setCurrentChord(chord)} />
-              <button
-                onClick={() => {
-                  song.slug = `${song.name
-                    .toLowerCase()
-                    .split(" ")
-                    .join("-")}-${song.artist
-                    .toLowerCase()
-                    .split(" ")
-                    .join("-")}`;
-                  console.log(song);
-                  navigator.clipboard.writeText(JSON.stringify(song));
-                }}
-              >
-                Save
-              </button>
+              <button onClick={handleSaveButtonClick}>Save</button>
               {/* <button onClick={convertOldSong}>Convert</button> */}
             </div>
           )}

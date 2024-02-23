@@ -23,10 +23,7 @@ export default () => {
       .then((res) => res.json())
       .then((json) => {
         if (json && json.length > 0) {
-          setSong({
-            ...json[0],
-            lines: JSON.parse(json[0]["lines"]),
-          });
+          setSong(json[0]);
           setLoading(false);
         }
       });

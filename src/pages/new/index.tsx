@@ -4,8 +4,6 @@ import { SongComponent } from "@/components/songComponent/songComponent";
 import { useState } from "react";
 
 export default () => {
-  const router = useRouter();
-
   const [isEditing, setIsEditing] = useState<boolean>(true);
 
   return (

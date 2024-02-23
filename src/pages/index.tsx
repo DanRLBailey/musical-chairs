@@ -59,7 +59,9 @@ export default function HomePage() {
               })}
           </div>
         )}
-        {(!songs || songs.length == 0) && <LoadingSpinner multiplier={2} />}
+        {(!songs || songs.length == 0 || loading) && (
+          <LoadingSpinner multiplier={2} />
+        )}
       </div>
     </div>
   );
