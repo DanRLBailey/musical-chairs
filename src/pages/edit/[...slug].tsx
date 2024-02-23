@@ -10,7 +10,7 @@ export default () => {
   const { pathname } = router;
   const { slug } = router.query;
 
-  const [isEditing, setIsEditing] = useState<boolean>(false);
+  const [isEditing, setIsEditing] = useState<boolean>(true);
 
   const [song, setSong] = useState<Song>();
   const [loading, setLoading] = useState<boolean>(true);

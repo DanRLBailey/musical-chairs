@@ -10,7 +10,7 @@
     overflow: hidden;
     padding: 5rem;
 
-    & > div {
+    .songGrid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: var(--margin-lg);

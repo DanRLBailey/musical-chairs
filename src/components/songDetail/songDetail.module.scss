@@ -5,8 +5,8 @@
   flex-direction: column;
   background-color: var(--background-colour-light);
   border-radius: var(--border-radius-md);
-  transition: var(--transition);
   width: 100%;
+  transition: var(--transition);
 
   &:hover {
     transform: scale(1.05);
