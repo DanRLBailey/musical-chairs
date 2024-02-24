@@ -15,7 +15,7 @@ export default async (req, res) => {
   const duration = body["duration"];
   const difficulty = body["difficulty"];
 
-  const query = `INSERT INTO songs2 (
+  const query = `INSERT INTO songs2 VALUES (
   null,
   '${name}',
   '${artist}',
