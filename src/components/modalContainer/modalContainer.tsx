@@ -36,7 +36,12 @@ export const ModalContainer = (props: ModalContainerProps) => {
           className={`${styles.modalContainer} ${isActive && styles.active}`}
           onClick={handleClose}
         >
-          <div className={styles.modalContent}>{props.children}</div>
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className={styles.modalContent}
+          >
+            {props.children}
+          </div>
         </div>
       )}
     </>
