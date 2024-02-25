@@ -48,6 +48,10 @@
       &:focus {
         outline: $outline-width solid var(--primary-colour);
       }
+
+      &.error {
+        outline: $outline-width solid var(--alert-colour);
+      }
     }
 
     textarea {

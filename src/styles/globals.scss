@@ -147,6 +147,8 @@ button {
   transition: var(--transition);
   background-color: var(--primary-colour);
   display: flex;
+  justify-content: center;
+  align-items: center;
 
   &:hover {
     background-color: var(--primary-colour-dark);

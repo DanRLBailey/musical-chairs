@@ -10,13 +10,18 @@ interface TextInputProps {
   onButtonClick?: () => void;
   buttonText?: string | React.ReactElement;
   disabled?: boolean;
+  isError?: boolean;
   loading?: boolean;
   success?: boolean;
 }
 
 export const TextInput = (props: TextInputProps) => {
   const handleInput = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key.toLowerCase() == "enter" && props.onButtonClick)
+    if (
+      e.key.toLowerCase() == "enter" &&
+      props.onButtonClick &&
+      !(props.value == "" || props.disabled || props.isError)
+    )
       props.onButtonClick();
   };
 
@@ -37,12 +42,12 @@ export const TextInput = (props: TextInputProps) => {
               onKeyDown={(e) => handleInput(e)}
               className={`${props.label ? styles.withLabel : ""} ${
                 props.onButtonClick ? styles.withButton : ""
-              }`}
+              } ${props.isError ? styles.error : ""}`}
               placeholder={props.placeholder ?? ""}
             ></input>
             {props.onButtonClick && (
               <button
-                disabled={props.value == "" || props.disabled}
+                disabled={props.value == "" || props.disabled || props.isError}
                 onClick={props.onButtonClick}
                 className={props.success ? typography.success : ""}
               >
