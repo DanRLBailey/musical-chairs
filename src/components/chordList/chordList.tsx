@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./chordList.module.scss";
 import { TextInput } from "../textInput/textInput";
-import { chordsList, modifiersList } from "@/constants/chords";
+import { isValidChord } from "@/helpers/chords";
 
 interface ChordListProps {
   onChordPressed: (chord: string) => void;
+  currentSelected: number | null;
 }
 
 export const ChordList = (props: ChordListProps) => {
@@ -13,6 +14,11 @@ export const ChordList = (props: ChordListProps) => {
   const [searchedChord, setSearchedChord] = useState<string>("");
   const [validChord, setValidChord] = useState<boolean>(true);
 
+  useEffect(() => {
+    if (!props.currentSelected) return;
+    setCurrentSelectedChord(props.currentSelected);
+  }, [props.currentSelected]);
+
   const onInputChange = (e: string) => {
     //split the string by "/"
     const chordParts = e.toLowerCase().split("/");
@@ -20,42 +26,8 @@ export const ChordList = (props: ChordListProps) => {
 
     //loop over the array
     chordParts.forEach((part, partIndex) => {
-      let chordPart: string[] | undefined;
-      chordPart =
-        chordsList.find((chordArr) =>
-          chordArr.find((c) => part.toLowerCase() === c.toLowerCase())
-        ) ??
-        chordsList.find((chordArr) =>
-          chordArr.find(
-            (c) => part.slice(0, 2).toLowerCase() === c.toLowerCase()
-          )
-        ) ??
-        chordsList.find((chordArr) =>
-          chordArr.find(
-            (c) => part.slice(0, 1).toLowerCase() === c.toLowerCase()
-          )
-        );
-
-      const modifier = chordPart
-        ? chordPart.length == 1
-          ? part.slice(1, 20)
-          : part.slice(2, 20)
-        : "";
-
-      const modifierPart = modifiersList.find(
-        (mod) =>
-          modifier.toLowerCase() == mod.toLowerCase() ??
-          modifier.toLowerCase().startsWith(mod.toLowerCase())
-      );
-
-      const validChordPart =
-        chordPart !== undefined && chordPart != null && chordPart.length > 0;
-      const validModiferPart =
-        modifier == ""
-          ? true
-          : modifierPart !== undefined && modifierPart != null;
-
-      if (validChord) validChord = validChordPart && validModiferPart;
+      const { valid, chordPart, modifierPart, modifier } = isValidChord(part);
+      if (validChord) validChord = valid;
 
       chordParts[partIndex] = chordPart ? chordPart[0] : "";
       if (modifierPart) chordParts[partIndex] += modifierPart;
@@ -81,7 +53,11 @@ export const ChordList = (props: ChordListProps) => {
           buttonText="+"
         />
       </div>
-      <div className={styles.selectedChords}>
+      <div
+        className={`${styles.selectedChords} ${
+          chosenChords.length > 0 ? styles.hasChords : ""
+        }`}
+      >
         {chosenChords.map((chord: string, index: number) => {
           return (
             <button

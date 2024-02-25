@@ -7,7 +7,6 @@
   $width: 20rem;
   display: flex;
   transition: var(--transition);
-  z-index: 1;
 
   &.closed {
     margin-left: calc($width * -1);

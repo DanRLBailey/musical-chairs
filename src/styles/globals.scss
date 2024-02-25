@@ -17,6 +17,10 @@
     nth($secondary-colour-rgb, 2),
     nth($secondary-colour-rgb, 3)
   );
+  $secondary-colour-light: lighten($secondary-colour, 10%);
+  $secondary-colour-light-2: lighten($secondary-colour, 20%);
+  $secondary-colour-dark: darken($secondary-colour, 10%);
+  $secondary-colour-darker: darken($secondary-colour, 25%);
 
   --primary-colour-rgb: #{$primary-colour-rgb};
   --primary-colour: #{$primary-colour};
@@ -25,7 +29,12 @@
   --primary-colour-dark: #{$primary-colour-dark};
   --primary-colour-darker: #{$primary-colour-darker};
 
+  --secondary-colour-rgb: #{$secondary-colour-rgb};
   --secondary-colour: #{$secondary-colour};
+  --secondary-colour-light: #{$secondary-colour-light};
+  --secondary-colour-light-2: #{$secondary-colour-light-2};
+  --secondary-colour-dark: #{$secondary-colour-dark};
+  --secondary-colour-darker: #{$secondary-colour-darker};
 
   --background-colour-rgb: 25, 25, 25;
   --background-colour: rgb(var(--background-colour-rgb));

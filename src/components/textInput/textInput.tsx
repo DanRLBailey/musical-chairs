@@ -8,7 +8,7 @@ interface TextInputProps {
   placeholder?: string;
   type?: "input" | "textArea";
   onButtonClick?: () => void;
-  buttonText?: string | React.ReactElement;
+  buttonText?: string | React.ReactNode;
   disabled?: boolean;
   isError?: boolean;
   loading?: boolean;

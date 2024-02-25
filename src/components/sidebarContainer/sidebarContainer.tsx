@@ -3,7 +3,7 @@ import styles from "./sidebarContainer.module.scss";
 import Link from "next/link";
 
 interface SidebarContainerProps {
-  children: React.ReactElement | React.ReactElement[];
+  children: React.ReactNode | React.ReactNode[];
 }
 
 export const SidebarContainer = (props: SidebarContainerProps) => {

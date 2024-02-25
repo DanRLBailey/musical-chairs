@@ -14,7 +14,7 @@
     flex: 1;
     height: 100dvh;
     overflow: auto;
-    padding: 2rem 5rem;
+    padding: 2rem 5rem 10rem;
 
     .songDetails {
       display: flex;
@@ -67,7 +67,6 @@
                   background-color: rgba(0, 0, 0, 0.2);
                   bottom: -50%;
                   left: 0;
-                  z-index: -1;
                   border-radius: var(--border-radius-xs);
                 }
               }
@@ -107,15 +106,14 @@
                 $padding-block: var(--padding-xs);
                 $padding-inline: var(--padding-xxs);
                 content: "";
-                width: calc(100% + #{$padding-inline} * 2);
-                height: calc(100% + #{$padding-block} * 2);
+                width: calc(100% + #{$padding-inline} / 2);
+                height: calc(100% + #{$padding-block} / 2);
                 padding: $padding-block $padding-inline;
                 background-color: var(--background-colour-light);
                 border-radius: var(--border-radius-xs);
                 position: absolute;
                 top: calc(#{$padding-block} * -1);
                 left: calc(#{$padding-inline} * -1);
-                z-index: -1;
                 transform: scale(0.85);
                 transition: 0.2s ease-out;
                 opacity: 0;

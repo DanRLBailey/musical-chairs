@@ -1,7 +1,7 @@
 import styles from "./tooltip.module.scss";
 
 interface TooltipProps {
-  children: React.ReactElement | React.ReactElement[] | string;
+  children: React.ReactNode | React.ReactNode[] | string;
   hovering: boolean;
 }
 

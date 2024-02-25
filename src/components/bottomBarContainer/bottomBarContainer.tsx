@@ -2,7 +2,7 @@ import { useState } from "react";
 import styles from "./bottomBarContainer.module.scss";
 
 interface BottomBarContainerProps {
-  children: React.ReactElement | React.ReactElement[];
+  children: React.ReactNode | React.ReactNode[];
   isOpen: boolean;
 }
 

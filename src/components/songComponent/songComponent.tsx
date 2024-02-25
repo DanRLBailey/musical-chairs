@@ -18,6 +18,8 @@ import oldSong from "@/public/song-old.json";
 import { ChordPill } from "../chordPill/chordPill";
 import { LoadingSpinner } from "../loadingSpinner/loadingSpinner";
 import { useRouter } from "next/router";
+import { TabList } from "../tabList/tabList";
+import { isValidChord } from "@/helpers/chords";
 
 interface AddSongComponentProps {
   existingSong?: Song;
@@ -29,11 +31,18 @@ export const SongComponent = (props: AddSongComponentProps) => {
   const [song, setSong] = useState<Song>(props.existingSong ?? songTemplate);
   const [textAreaVal, setTextAreaVal] = useState<string>("");
   const [currentChord, setCurrentChord] = useState<string>();
+  const [validChord, setValidChord] = useState<boolean>(true);
   const [currentTime, setCurrentTime] = useState<number>(-1);
   const [allWordsFiltered, setAllWordsFiltered] = useState<Word[]>([]);
   const [allChords, setAllChords] = useState<Chord[]>([]);
   const [allChordsInSong, setAllChordsInSong] = useState<string[]>([]); //List the chords at the top of the page
   const [currentChordIndex, setCurrentChordIndex] = useState<number>(-1);
+
+  useEffect(() => {
+    if (!currentChord) return;
+
+    setValidChord(isValidChord(currentChord).valid);
+  }, [currentChord]);
 
   const router = useRouter();
 
@@ -435,129 +444,124 @@ export const SongComponent = (props: AddSongComponentProps) => {
                 }
                 type="textArea"
               />
-              <ChordList onChordPressed={(chord) => setCurrentChord(chord)} />
-              <button onClick={handleSaveButtonClick}>Save</button>
+              <ChordList
+                onChordPressed={(chord) => setCurrentChord(chord)}
+                currentSelected={validChord ? null : -1}
+              />
+              <TabList
+                onTabPressed={(tab) => setCurrentChord(tab)}
+                currentSelected={validChord ? -1 : null}
+              />
+              {/* <button onClick={handleSaveButtonClick}>Save</button> */}
               {/* <button onClick={convertOldSong}>Convert</button> */}
             </div>
           )}
         </>
       </SidebarContainer>
-
-      <>
-        <BottomBarContainer isOpen={ReactPlayer.canPlay(song.link)}>
-          <>
-            {song.link != "" && (
-              <MusicPlayer
-                song={song}
-                isEditing={props.editing ?? false}
-                addTimingToLatestChord={(currentTime) =>
-                  addTimingToLatestChord(currentTime)
-                }
-                addTimingToLatestWord={(currentTime) =>
-                  addTimingToLatestWord(currentTime)
-                }
-                removeTimingFromLatestWord={removeTimingFromLatestWord}
-                removeTimingFromLatestChord={removeTimingFromLatestChord}
-                onCurrentTimeChange={(currentTime) =>
-                  setCurrentTime(currentTime)
-                }
-              />
-            )}
-          </>
-        </BottomBarContainer>
-        <div className={styles.songContent}>
-          <div className={styles.songDetails}>
-            <span className={styles.heading}>{song.name}</span>
-            <span className={styles.subHeading}>{song.artist}</span>
-            {/* {allChordsInSong.map((c) => {
+      <div className={styles.songContent}>
+        <div className={styles.songDetails}>
+          <span className={styles.heading}>{song.name}</span>
+          <span className={styles.subHeading}>{song.artist}</span>
+          {/* {allChordsInSong.map((c) => {
           return <div>{c}</div>;
         })} */}
-          </div>
-          <div className={styles.songContainer}>
-            {song.lines.map((line, lineIndex) => {
-              return (
-                <div key={lineIndex} className={styles.songLine}>
-                  {line.words.map((word, wordIndex) => {
-                    const wordTiming =
-                      word.timing || word.timing == 0 ? word.timing : null;
-                    const hasWordTiming = wordTiming || wordTiming == 0;
-
-                    const hasLyric =
-                      !word.lyric.includes("[") &&
-                      !word.lyric.includes("]") &&
-                      word.lyric != "";
-
-                    const nextWord =
-                      allWordsFiltered[
-                        allWordsFiltered.findIndex((w) => w == word) + 1
-                      ];
-
-                    return (
-                      <div key={wordIndex} className={styles.songWord}>
-                        <div className={styles.songChord}>
-                          {word.chords.map((chord, chordIndex) => {
-                            overallChordIndex++;
-                            const chordTiming =
-                              chord.timing || chord.timing == 0
-                                ? chord.timing
-                                : null;
-
-                            const hasChordTiming =
-                              chordTiming || chordTiming == 0;
-
-                            const nextChord =
-                              allChords[
-                                allChords.findIndex((c) => c == chord) + 1
-                              ];
-
-                            return (
-                              <ChordPill
-                                key={chordIndex}
-                                chord={chord}
-                                nextChord={nextChord}
-                                hasChordTiming={hasChordTiming}
-                                chordTiming={chordTiming}
-                                currentTime={currentTime}
-                                overallChordIndex={overallChordIndex}
-                                lineIndex={lineIndex}
-                                wordIndex={wordIndex}
-                                chordIndex={chordIndex}
-                                removeChordFromSongWord={
-                                  removeChordFromSongWord
-                                }
-                              />
-                            );
-                          })}
-                        </div>
-                        <div
-                          className={`${styles.songLyric} ${
-                            !hasWordTiming && hasLyric
-                              ? styles.missingWordTiming
-                              : ""
-                          } ${hasLyric ? styles.hasLyric : ""} ${
-                            word.timing &&
-                            word.timing <= currentTime &&
-                            (!nextWord ||
-                              (nextWord.timing &&
-                                nextWord.timing > currentTime))
-                              ? styles.active
-                              : ""
-                          }`}
-                          onClick={() =>
-                            addChordToSongWord(lineIndex, wordIndex)
-                          }
-                        >
-                          <span>{word.lyric}</span>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              );
-            })}
-          </div>
         </div>
-      </>
+        <div className={styles.songContainer}>
+          {song.lines.map((line, lineIndex) => {
+            return (
+              <div key={lineIndex} className={styles.songLine}>
+                {line.words.map((word, wordIndex) => {
+                  const wordTiming =
+                    word.timing || word.timing == 0 ? word.timing : null;
+                  const hasWordTiming = wordTiming || wordTiming == 0;
+
+                  const hasLyric =
+                    !word.lyric.includes("[") &&
+                    !word.lyric.includes("]") &&
+                    word.lyric != "";
+
+                  const nextWord =
+                    allWordsFiltered[
+                      allWordsFiltered.findIndex((w) => w == word) + 1
+                    ];
+
+                  return (
+                    <div key={wordIndex} className={styles.songWord}>
+                      <div className={styles.songChord}>
+                        {word.chords.map((chord, chordIndex) => {
+                          overallChordIndex++;
+                          const chordTiming =
+                            chord.timing || chord.timing == 0
+                              ? chord.timing
+                              : null;
+
+                          const hasChordTiming =
+                            chordTiming || chordTiming == 0;
+
+                          const nextChord =
+                            allChords[
+                              allChords.findIndex((c) => c == chord) + 1
+                            ];
+
+                          return (
+                            <ChordPill
+                              key={chordIndex}
+                              chord={chord}
+                              nextChord={nextChord}
+                              hasChordTiming={hasChordTiming}
+                              chordTiming={chordTiming}
+                              currentTime={currentTime}
+                              overallChordIndex={overallChordIndex}
+                              lineIndex={lineIndex}
+                              wordIndex={wordIndex}
+                              chordIndex={chordIndex}
+                              removeChordFromSongWord={removeChordFromSongWord}
+                            />
+                          );
+                        })}
+                      </div>
+                      <div
+                        className={`${styles.songLyric} ${
+                          !hasWordTiming && hasLyric
+                            ? styles.missingWordTiming
+                            : ""
+                        } ${hasLyric ? styles.hasLyric : ""} ${
+                          word.timing &&
+                          word.timing <= currentTime &&
+                          (!nextWord ||
+                            (nextWord.timing && nextWord.timing > currentTime))
+                            ? styles.active
+                            : ""
+                        }`}
+                        onClick={() => addChordToSongWord(lineIndex, wordIndex)}
+                      >
+                        <span>{word.lyric}</span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+      <BottomBarContainer isOpen={ReactPlayer.canPlay(song.link)}>
+        {song.link != "" && (
+          <MusicPlayer
+            song={song}
+            isEditing={props.editing ?? false}
+            addTimingToLatestChord={(currentTime) =>
+              addTimingToLatestChord(currentTime)
+            }
+            addTimingToLatestWord={(currentTime) =>
+              addTimingToLatestWord(currentTime)
+            }
+            removeTimingFromLatestWord={removeTimingFromLatestWord}
+            removeTimingFromLatestChord={removeTimingFromLatestChord}
+            onCurrentTimeChange={(currentTime) => setCurrentTime(currentTime)}
+          />
+        )}
+      </BottomBarContainer>
     </div>
   );
 };

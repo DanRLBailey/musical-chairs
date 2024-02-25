@@ -1,14 +1,29 @@
-.chordListContainer {
-  margin-bottom: 1rem;
-
-  .selectedChords {
+.chordListContainer,
+.tabListContainer {
+  .selectedChords,
+  .selectedTabs {
     display: flex;
     flex-wrap: wrap;
     gap: var(--padding-xs);
 
+    &.hasChords,
+    &.hasTabs {
+      padding-bottom: 1rem;
+    }
+
     button {
       &:not(.active) {
         background-color: rgba(255, 255, 255, 0.05);
+      }
+    }
+  }
+
+  .selectedTabs {
+    button {
+      &.active {
+        &:hover {
+          background-color: var(--secondary-colour-dark);
+        }
       }
     }
   }

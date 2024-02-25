@@ -4,8 +4,8 @@ import styles from "./toggle.module.scss";
 interface ToggleProps {
   toggled: boolean;
   setToggled: (newToggled: boolean) => void;
-  leftSideText: string | React.ReactElement;
-  rightSideText: string | React.ReactElement;
+  leftSideText: string | React.ReactNode;
+  rightSideText: string | React.ReactNode;
 }
 
 export const Toggle = (props: ToggleProps) => {
