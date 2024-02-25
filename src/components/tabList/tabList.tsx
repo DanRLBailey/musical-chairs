@@ -2,16 +2,20 @@ import { useEffect, useState } from "react";
 import styles from "@/components/chordList/chordList.module.scss";
 import { TextInput } from "../textInput/textInput";
 import { ModalContainer } from "../modalContainer/modalContainer";
+import { TabEditor } from "../tabEditor/tabEditor";
+import { Tab } from "@/types/songTypes";
 
 interface TabListProps {
   onTabPressed: (tab: string) => void;
   currentSelected: number | null;
+  onTabsChange: (tabs: Tab[]) => void;
 }
 
 export const TabList = (props: TabListProps) => {
-  const [chosenTabs, setChosenTabs] = useState<string[]>([]);
-  const [currentSelectedTab, setCurrentSelectedTab] = useState<number>(-1);
-  const [searchedTab, setSearchedTab] = useState<string>("");
+  const [chosenTabs, setChosenTabs] = useState<Tab[]>([]);
+  const [currentSelectedTabNumber, setCurrentSelectedTab] =
+    useState<number>(-1);
+  const [searchedTab, setSearchedTab] = useState<Tab>({} as Tab);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
 
   useEffect(() => {
@@ -20,7 +24,14 @@ export const TabList = (props: TabListProps) => {
   }, [props.currentSelected]);
 
   const onInputChange = (e: string) => {
-    setSearchedTab(e);
+    setSearchedTab({
+      name: e,
+      cols: [
+        {
+          G: 1,
+        },
+      ],
+    } as Tab);
   };
 
   return (
@@ -28,13 +39,14 @@ export const TabList = (props: TabListProps) => {
       <div className={styles.tabSearch}>
         <TextInput
           label="Tabs"
-          value={searchedTab}
+          value={searchedTab.name ?? ""}
           onValueChange={(e) => onInputChange(e as string)}
           onButtonClick={() => {
             setChosenTabs([...chosenTabs, searchedTab]);
-            setSearchedTab("");
+            setSearchedTab({} as Tab);
           }}
           buttonText="+"
+          isError={chosenTabs.some((tab) => tab.name === searchedTab.name)}
         />
       </div>
       <div
@@ -42,29 +54,39 @@ export const TabList = (props: TabListProps) => {
           chosenTabs.length > 0 ? styles.hasTabs : ""
         }`}
       >
-        {chosenTabs.map((tab: string, index: number) => {
+        {chosenTabs.map((tab: Tab, index: number) => {
           return (
             <button
               key={index}
               onClick={() => {
-                if (currentSelectedTab != index) {
-                  props.onTabPressed(tab);
+                if (currentSelectedTabNumber != index) {
+                  props.onTabPressed(tab.name);
                   setCurrentSelectedTab(index);
                 } else {
-                  console.log("open modal");
                   setModalOpen(true);
                 }
               }}
-              className={currentSelectedTab == index ? styles.active : ""}
+              className={currentSelectedTabNumber == index ? styles.active : ""}
             >
-              {tab}
+              {tab.name}
             </button>
           );
         })}
       </div>
       {modalOpen && (
         <ModalContainer modalOpen={modalOpen} setModalOpen={setModalOpen}>
-          tabEditor
+          <TabEditor
+            tab={chosenTabs[currentSelectedTabNumber]}
+            setTab={(newTab) => {
+              const updatedTabs = chosenTabs.map((tab) => {
+                if (tab.name === newTab.name) {
+                  return newTab;
+                }
+                return tab;
+              });
+              setChosenTabs(updatedTabs);
+            }}
+          />
         </ModalContainer>
       )}
     </div>

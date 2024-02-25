@@ -22,16 +22,6 @@
     textarea {
       $outline-width: 2px;
 
-      background-color: rgba(255, 255, 255, 0.05);
-      border: none;
-      border-radius: var(--border-radius-xs);
-      width: 100%;
-      resize: none;
-      padding: var(--padding-xs);
-      outline-offset: calc($outline-width * -1);
-      transition: var(--transition-quick);
-      outline: $outline-width solid transparent;
-
       &.withLabel {
         border-top-left-radius: 0;
       }

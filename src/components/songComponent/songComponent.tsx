@@ -1,6 +1,13 @@
 import { useEffect, useState } from "react";
 import styles from "./songComponent.module.scss";
-import { Chord, Line, Song, Word, songTemplate } from "../../types/songTypes";
+import {
+  Chord,
+  Line,
+  Song,
+  Tab,
+  Word,
+  songTemplate,
+} from "../../types/songTypes";
 import {
   getIndecesOfLatestBlankChord,
   getIndecesOfLatestBlankWord,
@@ -451,6 +458,7 @@ export const SongComponent = (props: AddSongComponentProps) => {
               <TabList
                 onTabPressed={(tab) => setCurrentChord(tab)}
                 currentSelected={validChord ? -1 : null}
+                onTabsChange={() => {}}
               />
               {/* <button onClick={handleSaveButtonClick}>Save</button> */}
               {/* <button onClick={convertOldSong}>Convert</button> */}

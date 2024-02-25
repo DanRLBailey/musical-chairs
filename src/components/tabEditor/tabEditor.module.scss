@@ -1,0 +1,34 @@
+.tabEditorContainer {
+  $gap: var(--padding-xxs);
+
+  display: flex;
+  flex-direction: row;
+  gap: $gap;
+  padding: var(--padding-md);
+
+  .tabCol {
+    $width: 2rem;
+    $border: 2px solid white;
+
+    display: flex;
+    flex-direction: column;
+    gap: $gap;
+    width: $width;
+    height: 100%;
+
+    &:first-of-type,
+    &:last-of-type {
+      border-right: $border;
+    }
+
+    & > * {
+      height: $width;
+    }
+
+    & > *:first-child {
+      border-bottom: $border;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+}

@@ -178,7 +178,18 @@ a {
   cursor: pointer;
 }
 
-input,
+input:not([type="range"]),
 textarea {
+  $outline-width: 2px;
   color: var(--text-colour);
+
+  background-color: rgba(255, 255, 255, 0.05);
+  border: none;
+  border-radius: var(--border-radius-xs);
+  width: 100%;
+  resize: none;
+  padding: var(--padding-xs);
+  outline-offset: calc($outline-width * -1);
+  transition: var(--transition-quick);
+  outline: $outline-width solid transparent;
 }

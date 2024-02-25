@@ -103,6 +103,7 @@
               line-height: 1;
 
               &::before {
+                z-index: -1;
                 $padding-block: var(--padding-xs);
                 $padding-inline: var(--padding-xxs);
                 content: "";

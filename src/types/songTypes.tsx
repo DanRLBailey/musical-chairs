@@ -3,6 +3,7 @@ export interface Song {
   artist: string;
   slug: string;
   lines: Line[];
+  tabs?: Tab[];
   link: string;
   capo: number;
   key: string;
@@ -24,6 +25,15 @@ export interface Word {
 export interface Chord {
   timing?: number;
   chord: string;
+}
+
+export interface Tab {
+  name: string;
+  cols: TabColumn[];
+}
+
+export interface TabColumn {
+  [key: string]: string | number | undefined;
 }
 
 export const songTemplate = {
