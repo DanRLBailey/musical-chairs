@@ -4,12 +4,15 @@ import { TextInput } from "../textInput/textInput";
 import { isValidChord } from "@/helpers/chords";
 
 interface ChordListProps {
+  existingChords?: string[];
   onChordPressed: (chord: string) => void;
   currentSelected: number | null;
 }
 
 export const ChordList = (props: ChordListProps) => {
-  const [chosenChords, setChosenChords] = useState<string[]>([]);
+  const [chosenChords, setChosenChords] = useState<string[]>(
+    props.existingChords ?? []
+  );
   const [currentSelectedChord, setCurrentSelectedChord] = useState<number>(-1);
   const [searchedChord, setSearchedChord] = useState<string>("");
   const [validChord, setValidChord] = useState<boolean>(true);
@@ -18,6 +21,11 @@ export const ChordList = (props: ChordListProps) => {
     if (!props.currentSelected) return;
     setCurrentSelectedChord(props.currentSelected);
   }, [props.currentSelected]);
+
+  useEffect(() => {
+    if (!props.existingChords) return;
+    setChosenChords(props.existingChords);
+  }, [props.existingChords]);
 
   const onInputChange = (e: string) => {
     //split the string by "/"

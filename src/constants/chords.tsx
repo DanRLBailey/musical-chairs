@@ -24,6 +24,7 @@ export const modifiersList = [
   "aug7",
   "m7.5-",
   "m7+",
+  "5",
   "6",
   "m6",
   "9",

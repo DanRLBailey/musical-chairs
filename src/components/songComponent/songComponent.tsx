@@ -23,10 +23,10 @@ import { BottomBarContainer } from "../bottomBarContainer/bottomBarContainer";
 import { MusicPlayer } from "../musicPlayer/musicPlayer";
 import oldSong from "@/public/song-old.json";
 import { ChordPill } from "../chordPill/chordPill";
-import { LoadingSpinner } from "../loadingSpinner/loadingSpinner";
 import { useRouter } from "next/router";
 import { TabList } from "../tabList/tabList";
 import { isValidChord } from "@/helpers/chords";
+import { title } from "@/constants/document";
 
 interface AddSongComponentProps {
   existingSong?: Song;
@@ -100,6 +100,12 @@ export const SongComponent = (props: AddSongComponentProps) => {
   // }
 
   useEffect(() => {
+    if (!props.existingSong) title("New Song");
+    else if (props.editing) title(`${song.name} - ${song.artist} | Edit`);
+    else title(`${song.name} - ${song.artist}`);
+  }, []);
+
+  useEffect(() => {
     if (song.lines.length <= 0) return;
 
     const { allLines, allWords: words, allChords } = getPartsFromSong(song);
@@ -120,7 +126,11 @@ export const SongComponent = (props: AddSongComponentProps) => {
 
     const songChords: string[] = [];
     allChords.forEach((chord) => {
-      if (songChords.some((c) => c == chord.chord)) return;
+      if (
+        songChords.some((c) => c == chord.chord) ||
+        !isValidChord(chord.chord).valid
+      )
+        return;
       songChords.push(chord.chord);
     });
 
@@ -348,6 +358,7 @@ export const SongComponent = (props: AddSongComponentProps) => {
         .then((res) => res.json())
         .then((json) => {
           console.log(json); //TODO: Update to notification
+          router.push(`/song/${song.slug}`);
         })
         .catch((err) => {
           console.error(err);
@@ -373,8 +384,11 @@ export const SongComponent = (props: AddSongComponentProps) => {
     pathname.includes("edit") ? updateExistingSong() : postNewSong();
   };
 
-  let overallChordIndex = -1;
+  const onTabChange = (tabs: Tab[]) => {
+    setSong({ ...song, tabs: tabs });
+  };
 
+  let overallChordIndex = -1;
   return (
     <div className={styles.addSongContainer}>
       <SidebarContainer>
@@ -452,15 +466,17 @@ export const SongComponent = (props: AddSongComponentProps) => {
                 type="textArea"
               />
               <ChordList
+                existingChords={allChordsInSong}
                 onChordPressed={(chord) => setCurrentChord(chord)}
                 currentSelected={validChord ? null : -1}
               />
               <TabList
+                existingTabs={song.tabs ?? []}
                 onTabPressed={(tab) => setCurrentChord(tab)}
                 currentSelected={validChord ? -1 : null}
-                onTabsChange={() => {}}
+                onTabsChange={onTabChange} //TODO: Add to song
               />
-              {/* <button onClick={handleSaveButtonClick}>Save</button> */}
+              <button onClick={handleSaveButtonClick}>Save</button>
               {/* <button onClick={convertOldSong}>Convert</button> */}
             </div>
           )}

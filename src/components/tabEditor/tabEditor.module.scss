@@ -1,34 +1,54 @@
 .tabEditorContainer {
   $gap: var(--padding-xxs);
+  $border: 2px solid white;
+  $width: 2rem;
 
   display: flex;
-  flex-direction: row;
-  gap: $gap;
+  flex-direction: column;
+  gap: var(--padding-md);
   padding: var(--padding-md);
 
-  .tabCol {
-    $width: 2rem;
-    $border: 2px solid white;
+  .tabName {
+    font-size: var(--font-size-lg);
+    font-weight: bold;
+  }
 
+  .tabContainer {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: $gap;
-    width: $width;
-    height: 100%;
 
-    &:first-of-type,
-    &:last-of-type {
-      border-right: $border;
+    .tabCol {
+      display: flex;
+      flex-direction: column;
+      gap: $gap;
+      width: $width;
+      height: 100%;
+
+      &:first-of-type {
+        border-right: $border;
+      }
+
+      & > * {
+        height: $width;
+      }
+
+      & > *:first-child {
+        border-bottom: $border;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+      }
     }
 
-    & > * {
-      height: $width;
-    }
-
-    & > *:first-child {
-      border-bottom: $border;
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0;
+    .tabEndCol {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: $gap;
+      border-left: $border;
+      cursor: pointer;
+      width: $width;
     }
   }
 }

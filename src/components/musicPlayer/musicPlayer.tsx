@@ -64,10 +64,11 @@ export const MusicPlayer = (props: MusicPlayerProps) => {
 
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
+      const modal = document.getElementById("modalContainer");
       const tagName = (e.target as HTMLElement).tagName.toLowerCase();
 
       // Check if the target element is an input or textarea
-      if (tagName === "input" || tagName === "textarea") return;
+      if (tagName === "input" || tagName === "textarea" || modal) return;
 
       switch (e.key) {
         case "Enter":

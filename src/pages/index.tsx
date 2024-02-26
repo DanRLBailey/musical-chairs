@@ -6,11 +6,16 @@ import { SidebarContainer } from "@/components/sidebarContainer/sidebarContainer
 import { TextInput } from "@/components/textInput/textInput";
 import { Song } from "@/types/songTypes";
 import { LoadingSpinner } from "@/components/loadingSpinner/loadingSpinner";
+import { title } from "@/constants/document";
 
 export default function HomePage() {
   const [songs, setSongs] = useState<Song[]>();
   const [loading, setLoading] = useState<boolean>(true);
   const [filter, setFilter] = useState<string>("");
+
+  useEffect(() => {
+    title("Home");
+  }, []);
 
   useEffect(() => {
     fetch("/api/getSongs")

@@ -6,31 +6,37 @@ import { TabEditor } from "../tabEditor/tabEditor";
 import { Tab } from "@/types/songTypes";
 
 interface TabListProps {
+  existingTabs?: Tab[];
   onTabPressed: (tab: string) => void;
   currentSelected: number | null;
   onTabsChange: (tabs: Tab[]) => void;
 }
 
 export const TabList = (props: TabListProps) => {
-  const [chosenTabs, setChosenTabs] = useState<Tab[]>([]);
+  const [chosenTabs, setChosenTabs] = useState<Tab[]>(props.existingTabs ?? []);
   const [currentSelectedTabNumber, setCurrentSelectedTab] =
     useState<number>(-1);
   const [searchedTab, setSearchedTab] = useState<Tab>({} as Tab);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
 
   useEffect(() => {
+    if (!props.existingTabs) return;
+    setChosenTabs(props.existingTabs);
+  }, [props.existingTabs]);
+
+  useEffect(() => {
     if (!props.currentSelected) return;
     setCurrentSelectedTab(props.currentSelected);
   }, [props.currentSelected]);
 
+  useEffect(() => {
+    props.onTabsChange(chosenTabs);
+  }, [chosenTabs]);
+
   const onInputChange = (e: string) => {
     setSearchedTab({
       name: e,
-      cols: [
-        {
-          G: 1,
-        },
-      ],
+      cols: [],
     } as Tab);
   };
 

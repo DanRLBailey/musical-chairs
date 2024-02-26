@@ -33,6 +33,7 @@ export const ModalContainer = (props: ModalContainerProps) => {
     <>
       {isOpen && (
         <div
+          id={"modalContainer"}
           className={`${styles.modalContainer} ${isActive && styles.active}`}
           onClick={handleClose}
         >
