@@ -14,6 +14,7 @@ export default async (req, res) => {
   const tuning = body["tuning"];
   const duration = body["duration"];
   const difficulty = body["difficulty"];
+  const tabs = body["tabs"];
 
   const query = `UPDATE songs2 SET
   name = '${name}',
@@ -25,7 +26,8 @@ export default async (req, res) => {
   tuning = '${tuning}',
   duration = ${duration ? parseInt(duration) : 0},
   difficulty = ${difficulty ? parseInt(difficulty) : 0},
-  last_updated = NOW()
+  last_updated = NOW(),
+  tabs = '${JSON.stringify(tabs)}'
   WHERE slug = '${slug}'
   `;
 

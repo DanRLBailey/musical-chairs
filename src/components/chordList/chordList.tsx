@@ -10,6 +10,7 @@ interface ChordListProps {
 }
 
 export const ChordList = (props: ChordListProps) => {
+  //TODO: fix the chord list resetting when adding a chord to the song
   const [chosenChords, setChosenChords] = useState<string[]>(
     props.existingChords ?? []
   );
@@ -23,7 +24,7 @@ export const ChordList = (props: ChordListProps) => {
   }, [props.currentSelected]);
 
   useEffect(() => {
-    if (!props.existingChords) return;
+    if (!props.existingChords || chosenChords.length > 0) return;
     setChosenChords(props.existingChords);
   }, [props.existingChords]);
 

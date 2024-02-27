@@ -14,6 +14,7 @@ export default async (req, res) => {
   const tuning = body["tuning"];
   const duration = body["duration"];
   const difficulty = body["difficulty"];
+  const tabs = body["tabs"];
 
   const query = `INSERT INTO songs2 VALUES (
   null,
@@ -30,7 +31,8 @@ export default async (req, res) => {
   NOW(),
   NOW(),
   1,
-  0
+  0,
+  '${JSON.stringify(tabs)}'
   )`;
 
   //TODO: Update "1" to the user id

@@ -22,6 +22,7 @@ interface MusicPlayerProps {
 }
 
 export const MusicPlayer = (props: MusicPlayerProps) => {
+  //TODO: Stop playing when the song reches the end
   const [playing, setPlaying] = useState<boolean>(false);
   const [maxTime, setMaxTime] = useState<number>(0);
   const [currentTime, setCurrentTime] = useState<number>(0);

@@ -293,6 +293,7 @@ export const SongComponent = (props: AddSongComponentProps) => {
   };
 
   const handleTextAreaChange = (text: string) => {
+    //TODO: fix line removal
     setTextAreaVal(text);
     const textAreaLines = text.split("\n");
     const currentLines: Line[] = [];
@@ -396,6 +397,7 @@ export const SongComponent = (props: AddSongComponentProps) => {
           {props.editing && (
             <div className={styles.addSongSidebar}>
               <div className={styles.list}>
+                {/* TODO: Add validation */}
                 <TextInput
                   label="Song Name"
                   value={song.name}
@@ -474,7 +476,7 @@ export const SongComponent = (props: AddSongComponentProps) => {
                 existingTabs={song.tabs ?? []}
                 onTabPressed={(tab) => setCurrentChord(tab)}
                 currentSelected={validChord ? -1 : null}
-                onTabsChange={onTabChange} //TODO: Add to song
+                onTabsChange={onTabChange}
               />
               <button onClick={handleSaveButtonClick}>Save</button>
               {/* <button onClick={convertOldSong}>Convert</button> */}

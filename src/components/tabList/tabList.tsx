@@ -20,6 +20,7 @@ export const TabList = (props: TabListProps) => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
 
   useEffect(() => {
+    console.log(props.existingTabs);
     if (!props.existingTabs) return;
     setChosenTabs(props.existingTabs);
   }, [props.existingTabs]);
