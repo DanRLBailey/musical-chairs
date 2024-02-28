@@ -1,0 +1,61 @@
+.chordViewerContainer {
+  .chordName {
+    font-size: var(--font-size-lg);
+    font-weight: bold;
+  }
+
+  .chordContainer {
+    margin-top: 2rem;
+
+    display: flex;
+    flex-direction: row;
+
+    .chordCol {
+      $width: 2rem;
+      display: flex;
+      flex-direction: column;
+
+      &:first-of-type,
+      &:last-of-type {
+        & > div {
+          border: none !important;
+        }
+      }
+
+      & > div {
+        width: $width;
+        height: $width;
+        border: 1px solid white;
+        position: relative;
+
+        span {
+          width: calc($width * 0.5);
+          height: calc($width * 0.5);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          border-radius: 50px;
+          padding: 0.5rem;
+          position: absolute;
+          top: 50%;
+          left: 0;
+          transform: translate(-55%, -50%);
+
+          &.fret {
+            background-color: white;
+          }
+
+          &.open {
+            border: 2px solid white;
+          }
+
+          &.muted,
+          &.open {
+            top: -50%;
+          }
+        }
+      }
+    }
+  }
+}

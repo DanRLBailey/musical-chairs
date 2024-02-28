@@ -36,6 +36,15 @@ export interface TabColumn {
   [key: string]: string | number | undefined;
 }
 
+export interface ChordObj {
+  [key: string]: ChordPartObj[];
+}
+
+export interface ChordPartObj {
+  positions: string[];
+  fingerings: [string[]];
+}
+
 export const songTemplate = {
   name: "",
   artist: "",

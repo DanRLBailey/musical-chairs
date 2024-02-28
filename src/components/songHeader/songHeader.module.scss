@@ -1,0 +1,11 @@
+.songHeaderContainer {
+  position: fixed;
+  top: var(--margin-md);
+  right: var(--margin-md);
+  padding: var(--padding-md);
+  background-color: var(--background-colour-dark);
+  border-radius: var(--border-radius-md);
+  // width: calc(100% - 20rem - var(--margin-md) * 2);
+  max-width: 45%;
+  transition: var(--transition);
+}

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import styles from "./songComponent.module.scss";
 import {
   Chord,
+  ChordObj,
   Line,
   Song,
   Tab,
@@ -27,6 +28,10 @@ import { useRouter } from "next/router";
 import { TabList } from "../tabList/tabList";
 import { isValidChord } from "@/helpers/chords";
 import { title } from "@/constants/document";
+import { SongHeader } from "../songHeader/songHeader";
+import { TabViewer } from "../tabViewer/tabViewer";
+import { ChordViewer } from "../chordViewer/chordViewer";
+import allChordsJson from "@/public/chords.json";
 
 interface AddSongComponentProps {
   existingSong?: Song;
@@ -42,8 +47,11 @@ export const SongComponent = (props: AddSongComponentProps) => {
   const [currentTime, setCurrentTime] = useState<number>(-1);
   const [allWordsFiltered, setAllWordsFiltered] = useState<Word[]>([]);
   const [allChords, setAllChords] = useState<Chord[]>([]);
-  const [allChordsInSong, setAllChordsInSong] = useState<string[]>([]); //List the chords at the top of the page
+  const [uniqueChords, setUniqueChords] = useState<string[]>([]);
   const [currentChordIndex, setCurrentChordIndex] = useState<number>(-1);
+  const [highlightedChord, setHighlightedChord] = useState<Chord>();
+
+  //TODO: List the chords at the top of the page
 
   useEffect(() => {
     if (!currentChord) return;
@@ -124,17 +132,17 @@ export const SongComponent = (props: AddSongComponentProps) => {
     );
     setAllChords(allChords);
 
-    const songChords: string[] = [];
+    const uniqueChords: string[] = [];
     allChords.forEach((chord) => {
       if (
-        songChords.some((c) => c == chord.chord) ||
+        uniqueChords.some((c) => c == chord.chord) ||
         !isValidChord(chord.chord).valid
       )
         return;
-      songChords.push(chord.chord);
+      uniqueChords.push(chord.chord);
     });
 
-    setAllChordsInSong(songChords);
+    setUniqueChords(uniqueChords);
 
     setTextAreaVal(allLinesToString);
   }, [song]);
@@ -155,6 +163,8 @@ export const SongComponent = (props: AddSongComponentProps) => {
 
     if (index != currentChordIndex) {
       setCurrentChordIndex(index);
+
+      setHighlightedChord(allChords[index]);
 
       const el = document.getElementById(`chordPill-${index}`);
       el?.scrollIntoView({
@@ -468,7 +478,7 @@ export const SongComponent = (props: AddSongComponentProps) => {
                 type="textArea"
               />
               <ChordList
-                existingChords={allChordsInSong}
+                existingChords={uniqueChords}
                 onChordPressed={(chord) => setCurrentChord(chord)}
                 currentSelected={validChord ? null : -1}
               />
@@ -588,6 +598,24 @@ export const SongComponent = (props: AddSongComponentProps) => {
           />
         )}
       </BottomBarContainer>
+      <SongHeader>
+        {highlightedChord && isValidChord(highlightedChord.chord).valid && (
+          <ChordViewer
+            chordName={highlightedChord.chord}
+            chord={(allChordsJson as ChordObj)[highlightedChord.chord][0]}
+          />
+        )}
+        {highlightedChord &&
+          !isValidChord(highlightedChord.chord).valid &&
+          song.tabs && (
+            <TabViewer
+              tab={
+                song.tabs.find((tab) => tab.name == highlightedChord.chord) ??
+                song.tabs[0]
+              }
+            />
+          )}
+      </SongHeader>
     </div>
   );
 };
