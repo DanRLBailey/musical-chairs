@@ -18,9 +18,9 @@ export default async (req, res) => {
 
   const query = `INSERT INTO songs2 VALUES (
   null,
-  '${name}',
-  '${artist}',
-  '${slug}',
+  '${name.replaceAll("'", "'")}',
+  '${artist.replaceAll("'", "'")}',
+  '${slug.replaceAll("'", "")}',
   '${JSON.stringify(lines).replaceAll("'", "\\'")}',
   '${link}',
   ${capo ? parseInt(capo) : 0},

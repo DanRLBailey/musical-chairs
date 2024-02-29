@@ -9,11 +9,20 @@ interface ChordViewerProps {
 
 export const ChordViewer = (props: ChordViewerProps) => {
   const [frets, setFrets] = useState<string[]>(props.chord.positions);
-  //TODO: fix for when the positions are further in the fretboard
+  const [fretOffset, setFretOffset] = useState<number>(0);
   //TODO: fix last open chord showing higher than all the others
 
   useEffect(() => {
     setFrets(props.chord.positions);
+    console.log(props.chord);
+
+    const fretNums: number[] = props.chord.positions
+      .map((fret) => (parseInt(fret) ? parseInt(fret) : null))
+      .filter((fret) => fret !== null) as number[];
+
+    const min = Math.min(...fretNums);
+    const offset = min - 1;
+    setFretOffset(offset);
   }, [props.chord]);
 
   return (
@@ -24,7 +33,7 @@ export const ChordViewer = (props: ChordViewerProps) => {
       <div className={styles.chordContainer}>
         <div className={styles.chordCol}>
           <div></div>
-          <div></div>
+          <div>{fretOffset > 0 && <>{fretOffset + 1}fr</>}</div>
           <div></div>
           <div></div>
           <div></div>
@@ -36,10 +45,26 @@ export const ChordViewer = (props: ChordViewerProps) => {
                 {fret == "x" && <span className={styles.muted}>X</span>}{" "}
                 {fret == "0" && <span className={styles.open}></span>}
               </div>
-              <div>{fret == "1" && <span className={styles.fret}></span>}</div>
-              <div>{fret == "2" && <span className={styles.fret}></span>}</div>
-              <div>{fret == "3" && <span className={styles.fret}></span>}</div>
-              <div>{fret == "4" && <span className={styles.fret}></span>}</div>
+              <div>
+                {(parseInt(fret) - fretOffset).toString() == "1" && (
+                  <span className={styles.fret}></span>
+                )}
+              </div>
+              <div>
+                {(parseInt(fret) - fretOffset).toString() == "2" && (
+                  <span className={styles.fret}></span>
+                )}
+              </div>
+              <div>
+                {(parseInt(fret) - fretOffset).toString() == "3" && (
+                  <span className={styles.fret}></span>
+                )}
+              </div>
+              <div>
+                {(parseInt(fret) - fretOffset).toString() == "4" && (
+                  <span className={styles.fret}></span>
+                )}
+              </div>
             </div>
           );
         })}

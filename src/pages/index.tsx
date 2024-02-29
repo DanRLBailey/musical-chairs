@@ -32,13 +32,14 @@ export default function HomePage() {
   return (
     <div className={styles.homePageContainer}>
       <SidebarContainer>
-        <>
-          <TextInput
-            label="Filter"
-            value={filter}
-            onValueChange={(newVal) => setFilter(newVal as string)}
-          />
-        </>
+        <Link href={"/new"}>
+          <button>New Song</button>
+        </Link>
+        <TextInput
+          label="Filter"
+          value={filter}
+          onValueChange={(newVal) => setFilter(newVal as string)}
+        />
       </SidebarContainer>
       <div className={styles.homePageContent}>
         {songs && songs.length > 0 && (

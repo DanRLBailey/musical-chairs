@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "./chordList.module.scss";
 import { TextInput } from "../textInput/textInput";
-import { isValidChord } from "@/helpers/chords";
+import { isValidChordPart } from "@/helpers/chords";
 
 interface ChordListProps {
   existingChords?: string[];
@@ -35,7 +35,8 @@ export const ChordList = (props: ChordListProps) => {
 
     //loop over the array
     chordParts.forEach((part, partIndex) => {
-      const { valid, chordPart, modifierPart, modifier } = isValidChord(part);
+      const { valid, chordPart, modifierPart, modifier } =
+        isValidChordPart(part);
       if (validChord) validChord = valid;
 
       chordParts[partIndex] = chordPart ? chordPart[0] : "";

@@ -1,22 +1,22 @@
 import { chordsList, modifiersList } from "@/constants/chords";
 
-export const isValidChord = (chord: string) => {
+export const isValidChordPart = (part: string) => {
   let chordPart: string[] | undefined;
   chordPart =
     chordsList.find((chordArr) =>
-      chordArr.find((c) => chord.toLowerCase() === c.toLowerCase())
+      chordArr.find((c) => part.toLowerCase() === c.toLowerCase())
     ) ??
     chordsList.find((chordArr) =>
-      chordArr.find((c) => chord.slice(0, 2).toLowerCase() === c.toLowerCase())
+      chordArr.find((c) => part.slice(0, 2).toLowerCase() === c.toLowerCase())
     ) ??
     chordsList.find((chordArr) =>
-      chordArr.find((c) => chord.slice(0, 1).toLowerCase() === c.toLowerCase())
+      chordArr.find((c) => part.slice(0, 1).toLowerCase() === c.toLowerCase())
     );
 
   const modifier = chordPart
     ? chordPart.length == 1
-      ? chord.slice(1, 20)
-      : chord.slice(2, 20)
+      ? part.slice(1, 20)
+      : part.slice(2, 20)
     : "";
 
   const modifierPart = modifiersList.find(

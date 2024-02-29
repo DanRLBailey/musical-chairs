@@ -26,12 +26,13 @@ import oldSong from "@/public/song-old.json";
 import { ChordPill } from "../chordPill/chordPill";
 import { useRouter } from "next/router";
 import { TabList } from "../tabList/tabList";
-import { isValidChord } from "@/helpers/chords";
+import { isValidChordPart } from "@/helpers/chords";
 import { title } from "@/constants/document";
 import { SongHeader } from "../songHeader/songHeader";
 import { TabViewer } from "../tabViewer/tabViewer";
 import { ChordViewer } from "../chordViewer/chordViewer";
 import allChordsJson from "@/public/chords.json";
+import Link from "next/link";
 
 interface AddSongComponentProps {
   existingSong?: Song;
@@ -56,7 +57,7 @@ export const SongComponent = (props: AddSongComponentProps) => {
   useEffect(() => {
     if (!currentChord) return;
 
-    setValidChord(isValidChord(currentChord).valid);
+    setValidChord(isValidChordPart(currentChord).valid);
   }, [currentChord]);
 
   const router = useRouter();
@@ -136,7 +137,7 @@ export const SongComponent = (props: AddSongComponentProps) => {
     allChords.forEach((chord) => {
       if (
         uniqueChords.some((c) => c == chord.chord) ||
-        !isValidChord(chord.chord).valid
+        !isValidChordPart(chord.chord).valid
       )
         return;
       uniqueChords.push(chord.chord);
@@ -403,28 +404,28 @@ export const SongComponent = (props: AddSongComponentProps) => {
   return (
     <div className={styles.addSongContainer}>
       <SidebarContainer>
-        <>
-          {props.editing && (
-            <div className={styles.addSongSidebar}>
-              <div className={styles.list}>
-                {/* TODO: Add validation */}
-                <TextInput
-                  label="Song Name"
-                  value={song.name}
-                  onValueChange={(newVal) =>
-                    setSong({ ...song, name: newVal as string })
-                  }
-                  placeholder="Name"
-                />
-                <TextInput
-                  label="Artist"
-                  value={song.artist}
-                  onValueChange={(newVal) =>
-                    setSong({ ...song, artist: newVal as string })
-                  }
-                  placeholder="Artist"
-                />
-              </div>
+        {props.editing && (
+          <div className={styles.songSidebar}>
+            <div className={styles.list}>
+              {/* TODO: Add validation */}
+              <TextInput
+                label="Song Name"
+                value={song.name}
+                onValueChange={(newVal) =>
+                  setSong({ ...song, name: newVal as string })
+                }
+                placeholder="Name"
+              />
+              <TextInput
+                label="Artist"
+                value={song.artist}
+                onValueChange={(newVal) =>
+                  setSong({ ...song, artist: newVal as string })
+                }
+                placeholder="Artist"
+              />
+            </div>
+            <div className={styles.list}>
               <TextInput
                 label="Link"
                 value={song.link}
@@ -433,74 +434,100 @@ export const SongComponent = (props: AddSongComponentProps) => {
                 }
                 placeholder="youtube.com/..."
               />
-              <div className={styles.list}>
-                <TextInput
-                  label="Key"
-                  value={song.key}
-                  onValueChange={(newVal) =>
-                    setSong({ ...song, key: newVal as string })
-                  }
-                  placeholder="Gb"
-                />
-                <TextInput
-                  label="Capo"
-                  value={song.capo}
-                  onValueChange={(newVal) =>
-                    setSong({ ...song, capo: newVal as number })
-                  }
-                  placeholder="0"
-                />
-              </div>
-              <div className={styles.list}>
-                <TextInput
-                  label="Tuning"
-                  value={song.tuning}
-                  onValueChange={(newVal) =>
-                    setSong({ ...song, tuning: newVal as string })
-                  }
-                  placeholder="Standard"
-                />
-                <TextInput
-                  label="Duration"
-                  value={song.duration}
-                  onValueChange={(newVal) =>
-                    setSong({ ...song, duration: newVal as number })
-                  }
-                  placeholder="0"
-                />
-              </div>
               <TextInput
-                label="Lyrics"
-                value={textAreaVal}
+                label="Difficulty"
+                value={song.difficulty}
                 onValueChange={(newVal) =>
-                  handleTextAreaChange(newVal as string)
+                  setSong({ ...song, difficulty: newVal as number })
                 }
-                type="textArea"
+                placeholder="0"
               />
-              <ChordList
-                existingChords={uniqueChords}
-                onChordPressed={(chord) => setCurrentChord(chord)}
-                currentSelected={validChord ? null : -1}
-              />
-              <TabList
-                existingTabs={song.tabs ?? []}
-                onTabPressed={(tab) => setCurrentChord(tab)}
-                currentSelected={validChord ? -1 : null}
-                onTabsChange={onTabChange}
-              />
-              <button onClick={handleSaveButtonClick}>Save</button>
-              {/* <button onClick={convertOldSong}>Convert</button> */}
             </div>
-          )}
-        </>
+            <div className={styles.list}>
+              <TextInput
+                label="Key"
+                value={song.key}
+                onValueChange={(newVal) =>
+                  setSong({ ...song, key: newVal as string })
+                }
+                placeholder="Gb"
+              />
+              <TextInput
+                label="Capo"
+                value={song.capo}
+                onValueChange={(newVal) =>
+                  setSong({ ...song, capo: newVal as number })
+                }
+                placeholder="0"
+              />
+            </div>
+            <div className={styles.list}>
+              <TextInput
+                label="Tuning"
+                value={song.tuning}
+                onValueChange={(newVal) =>
+                  setSong({ ...song, tuning: newVal as string })
+                }
+                placeholder="Standard"
+              />
+              <TextInput
+                label="Duration"
+                value={song.duration}
+                onValueChange={(newVal) =>
+                  setSong({ ...song, duration: newVal as number })
+                }
+                placeholder="0"
+              />
+            </div>
+            <TextInput
+              label="Lyrics"
+              value={textAreaVal}
+              onValueChange={(newVal) => handleTextAreaChange(newVal as string)}
+              type="textArea"
+            />
+            <ChordList
+              existingChords={uniqueChords}
+              onChordPressed={(chord) => setCurrentChord(chord)}
+              currentSelected={validChord ? null : -1}
+            />
+            <TabList
+              existingTabs={song.tabs ?? []}
+              onTabPressed={(tab) => setCurrentChord(tab)}
+              currentSelected={validChord ? -1 : null}
+              onTabsChange={onTabChange}
+            />
+            <button onClick={handleSaveButtonClick}>Save</button>
+            {/* <button onClick={convertOldSong}>Convert</button> */}
+          </div>
+        )}
+        {!props.editing && (
+          <div className={styles.songSidebar}>
+            <Link href={`/edit/${song.slug}`}>
+              <button>Edit</button>
+            </Link>
+          </div>
+        )}
       </SidebarContainer>
       <div className={styles.songContent}>
         <div className={styles.songDetails}>
           <span className={styles.heading}>{song.name}</span>
           <span className={styles.subHeading}>{song.artist}</span>
-          {/* {allChordsInSong.map((c) => {
-          return <div>{c}</div>;
-        })} */}
+          {!props.editing && (
+            <div className={styles.extraDetails}>
+              <span className={styles.subHeading}>Capo: {song.capo}</span>
+              <span className={styles.subHeading}>Key: {song.key}</span>
+              <span className={styles.subHeading}>Tuning: {song.tuning}</span>
+            </div>
+          )}
+          <div className={styles.chordList}>
+            {uniqueChords.map((c, cIndex) => {
+              return (
+                <div key={cIndex} className={styles.chordPill}>
+                  {c}
+                </div>
+              );
+            })}
+          </div>
         </div>
         <div className={styles.songContainer}>
           {song.lines.map((line, lineIndex) => {
@@ -598,24 +625,31 @@ export const SongComponent = (props: AddSongComponentProps) => {
           />
         )}
       </BottomBarContainer>
-      <SongHeader>
-        {highlightedChord && isValidChord(highlightedChord.chord).valid && (
-          <ChordViewer
-            chordName={highlightedChord.chord}
-            chord={(allChordsJson as ChordObj)[highlightedChord.chord][0]}
-          />
-        )}
-        {highlightedChord &&
-          !isValidChord(highlightedChord.chord).valid &&
-          song.tabs && (
-            <TabViewer
-              tab={
-                song.tabs.find((tab) => tab.name == highlightedChord.chord) ??
-                song.tabs[0]
-              }
+      {!props.editing && currentTime > 0 && highlightedChord && (
+        //TODO: Add a countdown progress bar to indicate chord change
+        <SongHeader>
+          {highlightedChord.chord
+            .split("/")
+            .every((part) => isValidChordPart(part).valid) && (
+            <ChordViewer
+              chordName={highlightedChord.chord}
+              chord={(allChordsJson as ChordObj)[highlightedChord.chord][0]}
             />
           )}
-      </SongHeader>
+          {!highlightedChord.chord
+            .split("/")
+            .every((part) => isValidChordPart(part).valid) &&
+            song.tabs && (
+              <TabViewer
+                tab={
+                  song.tabs.find((tab) => tab.name == highlightedChord.chord) ??
+                  song.tabs[0]
+                }
+              />
+            )}
+        </SongHeader>
+      )}
+      {/* TODO: Add controls for adding timings */}
     </div>
   );
 };
