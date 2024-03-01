@@ -52,8 +52,6 @@ export const SongComponent = (props: AddSongComponentProps) => {
   const [currentChordIndex, setCurrentChordIndex] = useState<number>(-1);
   const [highlightedChord, setHighlightedChord] = useState<Chord>();
 
-  //TODO: List the chords at the top of the page
-
   useEffect(() => {
     if (!currentChord) return;
 
@@ -470,6 +468,7 @@ export const SongComponent = (props: AddSongComponentProps) => {
                 }
                 placeholder="Standard"
               />
+              {/* TODO: Set time automatically using the music player */}
               <TextInput
                 label="Duration"
                 value={song.duration}
@@ -649,7 +648,7 @@ export const SongComponent = (props: AddSongComponentProps) => {
             )}
         </SongHeader>
       )}
-      {/* TODO: Add controls for adding timings */}
+      {/* TODO: Add controls key for adding timings */}
     </div>
   );
 };
