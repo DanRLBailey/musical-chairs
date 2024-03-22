@@ -42,7 +42,7 @@ export interface ChordObj {
 
 export interface ChordPartObj {
   positions: string[];
-  fingerings: [string[]];
+  fingerings: string[][];
 }
 
 export const songTemplate = {

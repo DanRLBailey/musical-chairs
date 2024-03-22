@@ -368,7 +368,7 @@ export const SongComponent = (props: AddSongComponentProps) => {
         .then((res) => res.json())
         .then((json) => {
           console.log(json); //TODO: Update to notification
-          router.push(`/song/${song.slug}`);
+          router.push(`/song/${song.slug}`); //TODO: push only when successful
         })
         .catch((err) => {
           console.error(err);
@@ -383,6 +383,7 @@ export const SongComponent = (props: AddSongComponentProps) => {
         .then((res) => res.json())
         .then((json) => {
           console.log(json); //TODO: Update to notification
+          //TODO: push to song page only when successful
         })
         .catch((err) => {
           console.error(err);
