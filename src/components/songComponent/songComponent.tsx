@@ -502,8 +502,8 @@ export const SongComponent = (props: AddSongComponentProps) => {
         )}
         {!props.editing && (
           <div className={styles.songSidebar}>
-            <Link href={`/edit/${song.slug}`}>
-              <button>Edit</button>
+            <Link href={`/edit/${song.slug}`} className="button">
+              Edit
             </Link>
           </div>
         )}

@@ -10,21 +10,34 @@
     overflow: hidden;
     padding: 2rem 5rem;
 
-    .songGrid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: var(--margin-lg);
+    .instrumentSection {
+      .songHeader {
+        $size: 4rem;
 
-      @include max-breakpoint(xxl) {
-        grid-template-columns: repeat(3, 1fr);
+        font-size: $size;
+        font-weight: bold;
+        color: rgba(255, 255, 255, 0.1);
+        margin-bottom: calc($size / 4 * -1);
+        text-transform: capitalize;
       }
 
-      @include max-breakpoint(xl) {
-        grid-template-columns: repeat(2, 1fr);
-      }
+      .songGrid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: var(--margin-lg);
+        margin-bottom: var(--margin-lg);
 
-      @include max-breakpoint(lg) {
-        grid-template-columns: repeat(1, 1fr);
+        @include max-breakpoint(xxl) {
+          grid-template-columns: repeat(3, 1fr);
+        }
+
+        @include max-breakpoint(xl) {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        @include max-breakpoint(lg) {
+          grid-template-columns: repeat(1, 1fr);
+        }
       }
     }
   }

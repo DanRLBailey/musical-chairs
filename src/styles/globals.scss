@@ -148,7 +148,8 @@ span {
   place-items: center;
 }
 
-button {
+button,
+.button {
   border: none;
   padding: var(--padding-xxs) var(--padding-sm);
   border-radius: var(--border-radius-xs);
@@ -183,7 +184,7 @@ textarea {
   $outline-width: 2px;
   color: var(--text-colour);
 
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: var(--background-colour);
   border: none;
   border-radius: var(--border-radius-xs);
   width: 100%;

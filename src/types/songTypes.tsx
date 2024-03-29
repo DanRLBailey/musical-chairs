@@ -10,6 +10,7 @@ export interface Song {
   tuning: string;
   duration: number;
   difficulty: number;
+  instrument: "guitar" | "keyboard";
 }
 
 export interface Line {
