@@ -16,7 +16,6 @@
   }
 
   .dropdownSelect {
-    // highlight on focus
     $outline-width: 2px;
 
     display: flex;
@@ -28,9 +27,13 @@
     resize: none;
     padding: var(--padding-xs);
     outline-offset: calc($outline-width * -1);
-    // transition: var(--transition-quick);
+    transition: outline var(--transition-quick);
     outline: $outline-width solid transparent;
     cursor: pointer;
+
+    &.withLabel {
+      border-top-left-radius: 0;
+    }
 
     &.placeholder {
       color: rgba(255, 255, 255, 0.2);
@@ -43,13 +46,30 @@
 
     .icon {
       transition: var(--transition);
-      color: var(--text-colour);
+      color: var(--text-colour-grey);
+
+      &:not(.closeIcon).active {
+        transform: rotate(180deg);
+      }
+
+      &:hover {
+        color: var(--secondary-colour);
+      }
 
       &.closeIcon {
         &:hover {
           color: var(--alert-colour);
         }
       }
+    }
+
+    &:hover {
+      outline: $outline-width solid var(--primary-colour-darker);
+    }
+
+    &:focus,
+    &.focus {
+      outline: $outline-width solid var(--primary-colour);
     }
   }
 
@@ -62,7 +82,7 @@
     padding: var(--padding-xs);
     max-height: 200px;
     overflow-y: auto;
-    z-index: 1;
+    z-index: 2;
 
     transition: var(--transition);
     opacity: 0;

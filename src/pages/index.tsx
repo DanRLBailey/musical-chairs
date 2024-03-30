@@ -8,6 +8,7 @@ import { Song } from "@/types/songTypes";
 import { LoadingSpinner } from "@/components/loadingSpinner/loadingSpinner";
 import { title } from "@/constants/document";
 import { DropdownContainer } from "@/components/dropdownContainer/dropdownContainer";
+import { MultiHandleRangeSlider } from "@/components/multiHandleRangeSlider/multiHandleRangeSlider";
 
 interface Filter {
   search: string;
@@ -15,6 +16,8 @@ interface Filter {
   key: string;
   capo: string;
   tuning: string;
+  duration: number[];
+  difficulty: number[];
 }
 
 export default function HomePage() {
@@ -26,6 +29,8 @@ export default function HomePage() {
     key: "",
     capo: "",
     tuning: "",
+    duration: [0, 1000],
+    difficulty: [0, 1000],
   });
 
   useEffect(() => {
@@ -66,14 +71,28 @@ export default function HomePage() {
     const isWithTuning =
       filter.tuning != "" ? filter.tuning == song.tuning : true;
 
+    const isWithinDuration =
+      song.duration >= filter.duration[0] &&
+      song.duration <= filter.duration[1];
+
+    const isWithinDifficulty =
+      song.difficulty >= filter.difficulty[0] &&
+      song.difficulty <= filter.difficulty[1];
+
     return (
       isWithinSearch &&
       isWithInstrument &&
       isWithKey &&
       isWithCapo &&
-      isWithTuning
+      isWithTuning &&
+      isWithinDuration &&
+      isWithinDifficulty
     );
   };
+
+  useEffect(() => {
+    console.log(filter.duration);
+  }, [filter]);
 
   return (
     <div className={styles.homePageContainer}>
@@ -138,8 +157,32 @@ export default function HomePage() {
           label="Tuning"
           placeholder="Select a Tuning"
         />
-        {/* TODO: Length Slider (min/max) */}
-        {/* TODO: Difficulty Slider (min/max) */}
+        {songs && songs.length > 0 && (
+          <MultiHandleRangeSlider
+            min={0}
+            max={songs.reduce((maxDuration, song) => {
+              return Math.max(maxDuration, song.duration);
+            }, 0)}
+            onValuesChange={(min, max) => {
+              setFilter({ ...filter, duration: [min, max] } as Filter);
+            }}
+            label="Duration"
+            format
+          />
+        )}
+        {/* TODO: Add 1 */}
+        {songs && songs.length > 0 && (
+          <MultiHandleRangeSlider
+            min={0}
+            max={songs.reduce((maxDifficulty, song) => {
+              return Math.max(maxDifficulty, song.difficulty);
+            }, 0)}
+            onValuesChange={(min, max) => {
+              setFilter({ ...filter, difficulty: [min, max] } as Filter);
+            }}
+            label="Difficulty"
+          />
+        )}
       </SidebarContainer>
       <div className={styles.homePageContent}>
         {songs &&

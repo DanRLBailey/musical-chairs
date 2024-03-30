@@ -26,7 +26,6 @@ export const DropdownContainer = (props: DropdownContainerProps) => {
         dropdownActive
       ) {
         setDropdownActive(false);
-        console.log(event.target);
       }
     };
 
@@ -58,6 +57,8 @@ export const DropdownContainer = (props: DropdownContainerProps) => {
           props.placeholder && selectedValue == props.placeholder
             ? styles.placeholder
             : ""
+        } ${dropdownActive ? styles.focus : ""} ${
+          props.label ? styles.withLabel : ""
         }`}
         onClick={() => setDropdownActive(!dropdownActive)}
       >
@@ -71,7 +72,9 @@ export const DropdownContainer = (props: DropdownContainerProps) => {
             }}
           />
         )}
-        <KeyboardArrowDownIcon className={styles.icon} />
+        <KeyboardArrowDownIcon
+          className={`${styles.icon} ${dropdownActive ? styles.active : ""}`}
+        />
       </div>
       <div
         className={`${styles.dropdown} ${dropdownActive ? styles.active : ""}`}

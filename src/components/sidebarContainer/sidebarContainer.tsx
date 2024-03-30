@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styles from "./sidebarContainer.module.scss";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import Link from "next/link";
 
 interface SidebarContainerProps {
@@ -23,7 +24,9 @@ export const SidebarContainer = (props: SidebarContainerProps) => {
       </div>
       <div className={styles.sidebarCollapse}>
         <div className={styles.collapse} onClick={() => setIsOpen(!isOpen)}>
-          <div className={!isOpen ? styles.closed : ""}>^</div>
+          <div className={!isOpen ? styles.closed : ""}>
+            <KeyboardArrowDownIcon />
+          </div>
         </div>
       </div>
     </div>
