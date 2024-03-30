@@ -46,15 +46,16 @@ export interface ChordPartObj {
   fingerings: string[][];
 }
 
-export const songTemplate = {
+export const songTemplate: Song = {
   name: "",
   artist: "",
   slug: "new-slug",
-  difficulty: 0,
+  lines: [],
+  link: "",
   capo: 0,
   key: "",
   tuning: "",
   duration: 180,
-  lines: [],
-  link: "",
+  difficulty: 0,
+  instrument: "guitar",
 };
