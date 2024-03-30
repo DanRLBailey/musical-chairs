@@ -1,14 +1,15 @@
 import styles from "./index.module.scss";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { SongDetail } from "@/components/songDetail/songDetail";
+import { SongDetail, getDifficulty } from "@/components/songDetail/songDetail";
 import { SidebarContainer } from "@/components/sidebarContainer/sidebarContainer";
 import { TextInput } from "@/components/textInput/textInput";
-import { Song } from "@/types/songTypes";
+import { Song, SongSortby } from "@/types/songTypes";
 import { LoadingSpinner } from "@/components/loadingSpinner/loadingSpinner";
 import { title } from "@/constants/document";
 import { DropdownContainer } from "@/components/dropdownContainer/dropdownContainer";
 import { MultiHandleRangeSlider } from "@/components/multiHandleRangeSlider/multiHandleRangeSlider";
+import { formatSeconds } from "@/components/chordPill/chordPill";
 
 interface Filter {
   search: string;
@@ -32,6 +33,7 @@ export default function HomePage() {
     duration: [0, 1000],
     difficulty: [0, 1000],
   });
+  const [sorting, setSorting] = useState<string>();
 
   useEffect(() => {
     title("Home");
@@ -91,7 +93,7 @@ export default function HomePage() {
   };
 
   useEffect(() => {
-    console.log(filter.duration);
+    // console.log(filter.duration);
   }, [filter]);
 
   return (
@@ -159,7 +161,9 @@ export default function HomePage() {
         />
         {songs && songs.length > 0 && (
           <MultiHandleRangeSlider
-            min={0}
+            min={songs.reduce((minDuration, song) => {
+              return Math.min(minDuration, song.duration);
+            }, Infinity)}
             max={songs.reduce((maxDuration, song) => {
               return Math.max(maxDuration, song.duration);
             }, 0)}
@@ -167,10 +171,9 @@ export default function HomePage() {
               setFilter({ ...filter, duration: [min, max] } as Filter);
             }}
             label="Duration"
-            format
+            format={(val: number) => formatSeconds(val, false)}
           />
         )}
-        {/* TODO: Add 1 */}
         {songs && songs.length > 0 && (
           <MultiHandleRangeSlider
             min={0}
@@ -181,8 +184,25 @@ export default function HomePage() {
               setFilter({ ...filter, difficulty: [min, max] } as Filter);
             }}
             label="Difficulty"
+            format={(val: number) => getDifficulty(val)}
           />
         )}
+        {/* <DropdownContainer
+          values={[
+            "Song Name",
+            "Artist",
+            "Capo",
+            "Key",
+            "Tuning",
+            "Duration",
+            "Difficulty",
+          ]}
+          onValueChange={(newVal: string) => {
+            setSorting(newVal);
+          }}
+          label="Sort By"
+          placeholder="Select a Sorting"
+        /> */}
       </SidebarContainer>
       <div className={styles.homePageContent}>
         {songs &&

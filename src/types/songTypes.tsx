@@ -13,6 +13,16 @@ export interface Song {
   instrument: "guitar" | "keyboard";
 }
 
+export interface SongSortby {
+  name: string;
+  artist: string;
+  capo: number;
+  key: string;
+  tuning: string;
+  duration: number;
+  difficulty: number;
+}
+
 export interface Line {
   words: Word[];
 }

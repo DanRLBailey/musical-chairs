@@ -13,20 +13,20 @@ interface SongDetailProps {
   song: Song;
 }
 
+export const getDifficulty = (difficulty: number) => {
+  switch (difficulty) {
+    case 1:
+      return "Intermediate";
+    case 2:
+      return "Expert";
+    case 0:
+    default:
+      return "Beginner";
+  }
+};
+
 export const SongDetail = (props: SongDetailProps) => {
   const [hovering, setHovering] = useState<string>("");
-
-  const getDifficulty = () => {
-    switch (props.song.difficulty) {
-      case 1:
-        return "Intermediate";
-      case 2:
-        return "Expert";
-      case 0:
-      default:
-        return "Beginner";
-    }
-  };
 
   return (
     <div className={styles.songDetailContainer}>
@@ -43,7 +43,7 @@ export const SongDetail = (props: SongDetailProps) => {
               {props.song.difficulty >= 1 && <span></span>}
               {props.song.difficulty >= 2 && <span></span>}
               <Tooltip hovering={hovering == "difficulty"}>
-                {getDifficulty()}
+                {getDifficulty(props.song.difficulty)}
               </Tooltip>
             </div>
           </div>

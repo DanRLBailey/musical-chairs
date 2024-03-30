@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react";
 import styles from "./multiHandleRangeSlider.module.scss";
 import RefreshIcon from "@mui/icons-material/Refresh";
-import { formatSeconds } from "../chordPill/chordPill";
 
 interface MultiHandleRangeSliderProps {
   min: number;
   max: number;
   onValuesChange: (min: number, max: number) => void;
   label?: string;
-  format?: boolean;
+  format?: (val: number) => string;
 }
 
 export const MultiHandleRangeSlider = (props: MultiHandleRangeSliderProps) => {
   const [values, setValues] = useState<number[]>([props.min, props.max]);
+  const [isFocused, setIsFocused] = useState<boolean>(false);
 
   const handleMinValueChange = (newVal: number) => {
     const newMin = newVal > values[1] ? values[1] : newVal;
@@ -31,12 +31,20 @@ export const MultiHandleRangeSlider = (props: MultiHandleRangeSliderProps) => {
   }, [values]);
 
   const getWidth = () => {
-    return Math.max(((values[1] - values[0]) / props.max) * 100, 35);
+    const maxDiff = props.max - props.min;
+    const diff = values[1] - values[0];
+    const percent = (diff / maxDiff) * 100;
+    console.log(percent);
+    return Math.max(percent, 35);
   };
 
   const getLeftMargin = () => {
-    const min = 100 - getWidth();
-    return Math.min((values[0] / props.max) * 100, min);
+    const diff = props.max - props.min;
+    const min = props.max - values[0];
+    const percent = (min / diff) * 100;
+
+    // TODO: Centre instead of left align
+    return Math.min(100 - percent, 65);
   };
 
   return (
@@ -53,14 +61,12 @@ export const MultiHandleRangeSlider = (props: MultiHandleRangeSliderProps) => {
         />
       </div>
       <div
-        className={`${styles.slider} ${props.label ? styles.withLabel : ""}`}
+        className={`${styles.slider} ${props.label ? styles.withLabel : ""} ${
+          isFocused ? styles.focused : ""
+        }`}
       >
-        <span>
-          {props.format ? formatSeconds(props.min, false) : props.min}
-        </span>
-        <span>
-          {props.format ? formatSeconds(props.max, false) : props.max}
-        </span>
+        <span>{props.format ? props.format(props.min) : props.min}</span>
+        <span>{props.format ? props.format(props.max) : props.max}</span>
         <input
           type="range"
           className={values[0] == values[1] ? styles.equal : ""}
@@ -69,6 +75,8 @@ export const MultiHandleRangeSlider = (props: MultiHandleRangeSliderProps) => {
           step={1}
           onChange={(e) => handleMinValueChange(parseInt(e.target.value))}
           value={values[0]}
+          onMouseDown={() => setIsFocused(true)}
+          onMouseUp={() => setIsFocused(false)}
         />
         <input
           type="range"
@@ -78,19 +86,21 @@ export const MultiHandleRangeSlider = (props: MultiHandleRangeSliderProps) => {
           step={1}
           onChange={(e) => handleMaxValueChange(parseInt(e.target.value))}
           value={values[1]}
+          onMouseDown={() => setIsFocused(true)}
+          onMouseUp={() => setIsFocused(false)}
         />
       </div>
       <div
         className={styles.indicator}
         style={{ marginLeft: `${getLeftMargin()}%`, width: `${getWidth()}%` }}
       >
-        <span>
-          {props.format ? formatSeconds(values[0], false) : values[0]}
-        </span>
-        <div></div>
-        <span>
-          {props.format ? formatSeconds(values[1], false) : values[1]}
-        </span>
+        <span>{props.format ? props.format(values[0]) : values[0]}</span>
+        {values[0] != values[1] && (
+          <>
+            <div></div>
+            <span>{props.format ? props.format(values[1]) : values[1]}</span>
+          </>
+        )}
       </div>
     </div>
   );
