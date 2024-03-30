@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { SongDetail, getDifficulty } from "@/components/songDetail/songDetail";
 import { SidebarContainer } from "@/components/sidebarContainer/sidebarContainer";
 import { TextInput } from "@/components/textInput/textInput";
-import { Song, SongSortby } from "@/types/songTypes";
+import { Song } from "@/types/songTypes";
 import { LoadingSpinner } from "@/components/loadingSpinner/loadingSpinner";
 import { title } from "@/constants/document";
 import { DropdownContainer } from "@/components/dropdownContainer/dropdownContainer";
