@@ -51,7 +51,7 @@ export default function HomePage() {
       });
   }, []);
 
-  const getIsFiltered = (song: Song) => {
+  const getFilteredSongs = (song: Song) => {
     if (!filter) return true;
 
     const isWithinSearch =
@@ -92,6 +92,24 @@ export default function HomePage() {
     );
   };
 
+  const getSortedSongs = (songsList: Song[]) => {
+    //Ascending
+    //For descending, reverse the "<"
+    switch (sorting) {
+      case "Artist":
+        return songsList.sort((a, b) => (a.artist < b.artist ? -1 : 0));
+      case "Duration":
+        return songsList.sort((a, b) => (a.duration < b.duration ? -1 : 0));
+      case "Difficulty":
+        return songsList.sort((a, b) => (a.difficulty < b.difficulty ? -1 : 0));
+      case "Song Name":
+      default:
+        return songsList.sort((a, b) => (a.name < b.name ? -1 : 0));
+    }
+
+    return songsList;
+  };
+
   useEffect(() => {
     // console.log(filter.duration);
   }, [filter]);
@@ -102,6 +120,14 @@ export default function HomePage() {
         <Link href={"/new"} className="button">
           Add New Song
         </Link>
+        <DropdownContainer
+          values={["Song Name", "Artist", "Duration", "Difficulty"]}
+          onValueChange={(newVal: string) => {
+            setSorting(newVal);
+          }}
+          label="Sort"
+          placeholder="Select a Sorting"
+        />
         <TextInput
           label="Search"
           value={filter?.search as string}
@@ -187,22 +213,6 @@ export default function HomePage() {
             format={(val: number) => getDifficulty(val)}
           />
         )}
-        {/* <DropdownContainer
-          values={[
-            "Song Name",
-            "Artist",
-            "Capo",
-            "Key",
-            "Tuning",
-            "Duration",
-            "Difficulty",
-          ]}
-          onValueChange={(newVal: string) => {
-            setSorting(newVal);
-          }}
-          label="Sort By"
-          placeholder="Select a Sorting"
-        /> */}
       </SidebarContainer>
       <div className={styles.homePageContent}>
         {songs &&
@@ -211,7 +221,7 @@ export default function HomePage() {
             (instrument, instrumentIndex) => {
               const filteredSongs = songs
                 .filter((song) => song.instrument == instrument)
-                .filter((song) => getIsFiltered(song));
+                .filter((song) => getFilteredSongs(song));
 
               if (filteredSongs.length > 0)
                 return (
@@ -221,7 +231,7 @@ export default function HomePage() {
                   >
                     <span className={styles.songHeader}>{instrument}</span>
                     <div className={styles.songGrid}>
-                      {filteredSongs.map((song, index) => {
+                      {getSortedSongs(filteredSongs).map((song, index) => {
                         return (
                           <Link
                             href={`song/${song.slug

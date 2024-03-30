@@ -82,6 +82,7 @@
     padding: var(--padding-xs);
     max-height: 200px;
     overflow-y: auto;
+    box-shadow: var(--box-shadow-harsh);
     z-index: 2;
 
     transition: var(--transition);
