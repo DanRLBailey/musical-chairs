@@ -7,10 +7,17 @@
     text-align: left;
     display: flex;
 
-    span {
+    div {
       background-color: var(--primary-colour);
       padding: 0 var(--padding-xs);
       border-radius: var(--border-radius-xs) var(--border-radius-xs) 0 0;
+      display: flex;
+      justify-content: space-between;
+      gap: var(--padding-xxs);
+
+      .requiredIcon {
+        width: 20px;
+      }
     }
   }
 

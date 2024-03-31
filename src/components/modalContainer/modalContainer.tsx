@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
 import styles from "./modalContainer.module.scss";
+import CloseIcon from "@mui/icons-material/Close";
 
 interface ModalContainerProps {
   modalOpen: boolean;
   setModalOpen: (open: boolean) => void;
   children: React.ReactNode | React.ReactNode[];
+  title?: string;
+  size?: "sm" | "md" | "lg";
 }
 
 export const ModalContainer = (props: ModalContainerProps) => {
@@ -29,18 +32,35 @@ export const ModalContainer = (props: ModalContainerProps) => {
     props.setModalOpen(isOpen);
   }, [isOpen]);
 
+  const getSize = () => {
+    switch (props.size) {
+      case "sm":
+        console.log("es emming");
+        return styles.sm;
+      case "md":
+        return styles.md;
+      case "lg":
+        return styles.lg;
+      default:
+        return "";
+    }
+  };
+
   return (
     <>
       {isOpen && (
         <div
-          id={"modalContainer"}
           className={`${styles.modalContainer} ${isActive && styles.active}`}
           onClick={handleClose}
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className={styles.modalContent}
+            className={`${styles.modalContent} ${getSize()}`}
           >
+            <div className={styles.header}>
+              <span className={styles.heading}>{props.title}</span>
+              <CloseIcon className={styles.icon} onClick={handleClose} />
+            </div>
             {props.children}
           </div>
         </div>

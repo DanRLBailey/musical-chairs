@@ -55,7 +55,7 @@ export const songTemplate: Song = {
   capo: 0,
   key: "",
   tuning: "",
-  duration: 180,
+  duration: 0,
   difficulty: 0,
   instrument: "guitar",
 };

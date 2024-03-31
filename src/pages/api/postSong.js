@@ -24,18 +24,21 @@ export default async (req, res) => {
   '${JSON.stringify(lines).replaceAll("'", "\\'")}',
   '${link}',
   ${capo ? parseInt(capo) : 0},
-  '${key}',
-  '${tuning}',
+  '${key ?? ""}',
+  '${tuning != "" ? tuning : "Standard"}',
   ${duration ? parseInt(duration) : 0},
   ${difficulty ? parseInt(difficulty) : 0},
   NOW(),
   NOW(),
   1,
   0,
-  '${JSON.stringify(tabs)}'
+  '${JSON.stringify(tabs) ?? null}',
+  'guitar'
   )`;
 
   //TODO: Update "1" to the user id
+
+  //TODO: Update "guitar" to the instrument select (once implemented)
 
   //TODO: First check if slug exists, then add a "version" modifier if so
   //  In case of duplicate songs

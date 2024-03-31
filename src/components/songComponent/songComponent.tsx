@@ -414,6 +414,7 @@ export const SongComponent = (props: AddSongComponentProps) => {
                   setSong({ ...song, name: newVal as string })
                 }
                 placeholder="Name"
+                required
               />
               <TextInput
                 label="Artist"
@@ -422,6 +423,7 @@ export const SongComponent = (props: AddSongComponentProps) => {
                   setSong({ ...song, artist: newVal as string })
                 }
                 placeholder="Artist"
+                required
               />
             </div>
             <div className={styles.list}>
@@ -432,6 +434,7 @@ export const SongComponent = (props: AddSongComponentProps) => {
                   setSong({ ...song, link: newVal as string })
                 }
                 placeholder="youtube.com/..."
+                required
               />
               <TextInput
                 label="Difficulty"
@@ -440,6 +443,7 @@ export const SongComponent = (props: AddSongComponentProps) => {
                   setSong({ ...song, difficulty: newVal as number })
                 }
                 placeholder="0"
+                required
               />
             </div>
             <div className={styles.list}>
@@ -484,6 +488,7 @@ export const SongComponent = (props: AddSongComponentProps) => {
               value={textAreaVal}
               onValueChange={(newVal) => handleTextAreaChange(newVal as string)}
               type="textArea"
+              required
             />
             <ChordList
               existingChords={uniqueChords}
@@ -496,6 +501,7 @@ export const SongComponent = (props: AddSongComponentProps) => {
               currentSelected={validChord ? -1 : null}
               onTabsChange={onTabChange}
             />
+            {/* TODO: Add Instrument Select */}
             <button onClick={handleSaveButtonClick}>Save</button>
             {/* <button onClick={convertOldSong}>Convert</button> */}
           </div>
@@ -622,6 +628,9 @@ export const SongComponent = (props: AddSongComponentProps) => {
             removeTimingFromLatestWord={removeTimingFromLatestWord}
             removeTimingFromLatestChord={removeTimingFromLatestChord}
             onCurrentTimeChange={(currentTime) => setCurrentTime(currentTime)}
+            onReady={(maxTime) =>
+              setSong({ ...song, duration: maxTime as number })
+            }
           />
         )}
       </BottomBarContainer>

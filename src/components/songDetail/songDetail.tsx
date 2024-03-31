@@ -27,6 +27,8 @@ export const getDifficulty = (difficulty: number) => {
 
 export const SongDetail = (props: SongDetailProps) => {
   const [hovering, setHovering] = useState<string>("");
+  // TODO: Add something for when a value is missing
+  // E.G: An Icon for when a song doesn't have a "Key"
 
   return (
     <div className={styles.songDetailContainer}>

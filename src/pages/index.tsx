@@ -10,6 +10,12 @@ import { title } from "@/constants/document";
 import { DropdownContainer } from "@/components/dropdownContainer/dropdownContainer";
 import { MultiHandleRangeSlider } from "@/components/multiHandleRangeSlider/multiHandleRangeSlider";
 import { formatSeconds } from "@/components/chordPill/chordPill";
+import { useRouter } from "next/router";
+import AddIcon from "@mui/icons-material/Add";
+import ShuffleIcon from "@mui/icons-material/Shuffle";
+import FilterListIcon from "@mui/icons-material/FilterList";
+import SortIcon from "@mui/icons-material/Sort";
+import { ModalContainer } from "@/components/modalContainer/modalContainer";
 
 interface Filter {
   search: string;
@@ -33,7 +39,11 @@ export default function HomePage() {
     duration: [0, 1000],
     difficulty: [0, 1000],
   });
-  const [sorting, setSorting] = useState<string>();
+  const [sorting, setSorting] = useState<string[]>(["", ""]);
+  const [filterModalOpen, setFilterModalOpen] = useState<boolean>(false);
+  const [sortModalOpen, setSortModalOpen] = useState<boolean>(false);
+
+  const router = useRouter();
 
   useEffect(() => {
     title("Home");
@@ -93,126 +103,53 @@ export default function HomePage() {
   };
 
   const getSortedSongs = (songsList: Song[]) => {
-    //Ascending
-    //For descending, reverse the "<"
-    switch (sorting) {
+    switch (sorting[0]) {
       case "Artist":
-        return songsList.sort((a, b) => (a.artist < b.artist ? -1 : 0));
+        return sorting[1] == "Ascending" || sorting[1] == ""
+          ? songsList.sort((a, b) => (a.artist < b.artist ? -1 : 0))
+          : songsList.sort((a, b) => (a.artist > b.artist ? -1 : 0));
       case "Duration":
-        return songsList.sort((a, b) => (a.duration < b.duration ? -1 : 0));
+        return sorting[1] == "Ascending" || sorting[1] == ""
+          ? songsList.sort((a, b) => (a.duration < b.duration ? -1 : 0))
+          : songsList.sort((a, b) => (a.duration > b.duration ? -1 : 0));
       case "Difficulty":
-        return songsList.sort((a, b) => (a.difficulty < b.difficulty ? -1 : 0));
+        return sorting[1] == "Ascending" || sorting[1] == ""
+          ? songsList.sort((a, b) => (a.difficulty < b.difficulty ? -1 : 0))
+          : songsList.sort((a, b) => (a.difficulty > b.difficulty ? -1 : 0));
       case "Song Name":
       default:
-        return songsList.sort((a, b) => (a.name < b.name ? -1 : 0));
+        return sorting[1] == "Ascending" || sorting[1] == ""
+          ? songsList.sort((a, b) => (a.name < b.name ? -1 : 0))
+          : songsList.sort((a, b) => (a.name > b.name ? -1 : 0));
     }
+  };
 
-    return songsList;
+  const getRandomSong = () => {
+    const rand = Math.floor(Math.random() * songs.length);
+    router.push(`/song/${songs[rand].slug}`);
   };
 
   useEffect(() => {
-    // console.log(filter.duration);
-  }, [filter]);
+    console.log(filterModalOpen);
+  }, [filterModalOpen]);
 
   return (
     <div className={styles.homePageContainer}>
       <SidebarContainer>
-        <Link href={"/new"} className="button">
-          Add New Song
-        </Link>
-        <DropdownContainer
-          values={["Song Name", "Artist", "Duration", "Difficulty"]}
-          onValueChange={(newVal: string) => {
-            setSorting(newVal);
-          }}
-          label="Sort"
-          placeholder="Select a Sorting"
-        />
-        <TextInput
-          label="Search"
-          value={filter?.search as string}
-          onValueChange={(newVal: string | number) =>
-            setFilter({ ...filter, search: newVal as string } as Filter)
-          }
-        />
-        <DropdownContainer
-          values={
-            songs && songs.length > 0
-              ? Array.from(new Set(songs.map((song) => song.instrument)))
-              : []
-          }
-          onValueChange={(newVal: string) => {
-            setFilter({ ...filter, instrument: newVal as string } as Filter);
-          }}
-          label="Instrument"
-          placeholder="Select an Instrument"
-        />
-        <DropdownContainer
-          values={
-            songs && songs.length > 0
-              ? Array.from(new Set(songs.map((song) => song.key))).sort()
-              : []
-          }
-          onValueChange={(newVal: string) =>
-            setFilter({ ...filter, key: newVal as string } as Filter)
-          }
-          label="Key"
-          placeholder="Select a Key"
-        />
-        <DropdownContainer
-          values={
-            songs && songs.length > 0
-              ? Array.from(
-                  new Set(songs.map((song) => song.capo.toString()))
-                ).sort()
-              : []
-          }
-          onValueChange={(newVal: string) =>
-            setFilter({ ...filter, capo: newVal as string } as Filter)
-          }
-          label="Capo"
-          placeholder="Select a Capo"
-        />
-        <DropdownContainer
-          values={
-            songs && songs.length > 0
-              ? Array.from(new Set(songs.map((song) => song.tuning))).sort()
-              : []
-          }
-          onValueChange={(newVal: string) =>
-            setFilter({ ...filter, tuning: newVal as string } as Filter)
-          }
-          label="Tuning"
-          placeholder="Select a Tuning"
-        />
-        {songs && songs.length > 0 && (
-          <MultiHandleRangeSlider
-            min={songs.reduce((minDuration, song) => {
-              return Math.min(minDuration, song.duration);
-            }, Infinity)}
-            max={songs.reduce((maxDuration, song) => {
-              return Math.max(maxDuration, song.duration);
-            }, 0)}
-            onValuesChange={(min, max) => {
-              setFilter({ ...filter, duration: [min, max] } as Filter);
-            }}
-            label="Duration"
-            format={(val: number) => formatSeconds(val, false)}
-          />
-        )}
-        {songs && songs.length > 0 && (
-          <MultiHandleRangeSlider
-            min={0}
-            max={songs.reduce((maxDifficulty, song) => {
-              return Math.max(maxDifficulty, song.difficulty);
-            }, 0)}
-            onValuesChange={(min, max) => {
-              setFilter({ ...filter, difficulty: [min, max] } as Filter);
-            }}
-            label="Difficulty"
-            format={(val: number) => getDifficulty(val)}
-          />
-        )}
+        <div className={styles.sidebarHeaderButtons}>
+          <Link href={"/new"} className="button">
+            <AddIcon />
+          </Link>
+          <button onClick={getRandomSong}>
+            <ShuffleIcon />
+          </button>
+          <button onClick={() => setFilterModalOpen(!filterModalOpen)}>
+            <FilterListIcon />
+          </button>
+          <button onClick={() => setSortModalOpen(!sortModalOpen)}>
+            <SortIcon />
+          </button>
+        </div>
       </SidebarContainer>
       <div className={styles.homePageContent}>
         {songs &&
@@ -253,6 +190,132 @@ export default function HomePage() {
           <LoadingSpinner multiplier={2} />
         )}
       </div>
+      {filterModalOpen && (
+        <ModalContainer
+          modalOpen={filterModalOpen}
+          setModalOpen={setFilterModalOpen}
+          title={"Filter"}
+          size="sm"
+        >
+          <div className={styles.modalStyles}>
+            <TextInput
+              label="Search"
+              value={filter?.search as string}
+              onValueChange={(newVal: string | number) =>
+                setFilter({ ...filter, search: newVal as string } as Filter)
+              }
+            />
+            <DropdownContainer
+              values={
+                songs && songs.length > 0
+                  ? Array.from(new Set(songs.map((song) => song.instrument)))
+                  : []
+              }
+              onValueChange={(newVal: string) => {
+                setFilter({
+                  ...filter,
+                  instrument: newVal as string,
+                } as Filter);
+              }}
+              label="Instrument"
+              placeholder="Select an Instrument"
+            />
+            <DropdownContainer
+              values={
+                songs && songs.length > 0
+                  ? Array.from(new Set(songs.map((song) => song.key))).sort()
+                  : []
+              }
+              onValueChange={(newVal: string) =>
+                setFilter({ ...filter, key: newVal as string } as Filter)
+              }
+              label="Key"
+              placeholder="Select a Key"
+            />
+            <DropdownContainer
+              values={
+                songs && songs.length > 0
+                  ? Array.from(
+                      new Set(songs.map((song) => song.capo.toString()))
+                    ).sort()
+                  : []
+              }
+              onValueChange={(newVal: string) =>
+                setFilter({ ...filter, capo: newVal as string } as Filter)
+              }
+              label="Capo"
+              placeholder="Select a Capo"
+            />
+            <DropdownContainer
+              values={
+                songs && songs.length > 0
+                  ? Array.from(new Set(songs.map((song) => song.tuning))).sort()
+                  : []
+              }
+              onValueChange={(newVal: string) =>
+                setFilter({ ...filter, tuning: newVal as string } as Filter)
+              }
+              label="Tuning"
+              placeholder="Select a Tuning"
+            />
+            {songs && songs.length > 0 && (
+              <MultiHandleRangeSlider
+                min={songs.reduce((minDuration, song) => {
+                  return Math.min(minDuration, song.duration);
+                }, Infinity)}
+                max={songs.reduce((maxDuration, song) => {
+                  return Math.max(maxDuration, song.duration);
+                }, 0)}
+                onValuesChange={(min, max) => {
+                  setFilter({ ...filter, duration: [min, max] } as Filter);
+                }}
+                label="Duration"
+                format={(val: number) => formatSeconds(val, false)}
+              />
+            )}
+            {songs && songs.length > 0 && (
+              <MultiHandleRangeSlider
+                min={0}
+                max={songs.reduce((maxDifficulty, song) => {
+                  return Math.max(maxDifficulty, song.difficulty);
+                }, 0)}
+                onValuesChange={(min, max) => {
+                  setFilter({ ...filter, difficulty: [min, max] } as Filter);
+                }}
+                label="Difficulty"
+                format={(val: number) => getDifficulty(val)}
+              />
+            )}
+          </div>
+        </ModalContainer>
+      )}
+      {sortModalOpen && (
+        <ModalContainer
+          modalOpen={sortModalOpen}
+          setModalOpen={setSortModalOpen}
+          title={"Sort"}
+          size="sm"
+        >
+          <div className={styles.modalStyles}>
+            <DropdownContainer
+              values={["Song Name", "Artist", "Duration", "Difficulty"]}
+              onValueChange={(newVal: string) => {
+                setSorting([newVal, sorting[1]]);
+              }}
+              label="Sort"
+              placeholder="Select a Sort By"
+            />
+            <DropdownContainer
+              values={["Ascending", "Descending"]}
+              onValueChange={(newVal: string) => {
+                setSorting([sorting[0], newVal]);
+              }}
+              label="Direction"
+              placeholder="Select a Direction"
+            />
+          </div>
+        </ModalContainer>
+      )}
     </div>
   );
 }

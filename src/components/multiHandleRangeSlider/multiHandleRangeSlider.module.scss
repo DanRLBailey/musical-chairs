@@ -43,7 +43,7 @@
     position: relative;
     width: 100%;
     height: $height;
-    background-color: var(--background-colour);
+    background-color: rgba(0, 0, 0, 0.2);
     border: none;
     border-radius: var(--border-radius-xs);
     outline-offset: calc($outline-width * -1);

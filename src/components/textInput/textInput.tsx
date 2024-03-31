@@ -1,5 +1,6 @@
 import styles from "./textInput.module.scss";
 import typography from "@/styles/typography.module.scss";
+import ErrorIcon from "@mui/icons-material/Error";
 
 interface TextInputProps {
   value: string | number;
@@ -13,6 +14,7 @@ interface TextInputProps {
   isError?: boolean;
   loading?: boolean;
   success?: boolean;
+  required?: boolean;
 }
 
 export const TextInput = (props: TextInputProps) => {
@@ -29,7 +31,10 @@ export const TextInput = (props: TextInputProps) => {
     <div className={styles.textInputContainer}>
       {props.label && (
         <div className={styles.label}>
-          <span>{props.label}</span>
+          <div>
+            <span>{props.label} </span>
+            {props.required && <ErrorIcon className={styles.requiredIcon} />}
+          </div>
         </div>
       )}
       <div className={styles.input}>

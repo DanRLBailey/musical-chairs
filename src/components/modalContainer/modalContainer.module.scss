@@ -27,5 +27,34 @@
     transition: var(--transition);
     top: 52.5%;
     opacity: 0;
+
+    &.sm {
+      min-width: 20rem;
+    }
+
+    &.md {
+      min-width: 30rem;
+    }
+
+    &.lg {
+      min-width: 50rem;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      border-bottom: 3px solid rgba(0, 0, 0, 0.1);
+      margin-bottom: var(--margin-lg);
+
+      .heading {
+        font-size: var(--font-size-xl);
+        font-weight: bold;
+        flex: 1;
+      }
+
+      .icon {
+        cursor: pointer;
+      }
+    }
   }
 }

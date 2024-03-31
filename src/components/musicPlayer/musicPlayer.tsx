@@ -19,6 +19,7 @@ interface MusicPlayerProps {
   allChords?: Chord[];
   onCurrentTimeChange?: (currentTime: number) => void;
   isEditing: boolean;
+  onReady: (maxTime: number) => void;
 }
 
 export const MusicPlayer = (props: MusicPlayerProps) => {
@@ -41,6 +42,10 @@ export const MusicPlayer = (props: MusicPlayerProps) => {
   useEffect(() => {
     if (props.onCurrentTimeChange) props.onCurrentTimeChange(currentTime);
   }, [currentTime]);
+
+  useEffect(() => {
+    props.onReady(maxTime);
+  }, [maxTime]);
 
   const seekTo = (amount: number) => {
     player.current.seekTo(amount, "seconds");

@@ -42,6 +42,7 @@ export const DropdownContainer = (props: DropdownContainerProps) => {
   }, [selectedValue]);
 
   const formatText = (text: string) => {
+    if (!text || text == "") return text;
     return `${text[0].toUpperCase()}${text.substring(1)}`;
   };
 

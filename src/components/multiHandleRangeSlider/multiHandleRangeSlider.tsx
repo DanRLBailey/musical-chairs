@@ -34,7 +34,6 @@ export const MultiHandleRangeSlider = (props: MultiHandleRangeSliderProps) => {
     const maxDiff = props.max - props.min;
     const diff = values[1] - values[0];
     const percent = (diff / maxDiff) * 100;
-    console.log(percent);
     return Math.max(percent, 35);
   };
 
