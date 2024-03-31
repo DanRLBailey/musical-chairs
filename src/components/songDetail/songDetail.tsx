@@ -27,8 +27,6 @@ export const getDifficulty = (difficulty: number) => {
 
 export const SongDetail = (props: SongDetailProps) => {
   const [hovering, setHovering] = useState<string>("");
-  // TODO: Add something for when a value is missing
-  // E.G: An Icon for when a song doesn't have a "Key"
 
   return (
     <div className={styles.songDetailContainer}>
@@ -53,26 +51,30 @@ export const SongDetail = (props: SongDetailProps) => {
         </div>
       </div>
       <div className={styles.footer}>
-        <div
-          onMouseEnter={() => setHovering("capo")}
-          onMouseLeave={() => setHovering("")}
-        >
-          <UnfoldLessIcon />
-          <span>{props.song.capo}</span>
-          <Tooltip hovering={hovering == "capo"}>
-            <>Capo</>
-          </Tooltip>
-        </div>
-        <div
-          onMouseEnter={() => setHovering("key")}
-          onMouseLeave={() => setHovering("")}
-        >
-          <KeyIcon />
-          <span>{props.song.key}</span>
-          <Tooltip hovering={hovering == "key"}>
-            <>Key</>
-          </Tooltip>
-        </div>
+        {props.song.capo > 0 && (
+          <div
+            onMouseEnter={() => setHovering("capo")}
+            onMouseLeave={() => setHovering("")}
+          >
+            <UnfoldLessIcon />
+            <span>{props.song.capo}</span>
+            <Tooltip hovering={hovering == "capo"}>
+              <>Capo</>
+            </Tooltip>
+          </div>
+        )}
+        {props.song.key != "" && (
+          <div
+            onMouseEnter={() => setHovering("key")}
+            onMouseLeave={() => setHovering("")}
+          >
+            <KeyIcon />
+            <span>{props.song.key}</span>
+            <Tooltip hovering={hovering == "key"}>
+              <>Key</>
+            </Tooltip>
+          </div>
+        )}
         <div
           onMouseEnter={() => setHovering("tuning")}
           onMouseLeave={() => setHovering("")}

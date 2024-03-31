@@ -12,7 +12,6 @@ interface ChordViewerProps {
 export const ChordViewer = (props: ChordViewerProps) => {
   const [frets, setFrets] = useState<string[]>(props.chord.positions);
   const [fretOffset, setFretOffset] = useState<number>(0);
-  //TODO: fix last open chord showing higher than all the others
   const [countdownVal, setCountdownVal] = useState<number>(
     props.countdown ?? 0
   );

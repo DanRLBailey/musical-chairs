@@ -23,7 +23,6 @@ interface MusicPlayerProps {
 }
 
 export const MusicPlayer = (props: MusicPlayerProps) => {
-  //TODO: Stop playing when the song reaches the end
   const [playing, setPlaying] = useState<boolean>(false);
   const [maxTime, setMaxTime] = useState<number>(0);
   const [currentTime, setCurrentTime] = useState<number>(0);
@@ -127,6 +126,7 @@ export const MusicPlayer = (props: MusicPlayerProps) => {
             width="auto"
             height="inherit"
             volume={volume}
+            onEnded={() => setPlaying(false)}
           />
         )}
       </div>

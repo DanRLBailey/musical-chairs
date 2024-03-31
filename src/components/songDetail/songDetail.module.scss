@@ -58,17 +58,16 @@
   }
 
   .footer {
-    display: grid;
-    grid-template-columns: 0.75fr 0.75fr 1.5fr 1fr;
+    display: flex;
+    gap: var(--margin-lg);
     padding: var(--padding-md);
     background-color: var(--background-colour-light-2);
     border-radius: 0 0 var(--border-radius-md) var(--border-radius-md);
 
     & > div {
-      flex: 1;
       display: flex;
       font-size: var(--font-size-xs);
-      place-items: center;
+      align-items: center;
       justify-content: center;
       gap: var(--margin-xxs);
       position: relative;

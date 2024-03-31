@@ -489,7 +489,6 @@ export const SongComponent = (props: AddSongComponentProps) => {
                 }
                 placeholder="Standard"
               />
-              {/* TODO: Set time automatically using the music player */}
               <TextInput
                 label="Duration"
                 value={song.duration}
