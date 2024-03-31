@@ -191,6 +191,7 @@ export default function HomePage() {
         )}
       </div>
       {filterModalOpen && (
+        // TODO: Bug: filters reset on opening modal
         <ModalContainer
           modalOpen={filterModalOpen}
           setModalOpen={setFilterModalOpen}

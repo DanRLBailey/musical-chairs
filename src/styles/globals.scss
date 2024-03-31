@@ -1,5 +1,6 @@
 :root {
   /* Colours */
+  // TODO: Allow for dynamic changing of primary and seconday colours
   $primary-colour-rgb: 91, 42, 204;
   $primary-colour: rgb(
     nth($primary-colour-rgb, 1),
