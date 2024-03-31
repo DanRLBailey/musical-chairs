@@ -399,6 +399,22 @@ export const SongComponent = (props: AddSongComponentProps) => {
     setSong({ ...song, tabs: tabs });
   };
 
+  const getTimingTillNextChord = () => {
+    const currentChordTiming = allChords[currentChordIndex]?.timing ?? null;
+    const nextChordTiming = allChords[currentChordIndex + 1]?.timing ?? null;
+
+    if (
+      currentChordIndex >= allChords.length ||
+      (!currentChordTiming && currentChordTiming != 0) ||
+      !nextChordTiming
+    )
+      return 0;
+
+    const timingDiff = nextChordTiming - currentChordTiming;
+
+    return timingDiff;
+  };
+
   let overallChordIndex = -1;
   return (
     <div className={styles.addSongContainer}>
@@ -635,7 +651,7 @@ export const SongComponent = (props: AddSongComponentProps) => {
         )}
       </BottomBarContainer>
       {!props.editing && currentTime > 0 && highlightedChord && (
-        //TODO: Add a countdown progress bar to indicate chord change
+        //TODO: Bug: Timings not getting reset properly when scrubbing
         <SongHeader>
           {highlightedChord.chord
             .split("/")
@@ -643,6 +659,8 @@ export const SongComponent = (props: AddSongComponentProps) => {
             <ChordViewer
               chordName={highlightedChord.chord}
               chord={(allChordsJson as ChordObj)[highlightedChord.chord][0]}
+              currentTime={currentTime}
+              countdown={getTimingTillNextChord()}
             />
           )}
           {!highlightedChord.chord
@@ -654,6 +672,8 @@ export const SongComponent = (props: AddSongComponentProps) => {
                   song.tabs.find((tab) => tab.name == highlightedChord.chord) ??
                   song.tabs[0]
                 }
+                currentTime={currentTime}
+                countdown={getTimingTillNextChord()}
               />
             )}
         </SongHeader>

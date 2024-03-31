@@ -55,4 +55,36 @@
       width: $width;
     }
   }
+
+  input[type="range"] {
+    $gapLeft: 1.5rem;
+    $height: 2rem;
+    $thumbWidth: 5px;
+
+    margin-top: var(--margin-lg);
+    width: calc(100% - $gapLeft);
+    margin-left: $gapLeft;
+    height: $height;
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
+    pointer-events: none;
+    border-radius: var(--border-radius-sm);
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, 0.05);
+
+    &::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      pointer-events: auto;
+      height: $height;
+      width: $thumbWidth;
+      background-color: var(--secondary-colour);
+      transition: var(--transition);
+      border-radius: var(--border-radius-lg);
+
+      &:hover {
+        background-color: var(--secondary-colour-dark);
+      }
+    }
+  }
 }

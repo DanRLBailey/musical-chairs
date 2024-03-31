@@ -4,10 +4,23 @@ import { Tab, TabColumn } from "@/types/songTypes";
 
 interface TabViewerProps {
   tab: Tab;
+  currentTime: number;
+  countdown?: number;
 }
 
 export const TabViewer = (props: TabViewerProps) => {
   const [currentTab, setCurrentTab] = useState<Tab>(props.tab);
+  const [countdownVal, setCountdownVal] = useState<number>(
+    props.countdown ?? 0
+  );
+  const [initialCurrentTime, setInitialCurrentTime] = useState<number>(0);
+
+  useEffect(() => {
+    if (!props.countdown) return;
+
+    setCountdownVal(props.countdown);
+    setInitialCurrentTime(props.currentTime);
+  }, [props.countdown]);
 
   useEffect(() => {
     setCurrentTab(props.tab);
@@ -42,6 +55,14 @@ export const TabViewer = (props: TabViewerProps) => {
           );
         })}
       </div>
+      <input
+        type="range"
+        min={initialCurrentTime}
+        max={initialCurrentTime + countdownVal}
+        value={props.currentTime}
+        onChange={() => {}}
+        step={0.01}
+      ></input>
     </div>
   );
 };

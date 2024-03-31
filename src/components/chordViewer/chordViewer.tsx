@@ -5,16 +5,28 @@ import { ChordObj, ChordPartObj } from "@/types/songTypes";
 interface ChordViewerProps {
   chordName: string;
   chord: ChordPartObj;
+  currentTime: number;
+  countdown?: number;
 }
 
 export const ChordViewer = (props: ChordViewerProps) => {
   const [frets, setFrets] = useState<string[]>(props.chord.positions);
   const [fretOffset, setFretOffset] = useState<number>(0);
   //TODO: fix last open chord showing higher than all the others
+  const [countdownVal, setCountdownVal] = useState<number>(
+    props.countdown ?? 0
+  );
+  const [initialCurrentTime, setInitialCurrentTime] = useState<number>(0);
+
+  useEffect(() => {
+    if (!props.countdown) return;
+
+    setCountdownVal(props.countdown);
+    setInitialCurrentTime(props.currentTime);
+  }, [props.countdown]);
 
   useEffect(() => {
     setFrets(props.chord.positions);
-    console.log(props.chord);
 
     const fretNums: number[] = props.chord.positions
       .map((fret) => (parseInt(fret) ? parseInt(fret) : null))
@@ -69,6 +81,14 @@ export const ChordViewer = (props: ChordViewerProps) => {
           );
         })}
       </div>
+      <input
+        type="range"
+        min={initialCurrentTime}
+        max={initialCurrentTime + countdownVal}
+        value={props.currentTime}
+        onChange={() => {}}
+        step={0.01}
+      ></input>
     </div>
   );
 };

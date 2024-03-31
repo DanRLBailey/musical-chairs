@@ -58,4 +58,34 @@
       }
     }
   }
+
+  input[type="range"] {
+    $height: 2rem;
+    $thumbWidth: 5px;
+
+    margin-top: var(--margin-lg);
+    width: 100%;
+    height: $height;
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
+    pointer-events: none;
+    border-radius: var(--border-radius-sm);
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, 0.05);
+
+    &::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      pointer-events: auto;
+      height: $height;
+      width: $thumbWidth;
+      background-color: var(--secondary-colour);
+      transition: var(--transition);
+      border-radius: var(--border-radius-lg);
+
+      &:hover {
+        background-color: var(--secondary-colour-dark);
+      }
+    }
+  }
 }
