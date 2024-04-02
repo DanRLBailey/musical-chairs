@@ -24,7 +24,6 @@ interface MusicPlayerProps {
 
 export const MusicPlayer = (props: MusicPlayerProps) => {
   // TODO: Add physical buttons for adding timings
-  // TODO: Style volume properly
   const [playing, setPlaying] = useState<boolean>(false);
   const [maxTime, setMaxTime] = useState<number>(0);
   const [currentTime, setCurrentTime] = useState<number>(0);
@@ -118,7 +117,7 @@ export const MusicPlayer = (props: MusicPlayerProps) => {
         {hasWindow && (
           <ReactPlayer
             ref={player}
-            url={props.song.link as string}
+            url={props.song.link as string} //TODO: Use local songs if offline
             playing={playing}
             onReady={() => {
               setMaxTime(player.current.getDuration());

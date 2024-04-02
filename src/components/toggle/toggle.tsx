@@ -18,7 +18,7 @@ export const Toggle = (props: ToggleProps) => {
       <div
         className={`${styles.toggle} ${props.toggled ? styles.toggled : ""}`}
       >
-        <div></div>
+        <div className={styles.toggleIndicator}></div>
       </div>
       <span>{props.rightSideText}</span>
     </div>

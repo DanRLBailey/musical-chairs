@@ -11,30 +11,33 @@
   }
 
   .toggle {
+    $height: 1rem;
+    $leftPos: 25%;
+
     flex: 1;
     display: flex;
     align-items: center;
     background-color: var(--primary-colour);
-    height: 70%;
+    height: 1.2rem;
     border-radius: 50px;
     padding: 0.25rem;
     transition: var(--transition);
     position: relative;
 
-    div {
-      width: 15px;
-      height: 15px;
-      border-radius: 50px;
+    .toggleIndicator {
+      width: $height;
+      height: $height;
+      border-radius: $height;
       background-color: white;
       position: absolute;
-      left: 25%;
+      left: $leftPos;
       transform: translateX(-50%);
       transition: var(--transition-quick);
     }
 
     &.toggled {
       div {
-        left: 75%;
+        left: calc(100% - $leftPos);
       }
     }
   }

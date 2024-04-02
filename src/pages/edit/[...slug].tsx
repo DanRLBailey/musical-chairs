@@ -1,21 +1,24 @@
 import styles from "@/styles/songPage.module.scss";
 import { useRouter } from "next/router";
 import { SongComponent } from "@/components/songComponent/songComponent";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Song, songTemplate } from "@/types/songTypes";
 import { LoadingSpinner } from "@/components/loadingSpinner/loadingSpinner";
+import { NetworkContext } from "@/context/networkContext";
 
 export default () => {
   const router = useRouter();
   const { pathname } = router;
   const { slug } = router.query;
+  const { isOnline } = useContext(NetworkContext);
 
   const [isEditing, setIsEditing] = useState<boolean>(true);
-
   const [song, setSong] = useState<Song>();
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
+    if (!isOnline) return;
+
     fetch("/api/getSong", {
       method: "POST",
       body: JSON.stringify({ slug: slug }),
@@ -27,7 +30,7 @@ export default () => {
           setLoading(false);
         }
       });
-  }, [slug]);
+  }, [isOnline, slug]);
 
   if (!slug || !pathname) return;
 

@@ -43,8 +43,11 @@
     .header {
       display: flex;
       align-items: center;
-      border-bottom: 3px solid rgba(0, 0, 0, 0.1);
-      margin-bottom: var(--margin-lg);
+
+      &.withTitle {
+        margin-bottom: var(--margin-lg);
+        border-bottom: 3px solid rgba(0, 0, 0, 0.1);
+      }
 
       .heading {
         font-size: var(--font-size-xl);

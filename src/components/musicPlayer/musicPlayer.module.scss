@@ -62,6 +62,9 @@
 
   .volumeContainer {
     position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     &:hover {
       div {
@@ -79,6 +82,7 @@
       height: 50px;
       background-color: var(--background-colour-dark);
       padding: var(--padding-sm);
+      border-radius: var(--border-radius-sm);
 
       transform-origin: center left;
       transform: rotate(-90deg);
@@ -98,6 +102,8 @@
         &::-webkit-slider-runnable-track {
           background-color: rgba(255, 255, 255, 0.05);
           height: 100%;
+          border-radius: var(--border-radius-sm);
+          overflow: hidden;
         }
 
         &::-webkit-slider-thumb {
@@ -105,7 +111,7 @@
           appearance: none;
           background-color: var(--primary-colour);
           height: 100%;
-          width: 1px;
+          width: 2px;
         }
       }
     }

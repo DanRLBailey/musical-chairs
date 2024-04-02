@@ -57,7 +57,13 @@ export const ModalContainer = (props: ModalContainerProps) => {
             onClick={(e) => e.stopPropagation()}
             className={`${styles.modalContent} ${getSize()}`}
           >
-            <div className={styles.header}>
+            <div
+              className={`${styles.header} ${
+                props.title && props.title !== undefined && props.title !== ""
+                  ? styles.withTitle
+                  : ""
+              }`}
+            >
               <span className={styles.heading}>{props.title}</span>
               <CloseIcon className={styles.icon} onClick={handleClose} />
             </div>

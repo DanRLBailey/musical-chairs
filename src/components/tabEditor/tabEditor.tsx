@@ -8,7 +8,7 @@ interface TabEditorProps {
 }
 
 export const TabEditor = (props: TabEditorProps) => {
-  const [currentTab, setCurrentTab] = useState<Tab>(props.tab); //Change to be a prop
+  const [currentTab, setCurrentTab] = useState<Tab>(props.tab);
   const [heldKeys, setHeldKeys] = useState<string[]>([]);
 
   useEffect(() => {
@@ -22,6 +22,7 @@ export const TabEditor = (props: TabEditorProps) => {
       if (!heldKeys.includes("Control")) return;
 
       switch (e.key) {
+        // TODO: Show controls in UI
         case "Enter":
           e.preventDefault();
           addColumnToTab();
@@ -62,12 +63,7 @@ export const TabEditor = (props: TabEditorProps) => {
 
         return {
           ...currentTab.cols[colIndex],
-          [stringKey]:
-            stringKey == "chord"
-              ? val
-              : (val === "" || !parseInt(val)) && val != "0"
-              ? null
-              : parseInt(val),
+          [stringKey]: val,
         } as TabColumn;
       }),
     });

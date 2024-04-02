@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import styles from "./songComponent.module.scss";
 import {
   Chord,
@@ -32,6 +32,7 @@ import { TabViewer } from "../tabViewer/tabViewer";
 import { ChordViewer } from "../chordViewer/chordViewer";
 import allChordsJson from "@/public/chords.json";
 import Link from "next/link";
+import { NetworkContext } from "@/context/networkContext";
 
 interface AddSongComponentProps {
   existingSong?: Song;
@@ -50,6 +51,8 @@ export const SongComponent = (props: AddSongComponentProps) => {
   const [uniqueChords, setUniqueChords] = useState<string[]>([]);
   const [currentChordIndex, setCurrentChordIndex] = useState<number>(-1);
   const [highlightedChord, setHighlightedChord] = useState<Chord>();
+
+  const { isOnline } = useContext(NetworkContext);
 
   useEffect(() => {
     if (!currentChord) return;
@@ -522,9 +525,11 @@ export const SongComponent = (props: AddSongComponentProps) => {
         )}
         {!props.editing && (
           <div className={styles.songSidebar}>
-            <Link href={`/edit/${song.slug}`} className="button">
-              Edit
-            </Link>
+            {isOnline && (
+              <Link href={`/edit/${song.slug}`} className="button">
+                Edit
+              </Link>
+            )}
           </div>
         )}
       </SidebarContainer>

@@ -2,7 +2,7 @@
   position: absolute;
   top: var(--padding-md);
   right: var(--padding-md);
-  background-color: var(--alert-colour);
+  background-color: rgba(var(--alert-colour-rgb), 0.25);
   display: flex;
   padding: var(--padding-xs);
   border-radius: 50px;

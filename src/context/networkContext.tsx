@@ -20,7 +20,7 @@ export const NetworkProvider = ({
   const [isOnline, setIsOnline] = useState<boolean>();
 
   useEffect(() => {
-    setIsOnline(!window.navigator.onLine); //reverse
+    setIsOnline(window.navigator.onLine); //reverse
   }, []);
 
   return (
