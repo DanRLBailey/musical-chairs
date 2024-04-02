@@ -1,6 +1,6 @@
 import styles from "./index.module.scss";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { SongDetail, getDifficulty } from "@/components/songDetail/songDetail";
 import { SidebarContainer } from "@/components/sidebarContainer/sidebarContainer";
 import { TextInput } from "@/components/textInput/textInput";
@@ -16,6 +16,8 @@ import ShuffleIcon from "@mui/icons-material/Shuffle";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import SortIcon from "@mui/icons-material/Sort";
 import { ModalContainer } from "@/components/modalContainer/modalContainer";
+import { NetworkContext } from "@/context/networkContext";
+import offlineSongs from "@/public/songs-offline.json";
 
 interface Filter {
   search: string;
@@ -28,6 +30,7 @@ interface Filter {
 }
 
 export default function HomePage() {
+  // TODO: Add "Playlist" feature for consecutive songs
   const [songs, setSongs] = useState<Song[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [filter, setFilter] = useState<Filter>({
@@ -44,12 +47,20 @@ export default function HomePage() {
   const [sortModalOpen, setSortModalOpen] = useState<boolean>(false);
 
   const router = useRouter();
+  const { isOnline } = useContext(NetworkContext);
 
   useEffect(() => {
     title("Home");
   }, []);
 
-  useEffect(() => {
+  const getSongsFromFile = () => {
+    console.log("offline");
+    setSongs(offlineSongs as Song[]);
+    setLoading(false);
+  };
+
+  const getSongsFromDb = () => {
+    console.log("online");
     fetch("/api/getSongs")
       .then((res) => res.json())
       .then((json) => {
@@ -59,7 +70,18 @@ export default function HomePage() {
       .catch((err) => {
         console.error(err);
       });
-  }, []);
+  };
+
+  useEffect(() => {
+    if (isOnline === undefined) return;
+
+    if (!isOnline) {
+      getSongsFromFile();
+      return;
+    }
+
+    getSongsFromDb();
+  }, [isOnline]);
 
   const getFilteredSongs = (song: Song) => {
     if (!filter) return true;
@@ -129,17 +151,15 @@ export default function HomePage() {
     router.push(`/song/${songs[rand].slug}`);
   };
 
-  useEffect(() => {
-    console.log(filterModalOpen);
-  }, [filterModalOpen]);
-
   return (
     <div className={styles.homePageContainer}>
       <SidebarContainer>
         <div className={styles.sidebarHeaderButtons}>
-          <Link href={"/new"} className="button">
-            <AddIcon />
-          </Link>
+          {isOnline && (
+            <Link href={"/new"} className="button">
+              <AddIcon />
+            </Link>
+          )}
           <button onClick={getRandomSong}>
             <ShuffleIcon />
           </button>

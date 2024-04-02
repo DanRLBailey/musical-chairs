@@ -1,0 +1,9 @@
+.networkContextContainer {
+  position: absolute;
+  top: var(--padding-md);
+  right: var(--padding-md);
+  background-color: var(--alert-colour);
+  display: flex;
+  padding: var(--padding-xs);
+  border-radius: 50px;
+}

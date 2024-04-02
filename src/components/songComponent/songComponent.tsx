@@ -22,7 +22,6 @@ import { TextInput } from "../textInput/textInput";
 import ReactPlayer from "react-player";
 import { BottomBarContainer } from "../bottomBarContainer/bottomBarContainer";
 import { MusicPlayer } from "../musicPlayer/musicPlayer";
-import oldSong from "@/public/song-old.json";
 import { ChordPill } from "../chordPill/chordPill";
 import { useRouter } from "next/router";
 import { TabList } from "../tabList/tabList";

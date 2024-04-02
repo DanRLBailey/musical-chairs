@@ -2,6 +2,7 @@ import "@/styles/globals.scss";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import favicon from "@/public/favicon.ico";
+import { NetworkProvider } from "@/context/networkContext";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -9,7 +10,9 @@ export default function App({ Component, pageProps }: AppProps) {
       <Head>
         <link rel="shortcut icon" href={favicon.src} />
       </Head>
-      <Component {...pageProps} />
+      <NetworkProvider>
+        <Component {...pageProps} />
+      </NetworkProvider>
     </>
   );
 }

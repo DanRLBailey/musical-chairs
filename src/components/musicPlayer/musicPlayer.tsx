@@ -23,6 +23,8 @@ interface MusicPlayerProps {
 }
 
 export const MusicPlayer = (props: MusicPlayerProps) => {
+  // TODO: Add physical buttons for adding timings
+  // TODO: Style volume properly
   const [playing, setPlaying] = useState<boolean>(false);
   const [maxTime, setMaxTime] = useState<number>(0);
   const [currentTime, setCurrentTime] = useState<number>(0);
