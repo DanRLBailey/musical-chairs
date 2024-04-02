@@ -4,7 +4,7 @@ import { SongComponent } from "@/components/songComponent/songComponent";
 import { useContext, useEffect, useState } from "react";
 import { Song, songTemplate } from "@/types/songTypes";
 import { LoadingSpinner } from "@/components/loadingSpinner/loadingSpinner";
-import { NetworkContext } from "@/context/networkContext";
+import { NetworkContext } from "@/context/networkContext/networkContext";
 
 export default () => {
   const router = useRouter();

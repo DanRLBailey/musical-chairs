@@ -32,7 +32,7 @@ import { TabViewer } from "../tabViewer/tabViewer";
 import { ChordViewer } from "../chordViewer/chordViewer";
 import allChordsJson from "@/public/chords.json";
 import Link from "next/link";
-import { NetworkContext } from "@/context/networkContext";
+import { NetworkContext } from "@/context/networkContext/networkContext";
 
 interface AddSongComponentProps {
   existingSong?: Song;

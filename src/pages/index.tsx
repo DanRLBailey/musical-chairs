@@ -16,7 +16,7 @@ import ShuffleIcon from "@mui/icons-material/Shuffle";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import SortIcon from "@mui/icons-material/Sort";
 import { ModalContainer } from "@/components/modalContainer/modalContainer";
-import { NetworkContext } from "@/context/networkContext";
+import { NetworkContext } from "@/context/networkContext/networkContext";
 import offlineSongs from "@/public/songs-offline.json";
 
 interface Filter {

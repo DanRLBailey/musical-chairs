@@ -4,7 +4,7 @@ import { SongComponent } from "@/components/songComponent/songComponent";
 import { useContext, useEffect, useState } from "react";
 import { Song, songTemplate } from "@/types/songTypes";
 import { LoadingSpinner } from "@/components/loadingSpinner/loadingSpinner";
-import { NetworkContext } from "@/context/networkContext";
+import { NetworkContext } from "@/context/networkContext/networkContext";
 import offlineSongs from "@/public/songs-offline.json";
 
 export default () => {
