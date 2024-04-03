@@ -38,6 +38,6 @@ export default async (req, res) => {
 
     res.send(result);
   } catch (error) {
-    res.error(error);
+    res.status(400).send(error);
   }
 };

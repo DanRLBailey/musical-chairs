@@ -17,6 +17,7 @@ import FilterListIcon from "@mui/icons-material/FilterList";
 import SortIcon from "@mui/icons-material/Sort";
 import { ModalContainer } from "@/components/modalContainer/modalContainer";
 import { NetworkContext } from "@/context/networkContext/networkContext";
+import { UserContext } from "@/context/userContext/userContext";
 import offlineSongs from "@/public/songs-offline.json";
 
 interface Filter {
@@ -48,23 +49,95 @@ export default function HomePage() {
 
   const router = useRouter();
   const { isOnline } = useContext(NetworkContext);
+  const { setUser } = useContext(UserContext);
 
   useEffect(() => {
     title("Home");
   }, []);
 
+  const email = "danbailey.813@gmail.com";
+  const password = "poopooPeepee";
+  const displayName = "Dan";
+
+  const loginUser = () => {
+    fetch("/api/loginUser", {
+      method: "POST",
+      body: JSON.stringify({
+        email: email,
+        password: password,
+      }),
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        const user = json.user;
+        const localUser = {
+          isLoggedIn: true,
+          displayName: user.display_name,
+          email: user.email,
+          userId: user.id,
+        };
+        setUser(localUser);
+
+        localStorage.setItem("user", JSON.stringify(localUser));
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
+  const createNewUser = async () => {
+    await fetch("/api/createUser", {
+      method: "POST",
+      body: JSON.stringify({
+        email: email,
+        password: password,
+        displayName: displayName,
+      }),
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        console.log(json, "User Created"); //TODO: Move to notification
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
+  const checkExistingUser = async () => {
+    await fetch("/api/getExistingUser", {
+      method: "POST",
+      body: JSON.stringify({
+        email: email,
+        password: password,
+        displayName: displayName,
+      }),
+    })
+      .then((res) => res.json())
+      .then(async (json) => {
+        if (!json.userExists) {
+          await createNewUser();
+        } else {
+          console.log("User already exists, please log in"); //TODO: Move to notification
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+
+    return;
+  };
+
   const getSongsFromFile = () => {
-    console.log("offline");
     setSongs(offlineSongs as Song[]);
     setLoading(false);
   };
 
   const getSongsFromDb = () => {
-    console.log("online");
     fetch("/api/getSongs")
       .then((res) => res.json())
       .then((json) => {
         setSongs(json);
+        console.log(json);
         setLoading(false);
       })
       .catch((err) => {
@@ -169,7 +242,10 @@ export default function HomePage() {
           <button onClick={() => setSortModalOpen(!sortModalOpen)}>
             <SortIcon />
           </button>
+          {/* TODO: Add search page */}
         </div>
+        <button onClick={loginUser}>Login</button>
+        <button onClick={checkExistingUser}>Create</button>
       </SidebarContainer>
       <div className={styles.homePageContent}>
         {songs &&

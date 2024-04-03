@@ -33,12 +33,18 @@ export default async (req, res) => {
   1,
   0,
   '${JSON.stringify(tabs) ?? null}',
-  'guitar'
+  'guitar',
+  'published',
+  'public'
   )`;
 
   //TODO: Update "1" to the user id
 
   //TODO: Update "guitar" to the instrument select (once implemented)
+
+  //TODO: Update "published" to the draft level (once implemented)
+
+  //TODO: Update "public" to the access level (once implemented)
 
   //TODO: First check if slug exists, then add a "version" modifier if so
   //  In case of duplicate songs
@@ -50,6 +56,6 @@ export default async (req, res) => {
 
     res.send(result);
   } catch (error) {
-    res.error(error);
+    res.status(400).send(error);
   }
 };

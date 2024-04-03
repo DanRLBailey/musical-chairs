@@ -11,6 +11,8 @@ export interface Song {
   duration: number;
   difficulty: number;
   instrument: "guitar" | "keyboard";
+  status: "draft" | "published";
+  access: "public" | "private";
 }
 
 export interface Line {
@@ -58,4 +60,6 @@ export const songTemplate: Song = {
   duration: 0,
   difficulty: 0,
   instrument: "guitar",
+  status: "published",
+  access: "public",
 };
