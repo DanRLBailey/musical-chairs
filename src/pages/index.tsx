@@ -17,8 +17,8 @@ import FilterListIcon from "@mui/icons-material/FilterList";
 import SortIcon from "@mui/icons-material/Sort";
 import { ModalContainer } from "@/components/modalContainer/modalContainer";
 import { NetworkContext } from "@/context/networkContext/networkContext";
-import { UserContext } from "@/context/userContext/userContext";
 import offlineSongs from "@/public/songs-offline.json";
+import { UserContext } from "@/context/userContext/userContext";
 
 interface Filter {
   search: string;
@@ -49,83 +49,11 @@ export default function HomePage() {
 
   const router = useRouter();
   const { isOnline } = useContext(NetworkContext);
-  const { setUser } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
 
   useEffect(() => {
     title("Home");
   }, []);
-
-  const email = "danbailey.813@gmail.com";
-  const password = "poopooPeepee";
-  const displayName = "Dan";
-
-  const loginUser = () => {
-    fetch("/api/loginUser", {
-      method: "POST",
-      body: JSON.stringify({
-        email: email,
-        password: password,
-      }),
-    })
-      .then((res) => res.json())
-      .then((json) => {
-        const user = json.user;
-        const localUser = {
-          isLoggedIn: true,
-          displayName: user.display_name,
-          email: user.email,
-          userId: user.id,
-        };
-        setUser(localUser);
-
-        localStorage.setItem("user", JSON.stringify(localUser));
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  };
-
-  const createNewUser = async () => {
-    await fetch("/api/createUser", {
-      method: "POST",
-      body: JSON.stringify({
-        email: email,
-        password: password,
-        displayName: displayName,
-      }),
-    })
-      .then((res) => res.json())
-      .then((json) => {
-        console.log(json, "User Created"); //TODO: Move to notification
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  };
-
-  const checkExistingUser = async () => {
-    await fetch("/api/getExistingUser", {
-      method: "POST",
-      body: JSON.stringify({
-        email: email,
-        password: password,
-        displayName: displayName,
-      }),
-    })
-      .then((res) => res.json())
-      .then(async (json) => {
-        if (!json.userExists) {
-          await createNewUser();
-        } else {
-          console.log("User already exists, please log in"); //TODO: Move to notification
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-
-    return;
-  };
 
   const getSongsFromFile = () => {
     setSongs(offlineSongs as Song[]);
@@ -133,7 +61,13 @@ export default function HomePage() {
   };
 
   const getSongsFromDb = () => {
-    fetch("/api/getSongs")
+    fetch("/api/getSongs", {
+      method: "POST",
+      body: JSON.stringify({
+        userId: user.userId,
+        saved: user.saved,
+      }),
+    })
       .then((res) => res.json())
       .then((json) => {
         setSongs(json);
@@ -244,8 +178,6 @@ export default function HomePage() {
           </button>
           {/* TODO: Add search page */}
         </div>
-        <button onClick={loginUser}>Login</button>
-        <button onClick={checkExistingUser}>Create</button>
       </SidebarContainer>
       <div className={styles.homePageContent}>
         {songs &&

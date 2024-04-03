@@ -1,8 +1,10 @@
 export interface User {
   isLoggedIn: boolean;
-  displayName: string;
   email: string;
+  userName: string;
+  displayName: string;
   userId: number;
+  saved: number[];
 }
 
 export interface UserDB {
@@ -12,4 +14,6 @@ export interface UserDB {
   password: string;
   last_login: Date;
   display_name: string;
+  user_name: string;
+  saved: string;
 }

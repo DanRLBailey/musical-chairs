@@ -20,7 +20,8 @@ export default async (req, res) => {
         "${hashedPass}",
         NULL,
         "user",
-        "${displayName}"
+        "${displayName}",
+        []
       )`,
     });
 

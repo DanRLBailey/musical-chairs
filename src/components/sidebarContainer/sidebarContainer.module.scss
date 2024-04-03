@@ -25,7 +25,7 @@
     flex-direction: column;
     background-color: var(--background-colour-dark);
     box-shadow: var(--box-shadow);
-    padding: 1rem 1rem 5rem 1rem;
+    padding: 1rem;
     overflow-y: auto;
     width: $width;
 
@@ -41,6 +41,42 @@
         display: flex;
         justify-content: center;
         align-items: center;
+      }
+    }
+
+    .footerContent {
+      display: flex;
+      flex-direction: column;
+      gap: var(--margin-lg);
+
+      .userContainer {
+        display: flex;
+        align-items: center;
+        gap: var(--margin-xs);
+
+        & > span {
+          $profileWidth: 2rem;
+
+          background-color: var(--secondary-colour);
+          width: $profileWidth;
+          height: $profileWidth;
+          border-radius: $profileWidth;
+
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .nameContainer {
+          display: flex;
+          flex-direction: column;
+
+          .displayName {
+          }
+
+          .userName {
+          }
+        }
       }
     }
   }
