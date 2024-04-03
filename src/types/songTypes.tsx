@@ -13,6 +13,7 @@ export interface Song {
   instrument: "guitar" | "keyboard";
   status: "draft" | "published";
   access: "public" | "private";
+  saved?: boolean;
 }
 
 export interface Line {
