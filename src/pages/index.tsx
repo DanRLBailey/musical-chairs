@@ -162,7 +162,7 @@ export default function HomePage() {
     <div className={styles.homePageContainer}>
       <SidebarContainer>
         <div className={styles.sidebarHeaderButtons}>
-          {isOnline && (
+          {isOnline && user.isLoggedIn && (
             <Link href={"/new"} className="button">
               <AddIcon />
             </Link>

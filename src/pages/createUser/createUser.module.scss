@@ -1,0 +1,40 @@
+.createUserContainer {
+  width: 100dvw;
+  height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .createUser {
+    display: flex;
+    flex-direction: column;
+    gap: var(--margin-lg);
+    padding: var(--padding-lg);
+    width: 20vw;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--box-shadow);
+
+    & > button {
+      width: 50%;
+      background-color: transparent;
+      padding: 0;
+      justify-content: flex-start;
+      color: rgba(255, 255, 255, 0.3);
+
+      &:hover {
+        color: rgba(var(--alert-colour-rgb), 0.75);
+      }
+    }
+
+    .buttonContainer {
+      display: flex;
+      gap: var(--margin-lg);
+      padding-top: var(--padding-lg);
+
+      button {
+        flex: 1;
+      }
+    }
+  }
+}

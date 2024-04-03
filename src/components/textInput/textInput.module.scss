@@ -14,9 +14,16 @@
       display: flex;
       justify-content: space-between;
       gap: var(--padding-xxs);
+      transition: var(--transition);
 
       .requiredIcon {
         width: 20px;
+      }
+    }
+
+    &.error {
+      div {
+        background-color: var(--alert-colour);
       }
     }
   }

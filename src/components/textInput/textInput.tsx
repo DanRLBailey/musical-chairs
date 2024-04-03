@@ -7,7 +7,7 @@ interface TextInputProps {
   onValueChange: (newVal: string | number) => void;
   label?: string;
   placeholder?: string;
-  type?: "input" | "textArea";
+  type?: "input" | "textArea" | "password";
   onButtonClick?: () => void;
   buttonText?: string | React.ReactNode;
   disabled?: boolean;
@@ -30,7 +30,7 @@ export const TextInput = (props: TextInputProps) => {
   return (
     <div className={styles.textInputContainer}>
       {props.label && (
-        <div className={styles.label}>
+        <div className={`${styles.label} ${props.isError ? styles.error : ""}`}>
           <div>
             <span>{props.label} </span>
             {props.required && <ErrorIcon className={styles.requiredIcon} />}
@@ -38,10 +38,10 @@ export const TextInput = (props: TextInputProps) => {
         </div>
       )}
       <div className={styles.input}>
-        {(props.type == "input" || !props.type) && (
+        {(props.type == "input" || props.type == "password" || !props.type) && (
           <>
             <input
-              type="text"
+              type={props.type == "password" ? "password" : "text"}
               value={props.value}
               onChange={(e) => props.onValueChange(e.target.value)}
               onKeyDown={(e) => handleInput(e)}

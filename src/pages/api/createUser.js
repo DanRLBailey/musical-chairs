@@ -8,6 +8,7 @@ export default async (req, res) => {
   const email = body["email"];
   const password = body["password"];
   const displayName = body["displayName"];
+  const username = body["username"];
 
   const hashedPass = await bcrypt.hash(password, saltRounds);
 
@@ -21,6 +22,7 @@ export default async (req, res) => {
         NULL,
         "user",
         "${displayName}",
+        "${username}",
         []
       )`,
     });

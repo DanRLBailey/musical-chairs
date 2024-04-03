@@ -51,6 +51,7 @@ export const SongComponent = (props: AddSongComponentProps) => {
   const [uniqueChords, setUniqueChords] = useState<string[]>([]);
   const [currentChordIndex, setCurrentChordIndex] = useState<number>(-1);
   const [highlightedChord, setHighlightedChord] = useState<Chord>();
+  const [sidebarOpen, setSidebarOpen] = useState<boolean>();
 
   const { isOnline } = useContext(NetworkContext);
 
@@ -420,7 +421,9 @@ export const SongComponent = (props: AddSongComponentProps) => {
   let overallChordIndex = -1;
   return (
     <div className={styles.addSongContainer}>
-      <SidebarContainer>
+      <SidebarContainer
+        onSidebarToggle={(isOpen: boolean) => setSidebarOpen(isOpen)}
+      >
         {props.editing && (
           <div className={styles.songSidebar}>
             <div className={styles.list}>
@@ -633,7 +636,10 @@ export const SongComponent = (props: AddSongComponentProps) => {
           })}
         </div>
       </div>
-      <BottomBarContainer isOpen={ReactPlayer.canPlay(song.link)}>
+      <BottomBarContainer
+        isOpen={ReactPlayer.canPlay(song.link)}
+        isSidebarOpen={sidebarOpen}
+      >
         {song.link != "" && (
           <MusicPlayer
             song={song}

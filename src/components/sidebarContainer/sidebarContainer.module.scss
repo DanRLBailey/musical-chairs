@@ -49,32 +49,63 @@
       flex-direction: column;
       gap: var(--margin-lg);
 
+      button {
+        background-color: transparent;
+        display: flex;
+        gap: var(--margin-xs);
+        justify-content: flex-start;
+
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.025);
+        }
+      }
+
       .userContainer {
+        position: relative;
         display: flex;
         align-items: center;
         gap: var(--margin-xs);
+        padding: var(--padding-md);
+        background-color: rgba(var(--background-colour-rgb), 0.5);
+        border-radius: var(--border-radius-md);
 
         & > span {
-          $profileWidth: 2rem;
+          $profileWidth: 2.25rem;
 
           background-color: var(--secondary-colour);
           width: $profileWidth;
           height: $profileWidth;
           border-radius: $profileWidth;
-
           display: flex;
           justify-content: center;
           align-items: center;
+          font-weight: bold;
         }
 
         .nameContainer {
           display: flex;
           flex-direction: column;
-
-          .displayName {
-          }
+          flex: 1;
 
           .userName {
+            color: rgba(255, 255, 255, 0.2);
+          }
+        }
+
+        .menu {
+          cursor: pointer;
+          overflow: hidden;
+          display: flex;
+          align-items: center;
+          transition: var(--transition);
+          width: 0;
+          opacity: 0;
+          transform: scale(0.9);
+
+          &.hover {
+            width: 1.5rem;
+            opacity: 1;
+            transform: scale(1);
           }
         }
       }

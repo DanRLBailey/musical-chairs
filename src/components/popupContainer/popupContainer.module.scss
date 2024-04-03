@@ -1,0 +1,27 @@
+.popupContainer {
+  $hiddenPosition: 15%;
+  $activePosition: 110%;
+
+  position: absolute;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: var(--padding-md);
+  border-radius: var(--border-radius-md);
+  transition: var(--transition);
+  left: 0;
+  opacity: 0;
+  bottom: calc(($activePosition - $hiddenPosition));
+  pointer-events: none;
+
+  &.active {
+    opacity: 1;
+    bottom: calc($activePosition);
+    pointer-events: all;
+  }
+
+  .popupContent {
+    display: flex;
+    flex-direction: column;
+    gap: var(--margin-xs);
+  }
+}

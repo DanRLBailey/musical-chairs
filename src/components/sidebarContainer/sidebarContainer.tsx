@@ -1,91 +1,45 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import styles from "./sidebarContainer.module.scss";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import PersonIcon from "@mui/icons-material/Person";
+import SettingsIcon from "@mui/icons-material/Settings";
+import LogoutIcon from "@mui/icons-material/Logout";
 import Link from "next/link";
 import { UserContext } from "@/context/userContext/userContext";
+import { PopupContainer } from "../popupContainer/popupContainer";
+import { User } from "@/types/userTypes";
+import { useRouter } from "next/router";
 
 interface SidebarContainerProps {
   children: React.ReactNode | React.ReactNode[];
+  onSidebarToggle?: (isOpen: boolean) => void;
 }
 
 export const SidebarContainer = (props: SidebarContainerProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(true);
+  const [profileHover, setProfileHover] = useState<boolean>(false);
+  const [popupOpen, setPopupOpen] = useState<boolean>(false);
 
   const { user, setUser } = useContext(UserContext);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (props.onSidebarToggle) props.onSidebarToggle(isOpen);
+  }, [isOpen]);
 
   const email = "danbailey.813@gmail.com";
   const password = "poopooPeepee";
   const displayName = "Dan";
 
-  const loginUser = () => {
-    fetch("/api/loginUser", {
-      method: "POST",
-      body: JSON.stringify({
-        email: email,
-        password: password,
-      }),
-    })
-      .then((res) => res.json())
-      .then((json) => {
-        const user = json.user;
-        console.log(user);
-        const localUser = {
-          isLoggedIn: true,
-          email: user.email,
-          userName: user.user_name,
-          displayName: user.display_name,
-          userId: user.id,
-          saved: user.saved,
-        };
-        setUser(localUser);
-
-        localStorage.setItem("user", JSON.stringify(localUser));
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+  const handleLoginButton = () => {
+    router.push("/login");
   };
 
-  const createNewUser = async () => {
-    await fetch("/api/createUser", {
-      method: "POST",
-      body: JSON.stringify({
-        email: email,
-        password: password,
-        displayName: displayName,
-      }),
-    })
-      .then((res) => res.json())
-      .then((json) => {
-        console.log(json, "User Created"); //TODO: Move to notification
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  };
-
-  const checkExistingUser = async () => {
-    await fetch("/api/getExistingUser", {
-      method: "POST",
-      body: JSON.stringify({
-        email: email,
-        password: password,
-        displayName: displayName,
-      }),
-    })
-      .then((res) => res.json())
-      .then(async (json) => {
-        if (!json.userExists) {
-          await createNewUser();
-        } else {
-          console.log("User already exists, please log in"); //TODO: Move to notification
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-
-    return;
+  const logoutUser = () => {
+    setUser({} as User);
+    localStorage.removeItem("user");
+    router.push(`/`); //TODO: Go to logout successful page
   };
 
   return (
@@ -102,17 +56,39 @@ export const SidebarContainer = (props: SidebarContainerProps) => {
         <div className={styles.footerContent}>
           {!user.isLoggedIn && (
             <>
-              {/* <button onClick={loginUser}>Login</button>
-              <button onClick={checkExistingUser}>Create</button> */}
+              <button onClick={handleLoginButton}>Log In</button>
             </>
           )}
           {user.isLoggedIn && (
-            <div className={styles.userContainer}>
+            <div
+              className={styles.userContainer}
+              onMouseEnter={() => setProfileHover(true)}
+              onMouseLeave={() => setProfileHover(false)}
+            >
               <span>{user.displayName[0]}</span>
               <div className={styles.nameContainer}>
                 <span className={styles.displayName}>{user.displayName}</span>
                 <span className={styles.userName}>@{user.userName}</span>
               </div>
+              <div
+                className={`${styles.menu} ${profileHover ? styles.hover : ""}`}
+              >
+                <MoreVertIcon onClick={() => setPopupOpen(!popupOpen)} />
+              </div>
+              <PopupContainer popupOpen={popupOpen} setPopupOpen={setPopupOpen}>
+                <button>
+                  <PersonIcon />
+                  <span>Profile</span>
+                </button>
+                <button>
+                  <SettingsIcon />
+                  <span>Settings</span>
+                </button>
+                <button onClick={logoutUser}>
+                  <LogoutIcon />
+                  <span>Logout</span>
+                </button>
+              </PopupContainer>
             </div>
           )}
         </div>
