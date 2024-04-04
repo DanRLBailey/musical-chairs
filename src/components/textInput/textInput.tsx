@@ -15,6 +15,7 @@ interface TextInputProps {
   loading?: boolean;
   success?: boolean;
   required?: boolean;
+  showSaveButton?: boolean;
 }
 
 export const TextInput = (props: TextInputProps) => {
@@ -46,22 +47,28 @@ export const TextInput = (props: TextInputProps) => {
               onChange={(e) => props.onValueChange(e.target.value)}
               onKeyDown={(e) => handleInput(e)}
               className={`${props.label ? styles.withLabel : ""} ${
-                props.onButtonClick ? styles.withButton : ""
+                props.onButtonClick &&
+                (props.showSaveButton || props.showSaveButton === undefined)
+                  ? styles.withButton
+                  : ""
               } ${props.isError ? styles.error : ""}`}
               placeholder={props.placeholder ?? ""}
             ></input>
-            {props.onButtonClick && (
-              <button
-                disabled={props.value == "" || props.disabled || props.isError}
-                onClick={props.onButtonClick}
-                className={props.success ? typography.success : ""}
-              >
-                {props.loading && !props.success && "Loading..."}
-                {!props.loading && props.success && "Tick"}
-                {(!props.loading && !props.success && props.buttonText) ??
-                  "Save"}
-              </button>
-            )}
+            {props.onButtonClick &&
+              (props.showSaveButton || props.showSaveButton === undefined) && (
+                <button
+                  disabled={
+                    props.value == "" || props.disabled || props.isError
+                  }
+                  onClick={props.onButtonClick}
+                  className={props.success ? typography.success : ""}
+                >
+                  {props.loading && !props.success && "Loading..."}
+                  {!props.loading && props.success && "Tick"}
+                  {(!props.loading && !props.success && props.buttonText) ??
+                    "Save"}
+                </button>
+              )}
           </>
         )}
         {props.type == "textArea" && (

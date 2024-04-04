@@ -10,7 +10,7 @@ export interface Song {
   tuning: string;
   duration: number;
   difficulty: number;
-  instrument: "guitar" | "keyboard";
+  instrument: "guitar" | "keyboard" | "bass";
   status: "draft" | "published";
   access: "public" | "private";
   saved?: boolean;

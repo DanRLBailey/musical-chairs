@@ -1,6 +1,6 @@
-import styles from "./index.module.scss";
+import styles from "./search.module.scss";
 import Link from "next/link";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { SongDetail, getDifficulty } from "@/components/songDetail/songDetail";
 import { SidebarContainer } from "@/components/sidebarContainer/sidebarContainer";
 import { TextInput } from "@/components/textInput/textInput";
@@ -11,15 +11,12 @@ import { DropdownContainer } from "@/components/dropdownContainer/dropdownContai
 import { MultiHandleRangeSlider } from "@/components/multiHandleRangeSlider/multiHandleRangeSlider";
 import { formatSeconds } from "@/components/chordPill/chordPill";
 import { useRouter } from "next/router";
-import AddIcon from "@mui/icons-material/Add";
 import ShuffleIcon from "@mui/icons-material/Shuffle";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import SortIcon from "@mui/icons-material/Sort";
 import SearchIcon from "@mui/icons-material/Search";
 import { ModalContainer } from "@/components/modalContainer/modalContainer";
-import { NetworkContext } from "@/context/networkContext/networkContext";
-import offlineSongs from "@/public/songs-offline.json";
-import { UserContext } from "@/context/userContext/userContext";
+import { useSearchParams, useParams } from "next/navigation";
 
 interface Filter {
   search: string;
@@ -31,9 +28,7 @@ interface Filter {
   difficulty: number[];
 }
 
-export default function HomePage() {
-  // TODO: Add "Playlist" feature for consecutive songs
-  // TODO: Add feature for songs with multiple parts (guitar, bass, piano etc)
+export default function SearchPage() {
   const [songs, setSongs] = useState<Song[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [filter, setFilter] = useState<Filter>({
@@ -48,27 +43,30 @@ export default function HomePage() {
   const [sorting, setSorting] = useState<string[]>(["", ""]);
   const [filterModalOpen, setFilterModalOpen] = useState<boolean>(false);
   const [sortModalOpen, setSortModalOpen] = useState<boolean>(false);
-  const [search, setSearch] = useState<string>("");
+  const [search, setSearch] = useState<string>(""); //TODO: from search bar
 
   const router = useRouter();
-  const { isOnline } = useContext(NetworkContext);
-  const { user } = useContext(UserContext);
+  const searchParams = useSearchParams();
 
   useEffect(() => {
-    title("Home");
-  }, []);
+    title("Search");
 
-  const getSongsFromFile = () => {
-    setSongs(offlineSongs as Song[]);
-    setLoading(false);
-  };
+    if (!searchParams.get("query")) return;
 
-  const getSongsFromDb = () => {
-    fetch("/api/getSongs", {
+    if (!search || search == "") {
+      const searchParam = searchParams.get("query");
+      setSearch(searchParam ?? "");
+      return;
+    }
+
+    searchSongs();
+  }, [searchParams, search]);
+
+  const searchSongs = () => {
+    fetch("/api/searchSongs", {
       method: "POST",
       body: JSON.stringify({
-        userId: user.userId,
-        saved: user.saved,
+        query: search,
       }),
     })
       .then((res) => res.json())
@@ -81,39 +79,6 @@ export default function HomePage() {
         console.error(err);
       });
   };
-
-  const getPublicSongs = () => {
-    fetch("/api/getPublicSongs")
-      .then((res) => res.json())
-      .then((json) => {
-        setSongs(json);
-        console.log(json);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  };
-
-  const searchForSong = () => {
-    router.push(`/search?query=${search}`);
-  };
-
-  useEffect(() => {
-    if (isOnline === undefined) return;
-
-    if (!isOnline) {
-      getSongsFromFile();
-      return;
-    }
-
-    if ((user && !user.isLoggedIn) || !user || user === undefined) {
-      getPublicSongs();
-      return;
-    }
-
-    getSongsFromDb();
-  }, [isOnline, user]);
 
   const getFilteredSongs = (song: Song) => {
     if (!filter) return true;
@@ -184,14 +149,9 @@ export default function HomePage() {
   };
 
   return (
-    <div className={styles.homePageContainer}>
+    <div className={styles.searchPageContainer}>
       <SidebarContainer>
         <div className={styles.sidebarHeaderButtons}>
-          {isOnline && user.isLoggedIn && (
-            <Link href={"/new"} className="button">
-              <AddIcon />
-            </Link>
-          )}
           <button onClick={getRandomSong}>
             <ShuffleIcon />
           </button>
@@ -208,11 +168,14 @@ export default function HomePage() {
           onValueChange={(newVal) => setSearch(newVal as string)}
           label="Search"
           placeholder="Search for a song"
-          onButtonClick={searchForSong}
+          onButtonClick={() => {
+            searchSongs();
+            router.push(`/search?query=${search}`);
+          }}
           buttonText={<SearchIcon />}
         />
       </SidebarContainer>
-      <div className={styles.homePageContent}>
+      <div className={styles.searchPageContent}>
         {songs &&
           songs.length > 0 &&
           Array.from(new Set(songs.map((song) => song.instrument))).map(

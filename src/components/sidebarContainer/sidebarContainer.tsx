@@ -36,10 +36,14 @@ export const SidebarContainer = (props: SidebarContainerProps) => {
     router.push("/login");
   };
 
+  const handleProfileClick = () => {
+    router.push(`/profile`);
+  };
+
   const logoutUser = () => {
     setUser({} as User);
     localStorage.removeItem("user");
-    router.push(`/`); //TODO: Go to logout successful page
+    router.push(`/logout`); //TODO: Go to logout successful page
   };
 
   return (
@@ -76,14 +80,17 @@ export const SidebarContainer = (props: SidebarContainerProps) => {
                 <MoreVertIcon onClick={() => setPopupOpen(!popupOpen)} />
               </div>
               <PopupContainer popupOpen={popupOpen} setPopupOpen={setPopupOpen}>
-                <button>
+                {/* TODO: Profile page */}
+                {/* <button onClick={handleProfileClick}>
                   <PersonIcon />
                   <span>Profile</span>
-                </button>
-                <button>
+                </button> */}
+                {/* TODO: Settings page */}
+                {/* <button>
                   <SettingsIcon />
                   <span>Settings</span>
-                </button>
+                </button> */}
+                {/* TODO: Logout page */}
                 <button onClick={logoutUser}>
                   <LogoutIcon />
                   <span>Logout</span>

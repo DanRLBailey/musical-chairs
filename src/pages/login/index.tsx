@@ -61,6 +61,8 @@ export default function LoginPage() {
           onValueChange={(newVal) => setEmail(newVal as string)}
           label="Email"
           required
+          onButtonClick={loginUser}
+          showSaveButton={false}
         />
         <TextInput
           value={password}
@@ -68,6 +70,8 @@ export default function LoginPage() {
           label="Password"
           type="password"
           required
+          onButtonClick={loginUser}
+          showSaveButton={false}
         />
         {/* TODO: This */}
         {/* <button className={styles.forgotPassword}>Forgot Password?</button> */}

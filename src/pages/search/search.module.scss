@@ -1,6 +1,6 @@
 @import "@/styles/breakpoints.scss";
 
-.homePageContainer {
+.searchPageContainer {
   display: flex;
   width: 100dvw;
 
@@ -14,7 +14,7 @@
     }
   }
 
-  .homePageContent {
+  .searchPageContent {
     flex: 1;
     height: 100dvh;
     overflow: hidden;
