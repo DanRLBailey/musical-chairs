@@ -44,6 +44,7 @@ export default function SearchPage() {
   const [filterModalOpen, setFilterModalOpen] = useState<boolean>(false);
   const [sortModalOpen, setSortModalOpen] = useState<boolean>(false);
   const [search, setSearch] = useState<string>(""); //TODO: from search bar
+  const [firstLoad, setFirstLoad] = useState<boolean>(false);
 
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -56,11 +57,16 @@ export default function SearchPage() {
     if (!search || search == "") {
       const searchParam = searchParams.get("query");
       setSearch(searchParam ?? "");
+      setFirstLoad(true);
       return;
     }
+  }, [searchParams]);
+
+  useEffect(() => {
+    if (!firstLoad) return;
 
     searchSongs();
-  }, [searchParams, search]);
+  }, [firstLoad]);
 
   const searchSongs = () => {
     fetch("/api/searchSongs", {
