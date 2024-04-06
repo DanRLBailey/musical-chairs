@@ -1,4 +1,5 @@
 import styles from "./index.module.scss";
+import typography from "@/styles/typography.module.scss";
 import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
 import { SongDetail, getDifficulty } from "@/components/songDetail/songDetail";
@@ -16,10 +17,12 @@ import ShuffleIcon from "@mui/icons-material/Shuffle";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import SortIcon from "@mui/icons-material/Sort";
 import SearchIcon from "@mui/icons-material/Search";
+import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 import { ModalContainer } from "@/components/modalContainer/modalContainer";
 import { NetworkContext } from "@/context/networkContext/networkContext";
 import offlineSongs from "@/public/songs-offline.json";
 import { UserContext } from "@/context/userContext/userContext";
+import { BottomBarContainer } from "@/components/bottomBarContainer/bottomBarContainer";
 
 interface Filter {
   search: string;
@@ -32,7 +35,6 @@ interface Filter {
 }
 
 export default function HomePage() {
-  // TODO: Add "Playlist" feature for consecutive songs
   // TODO: Add feature for songs with multiple parts (guitar, bass, piano etc)
   const [songs, setSongs] = useState<Song[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -49,6 +51,9 @@ export default function HomePage() {
   const [filterModalOpen, setFilterModalOpen] = useState<boolean>(false);
   const [sortModalOpen, setSortModalOpen] = useState<boolean>(false);
   const [search, setSearch] = useState<string>("");
+  const [creatingPlaylist, setCreatingPlaylist] = useState<boolean>(false);
+  const [playlist, setPlaylist] = useState<Song[]>([]);
+  const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
 
   const router = useRouter();
   const { isOnline } = useContext(NetworkContext);
@@ -183,25 +188,67 @@ export default function HomePage() {
     router.push(`/song/${songs[rand].slug}`);
   };
 
+  const onPlaylistChange = (song: Song) => {
+    const isInPlaylist = playlist.some(
+      (playlistSong) => playlistSong.slug == song.slug
+    );
+
+    let newPlaylist: Song[] = [];
+
+    if (isInPlaylist) {
+      newPlaylist = [...playlist].filter(
+        (playlistSong) => playlistSong.slug != song.slug
+      );
+
+      setPlaylist([...newPlaylist]);
+    } else {
+      newPlaylist = [...playlist];
+      newPlaylist.push(song);
+
+      setPlaylist([...newPlaylist]);
+    }
+  };
+
+  const finishPlaylist = () => {
+    const slugs = playlist.map((song) => song.slug);
+    let route = `/playlist?`;
+
+    slugs.forEach((slug, index) => {
+      route += `song${index + 1}=${slug}${index + 1 < slugs.length ? `&` : ""}`;
+    });
+
+    router.push(route);
+  };
+
   return (
     <div className={styles.homePageContainer}>
-      <SidebarContainer>
+      <SidebarContainer onSidebarToggle={(isOpen) => setSidebarOpen(isOpen)}>
         <div className={styles.sidebarHeaderButtons}>
           {isOnline && user.isLoggedIn && (
             <Link href={"/new"} className="button">
               <AddIcon />
             </Link>
           )}
-          <button onClick={getRandomSong}>
-            <ShuffleIcon />
-          </button>
           <button onClick={() => setFilterModalOpen(!filterModalOpen)}>
             <FilterListIcon />
           </button>
           <button onClick={() => setSortModalOpen(!sortModalOpen)}>
             <SortIcon />
           </button>
-          {/* TODO: Add search page */}
+        </div>
+        <div className={styles.sidebarHeaderButtons}>
+          <button onClick={getRandomSong}>
+            <ShuffleIcon />
+          </button>
+          <button
+            className={creatingPlaylist ? "active" : ""}
+            onClick={() => {
+              setCreatingPlaylist(!creatingPlaylist);
+              if (creatingPlaylist) setPlaylist([]);
+            }}
+          >
+            <PlaylistAddIcon />
+          </button>
         </div>
         <TextInput
           value={search}
@@ -211,6 +258,15 @@ export default function HomePage() {
           onButtonClick={searchForSong}
           buttonText={<SearchIcon />}
         />
+        {/* TODO: Reorder playlist */}
+        {playlist.length > 0 && (
+          <div className={styles.playlist}>
+            <span className={typography.heading}>Playlist</span>
+            {playlist.map((song, index) => {
+              return <div key={index}>{song.name}</div>;
+            })}
+          </div>
+        )}
       </SidebarContainer>
       <div className={styles.homePageContent}>
         {songs &&
@@ -231,15 +287,26 @@ export default function HomePage() {
                     <div className={styles.songGrid}>
                       {getSortedSongs(filteredSongs).map((song, index) => {
                         return (
-                          <Link
-                            href={`song/${song.slug
+                          // <Link
+                          //   href={`song/${song.slug
+                          //     .toLowerCase()
+                          //     .replaceAll(" ", "-")}`}
+                          //   className={styles.song}
+                          //   key={index}
+                          // >
+                          <SongDetail
+                            song={song}
+                            link={`song/${song.slug
                               .toLowerCase()
                               .replaceAll(" ", "-")}`}
-                            className={styles.song}
                             key={index}
-                          >
-                            <SongDetail song={song} />
-                          </Link>
+                            creatingPlaylist={creatingPlaylist}
+                            onPlaylistChange={onPlaylistChange}
+                            isSelected={playlist.some(
+                              (playlistSong) => playlistSong.slug == song.slug
+                            )}
+                          />
+                          // </Link>
                         );
                       })}
                     </div>
@@ -378,6 +445,12 @@ export default function HomePage() {
           </div>
         </ModalContainer>
       )}
+      <BottomBarContainer
+        isOpen={creatingPlaylist && playlist.length > 0}
+        isSidebarOpen={sidebarOpen}
+      >
+        <button onClick={finishPlaylist}>Start Playlist</button>
+      </BottomBarContainer>
     </div>
   );
 }

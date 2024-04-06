@@ -177,6 +177,10 @@ button,
   &.success {
     background-color: var(--success-colour);
   }
+
+  &.active {
+    background-color: var(--secondary-colour);
+  }
 }
 
 a {

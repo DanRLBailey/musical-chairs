@@ -19,7 +19,10 @@ interface MusicPlayerProps {
   allChords?: Chord[];
   onCurrentTimeChange?: (currentTime: number) => void;
   isEditing: boolean;
-  onReady: (maxTime: number) => void;
+  onReady?: (maxTime: number) => void;
+  keepPlaying?: boolean;
+  onEnded?: () => void;
+  isPlaying?: boolean;
 }
 
 export const MusicPlayer = (props: MusicPlayerProps) => {
@@ -44,7 +47,7 @@ export const MusicPlayer = (props: MusicPlayerProps) => {
   }, [currentTime]);
 
   useEffect(() => {
-    props.onReady(maxTime);
+    if (props.onReady) props.onReady(maxTime);
   }, [maxTime]);
 
   const seekTo = (amount: number) => {
@@ -118,7 +121,9 @@ export const MusicPlayer = (props: MusicPlayerProps) => {
           <ReactPlayer
             ref={player}
             url={props.song.link as string} //TODO: Use local songs if offline
-            playing={playing}
+            playing={
+              playing && (props.isPlaying || props.isPlaying == undefined)
+            }
             onReady={() => {
               setMaxTime(player.current.getDuration());
             }}
@@ -127,7 +132,10 @@ export const MusicPlayer = (props: MusicPlayerProps) => {
             width="auto"
             height="inherit"
             volume={volume}
-            onEnded={() => setPlaying(false)}
+            onEnded={() => {
+              if (!props.keepPlaying) setPlaying(false);
+              if (props.onEnded) props.onEnded();
+            }}
           />
         )}
       </div>

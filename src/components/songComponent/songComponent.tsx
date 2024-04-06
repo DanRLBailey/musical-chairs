@@ -34,13 +34,13 @@ import allChordsJson from "@/public/chords.json";
 import Link from "next/link";
 import { NetworkContext } from "@/context/networkContext/networkContext";
 
-interface AddSongComponentProps {
+interface SongComponentProps {
   existingSong?: Song;
   editing?: boolean;
   setIsEditing?: (isEditing: boolean) => void;
 }
 
-export const SongComponent = (props: AddSongComponentProps) => {
+export const SongComponent = (props: SongComponentProps) => {
   const [song, setSong] = useState<Song>(props.existingSong ?? songTemplate);
   const [textAreaVal, setTextAreaVal] = useState<string>("");
   const [currentChord, setCurrentChord] = useState<string>();
@@ -420,7 +420,7 @@ export const SongComponent = (props: AddSongComponentProps) => {
 
   let overallChordIndex = -1;
   return (
-    <div className={styles.addSongContainer}>
+    <div className={styles.songComponentContainer}>
       <SidebarContainer
         onSidebarToggle={(isOpen: boolean) => setSidebarOpen(isOpen)}
       >
@@ -670,12 +670,14 @@ export const SongComponent = (props: AddSongComponentProps) => {
               chord={(allChordsJson as ChordObj)[highlightedChord.chord][0]}
               currentTime={currentTime}
               countdown={getTimingTillNextChord()}
+              type={song.instrument}
             />
           )}
           {!highlightedChord.chord
             .split("/")
             .every((part) => isValidChordPart(part).valid) &&
-            song.tabs && (
+            song.tabs &&
+            song.instrument == "guitar" && (
               <TabViewer
                 tab={
                   song.tabs.find((tab) => tab.name == highlightedChord.chord) ??

@@ -3,13 +3,13 @@ import styles from "./tabViewer.module.scss";
 import { Tab, TabColumn } from "@/types/songTypes";
 
 interface TabViewerProps {
-  tab: Tab;
+  tab: Tab | undefined;
   currentTime: number;
   countdown?: number;
 }
 
 export const TabViewer = (props: TabViewerProps) => {
-  const [currentTab, setCurrentTab] = useState<Tab>(props.tab);
+  const [currentTab, setCurrentTab] = useState<Tab>(props.tab as Tab);
   const [countdownVal, setCountdownVal] = useState<number>(
     props.countdown ?? 0
   );
@@ -23,8 +23,10 @@ export const TabViewer = (props: TabViewerProps) => {
   }, [props.countdown]);
 
   useEffect(() => {
-    setCurrentTab(props.tab);
+    setCurrentTab(props.tab as Tab);
   }, [props.tab]);
+
+  if (!props.tab) return;
 
   return (
     <div className={styles.tabViewerContainer}>

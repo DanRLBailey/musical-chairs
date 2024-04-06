@@ -13,7 +13,7 @@ interface ChordPillProps {
   lineIndex: number;
   wordIndex: number;
   chordIndex: number;
-  removeChordFromSongWord: (
+  removeChordFromSongWord?: (
     lineIndex: number,
     wordIndex: number,
     chordIndex: number
@@ -60,11 +60,12 @@ export const ChordPill = (props: ChordPillProps) => {
       }`}
       id={`chordPill-${props.overallChordIndex}`}
       onClick={() => {
-        props.removeChordFromSongWord(
-          props.lineIndex,
-          props.wordIndex,
-          props.chordIndex
-        );
+        if (props.removeChordFromSongWord)
+          props.removeChordFromSongWord(
+            props.lineIndex,
+            props.wordIndex,
+            props.chordIndex
+          );
       }}
       onMouseEnter={() => setHovering(true)}
       onMouseLeave={() => setHovering(false)}

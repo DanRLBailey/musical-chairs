@@ -1,16 +1,32 @@
-.songComponentContainer {
+.multiSongComponentContainer {
   width: 100dvw;
   height: 100dvh;
   display: flex;
 
-  .songSidebar {
+  .playlist {
     display: flex;
     flex-direction: column;
     gap: var(--margin-xs);
+    padding: var(--padding-sm);
+    background-color: rgba(255, 255, 255, 0.03);
+    border-radius: var(--border-radius-sm);
 
-    .list {
-      display: flex;
-      gap: var(--margin-xs);
+    span {
+      justify-content: center;
+      padding-bottom: var(--padding-sm);
+      border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+    }
+
+    button {
+      background-color: transparent;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.03);
+      }
+
+      &.active {
+        background-color: rgba(var(--secondary-colour-rgb), 0.5);
+      }
     }
   }
 

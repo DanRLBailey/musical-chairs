@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./songDetail.module.scss";
 import typography from "@/styles/typography.module.scss";
 import { Song } from "../../types/songTypes";
@@ -8,9 +8,17 @@ import UnfoldLessIcon from "@mui/icons-material/UnfoldLess";
 import KeyIcon from "@mui/icons-material/Key";
 import MusicNoteIcon from "@mui/icons-material/MusicNote";
 import ScheduleIcon from "@mui/icons-material/Schedule";
+import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 interface SongDetailProps {
   song: Song;
+  link?: string;
+  creatingPlaylist?: boolean;
+  onPlaylistChange?: (song: Song) => void;
+  isSelected?: boolean;
 }
 
 export const getDifficulty = (difficulty: number) => {
@@ -28,8 +36,16 @@ export const getDifficulty = (difficulty: number) => {
 export const SongDetail = (props: SongDetailProps) => {
   const [hovering, setHovering] = useState<string>("");
 
+  const router = useRouter();
+
   return (
-    <div className={styles.songDetailContainer}>
+    <div
+      className={styles.songDetailContainer}
+      onClick={() => {
+        if (props.link && !props.creatingPlaylist) router.push(props.link);
+        else if (props.onPlaylistChange) props.onPlaylistChange(props.song);
+      }}
+    >
       <div className={styles.header}>
         <div className={styles.name}>
           <div>
@@ -45,6 +61,16 @@ export const SongDetail = (props: SongDetailProps) => {
               <Tooltip hovering={hovering == "difficulty"}>
                 {getDifficulty(props.song.difficulty)}
               </Tooltip>
+            </div>
+            <div
+              className={`${styles.iconContainer} ${
+                props.creatingPlaylist ? styles.open : ""
+              }`}
+            >
+              {!props.isSelected && <RadioButtonUncheckedIcon />}
+              {props.isSelected && (
+                <CheckCircleIcon className={styles.secondary} />
+              )}
             </div>
           </div>
           <span className={typography.subheading}>{props.song.artist}</span>

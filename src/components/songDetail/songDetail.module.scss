@@ -7,6 +7,7 @@
   border-radius: var(--border-radius-md);
   width: 100%;
   transition: var(--transition);
+  cursor: pointer;
 
   &:hover {
     transform: scale(1.05);
@@ -33,6 +34,7 @@
           display: flex;
           gap: calc($width / 2);
           position: relative;
+          margin-right: var(--margin-xs);
 
           span {
             width: $width;
@@ -50,6 +52,34 @@
 
             &:nth-of-type(4) {
               background: var(--primary-colour-dark);
+            }
+          }
+        }
+
+        .iconContainer {
+          overflow: hidden;
+          transition: var(--transition);
+          width: 0;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          & > svg {
+            transition: var(--transition);
+            margin-left: 1.5rem;
+            opacity: 0;
+
+            &.secondary {
+              color: var(--secondary-colour);
+            }
+          }
+
+          &.open {
+            width: 1.5rem;
+
+            & > svg {
+              margin-left: 0;
+              opacity: 1;
             }
           }
         }

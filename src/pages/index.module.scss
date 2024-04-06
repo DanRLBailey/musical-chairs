@@ -14,6 +14,26 @@
     }
   }
 
+  .playlist {
+    display: flex;
+    flex-direction: column;
+    gap: var(--margin-xs);
+    padding: var(--padding-sm);
+    background-color: rgba(255, 255, 255, 0.03);
+    border-radius: var(--border-radius-sm);
+
+    span {
+      justify-content: center;
+      padding-bottom: var(--padding-sm);
+      border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+    }
+
+    div {
+      background-color: transparent;
+      text-align: center;
+    }
+  }
+
   .homePageContent {
     flex: 1;
     height: 100dvh;

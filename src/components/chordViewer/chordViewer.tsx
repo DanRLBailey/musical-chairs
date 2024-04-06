@@ -7,6 +7,7 @@ interface ChordViewerProps {
   chord: ChordPartObj;
   currentTime: number;
   countdown?: number;
+  type: string;
 }
 
 export const ChordViewer = (props: ChordViewerProps) => {
@@ -36,58 +37,62 @@ export const ChordViewer = (props: ChordViewerProps) => {
     setFretOffset(offset);
   }, [props.chord]);
 
-  return (
-    <div className={styles.chordViewerContainer}>
-      <div className={styles.chordName}>
-        <span>{props.chordName}</span>
-      </div>
-      <div className={styles.chordContainer}>
-        <div className={styles.chordCol}>
-          <div></div>
-          <div>{fretOffset > 0 && <>{fretOffset + 1}fr</>}</div>
-          <div></div>
-          <div></div>
-          <div></div>
+  // TODO: Keyboard chord viewer
+  if (props.type == "keyboard") return <></>;
+
+  if (props.type == "guitar")
+    return (
+      <div className={styles.chordViewerContainer}>
+        <div className={styles.chordName}>
+          <span>{props.chordName}</span>
         </div>
-        {frets.map((fret, fretIndex) => {
-          return (
-            <div key={fretIndex} className={styles.chordCol}>
-              <div>
-                {fret == "x" && <span className={styles.muted}>X</span>}{" "}
-                {fret == "0" && <span className={styles.open}></span>}
+        <div className={styles.chordContainer}>
+          <div className={styles.chordCol}>
+            <div></div>
+            <div>{fretOffset > 0 && <>{fretOffset + 1}fr</>}</div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+          {frets.map((fret, fretIndex) => {
+            return (
+              <div key={fretIndex} className={styles.chordCol}>
+                <div>
+                  {fret == "x" && <span className={styles.muted}>X</span>}{" "}
+                  {fret == "0" && <span className={styles.open}></span>}
+                </div>
+                <div>
+                  {(parseInt(fret) - fretOffset).toString() == "1" && (
+                    <span className={styles.fret}></span>
+                  )}
+                </div>
+                <div>
+                  {(parseInt(fret) - fretOffset).toString() == "2" && (
+                    <span className={styles.fret}></span>
+                  )}
+                </div>
+                <div>
+                  {(parseInt(fret) - fretOffset).toString() == "3" && (
+                    <span className={styles.fret}></span>
+                  )}
+                </div>
+                <div>
+                  {(parseInt(fret) - fretOffset).toString() == "4" && (
+                    <span className={styles.fret}></span>
+                  )}
+                </div>
               </div>
-              <div>
-                {(parseInt(fret) - fretOffset).toString() == "1" && (
-                  <span className={styles.fret}></span>
-                )}
-              </div>
-              <div>
-                {(parseInt(fret) - fretOffset).toString() == "2" && (
-                  <span className={styles.fret}></span>
-                )}
-              </div>
-              <div>
-                {(parseInt(fret) - fretOffset).toString() == "3" && (
-                  <span className={styles.fret}></span>
-                )}
-              </div>
-              <div>
-                {(parseInt(fret) - fretOffset).toString() == "4" && (
-                  <span className={styles.fret}></span>
-                )}
-              </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
+        <input
+          type="range"
+          min={initialCurrentTime}
+          max={initialCurrentTime + countdownVal}
+          value={props.currentTime}
+          onChange={() => {}}
+          step={0.01}
+        ></input>
       </div>
-      <input
-        type="range"
-        min={initialCurrentTime}
-        max={initialCurrentTime + countdownVal}
-        value={props.currentTime}
-        onChange={() => {}}
-        step={0.01}
-      ></input>
-    </div>
-  );
+    );
 };

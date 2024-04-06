@@ -7,7 +7,7 @@ interface TextInputProps {
   onValueChange: (newVal: string | number) => void;
   label?: string;
   placeholder?: string;
-  type?: "input" | "textArea" | "password";
+  type?: "input" | "textArea" | "password" | "number";
   onButtonClick?: () => void;
   buttonText?: string | React.ReactNode;
   disabled?: boolean;
@@ -39,10 +39,10 @@ export const TextInput = (props: TextInputProps) => {
         </div>
       )}
       <div className={styles.input}>
-        {(props.type == "input" || props.type == "password" || !props.type) && (
+        {(props.type !== undefined || !props.type) && (
           <>
             <input
-              type={props.type == "password" ? "password" : "text"}
+              type={props.type ?? "text"}
               value={props.value}
               onChange={(e) => props.onValueChange(e.target.value)}
               onKeyDown={(e) => handleInput(e)}
