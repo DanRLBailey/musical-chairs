@@ -225,19 +225,22 @@ export default function HomePage() {
       <SidebarContainer onSidebarToggle={(isOpen) => setSidebarOpen(isOpen)}>
         <div className={styles.sidebarHeaderButtons}>
           {isOnline && user.isLoggedIn && (
-            <Link href={"/new"} className="button">
+            <Link href={"/new"} className="button" title="New song">
               <AddIcon />
             </Link>
           )}
-          <button onClick={() => setFilterModalOpen(!filterModalOpen)}>
+          <button
+            onClick={() => setFilterModalOpen(!filterModalOpen)}
+            title="Filter"
+          >
             <FilterListIcon />
           </button>
-          <button onClick={() => setSortModalOpen(!sortModalOpen)}>
+          <button onClick={() => setSortModalOpen(!sortModalOpen)} title="Sort">
             <SortIcon />
           </button>
         </div>
         <div className={styles.sidebarHeaderButtons}>
-          <button onClick={getRandomSong}>
+          <button onClick={getRandomSong} title="Random song">
             <ShuffleIcon />
           </button>
           <button
@@ -246,6 +249,7 @@ export default function HomePage() {
               setCreatingPlaylist(!creatingPlaylist);
               if (creatingPlaylist) setPlaylist([]);
             }}
+            title="Playlist"
           >
             <PlaylistAddIcon />
           </button>
@@ -449,7 +453,9 @@ export default function HomePage() {
         isOpen={creatingPlaylist && playlist.length > 0}
         isSidebarOpen={sidebarOpen}
       >
-        <button onClick={finishPlaylist}>Start Playlist</button>
+        <button onClick={finishPlaylist} title="Start Playlist">
+          Start Playlist
+        </button>
       </BottomBarContainer>
     </div>
   );
