@@ -33,6 +33,7 @@ import { ChordViewer } from "../chordViewer/chordViewer";
 import allChordsJson from "@/public/chords.json";
 import Link from "next/link";
 import { NetworkContext } from "@/context/networkContext/networkContext";
+import { UserContext } from "@/context/userContext/userContext";
 
 interface SongComponentProps {
   existingSong?: Song;
@@ -54,6 +55,7 @@ export const SongComponent = (props: SongComponentProps) => {
   const [sidebarOpen, setSidebarOpen] = useState<boolean>();
 
   const { isOnline } = useContext(NetworkContext);
+  const { user } = useContext(UserContext);
 
   useEffect(() => {
     if (!currentChord) return;
@@ -528,7 +530,7 @@ export const SongComponent = (props: SongComponentProps) => {
         )}
         {!props.editing && (
           <div className={styles.songSidebar}>
-            {isOnline && (
+            {isOnline && user.isLoggedIn && (
               <Link href={`/edit/${song.slug}`} className="button">
                 Edit
               </Link>
