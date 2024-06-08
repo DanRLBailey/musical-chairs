@@ -689,7 +689,7 @@ export const SongComponent = (props: SongComponentProps) => {
             .split("/")
             .every((part) => isValidChordPart(part).valid) &&
             song.tabs &&
-            song.instrument == "guitar" && (
+            song.instrument.includes("guitar") && (
               <TabViewer
                 tab={
                   song.tabs.find((tab) => tab.name == highlightedChord.chord) ??
