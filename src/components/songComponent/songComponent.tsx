@@ -34,6 +34,7 @@ import allChordsJson from "@/public/chords.json";
 import Link from "next/link";
 import { NetworkContext } from "@/context/networkContext/networkContext";
 import { UserContext } from "@/context/userContext/userContext";
+import { DropdownContainer } from "../dropdownContainer/dropdownContainer";
 
 interface SongComponentProps {
   existingSong?: Song;
@@ -372,6 +373,7 @@ export const SongComponent = (props: SongComponentProps) => {
       })
         .then((res) => res.json())
         .then((json) => {
+          if (json["error"]) throw new Error(json["error"]);
           console.log(json); //TODO: Update to notification
           router.push(`/song/${song.slug}`); //TODO: push only when successful
         })
@@ -505,6 +507,14 @@ export const SongComponent = (props: SongComponentProps) => {
                 placeholder="0"
               />
             </div>
+            <DropdownContainer
+              values={["Guitar", "Fingerstyle guitar", "Keyboard", "Bass"]}
+              onValueChange={(newVal) =>
+                setSong({ ...song, instrument: newVal.toLowerCase() })
+              }
+              label="Instrument"
+              placeholder="Guitar"
+            />
             <TextInput
               label="Lyrics"
               value={textAreaVal}
