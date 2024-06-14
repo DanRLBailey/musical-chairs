@@ -1,7 +1,7 @@
 import executeQuery from "@/lib/db";
 
 export default async (req, res) => {
-  const instruments = ["guitar", "keyboard", "bass"];
+  const instruments = ["guitar", "fingerstyle guitar", "keyboard", "bass"];
 
   let query = ``;
   instruments.forEach((instrument, index) => {
@@ -13,7 +13,6 @@ export default async (req, res) => {
           status = 'published'
           AND access = 'public'
           AND deleted = false
-          AND instrument = '${instrument}'
       )
       LIMIT 20
     )\n`;
