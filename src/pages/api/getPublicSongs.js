@@ -13,6 +13,7 @@ export default async (req, res) => {
           status = 'published'
           AND access = 'public'
           AND deleted = false
+          AND instrument = '${instrument}'
       )
       LIMIT 20
     )\n`;
