@@ -1,3 +1,21 @@
+.toggleButtonContainer {
+  transition: var(--transition);
+  background-color: var(--background-colour);
+  border-radius: var(--border-radius-xs);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--padding-xs);
+  font-size: 0.9rem;
+  line-height: 0.9rem;
+  cursor: pointer;
+
+  &.toggled {
+    background-color: var(--secondary-colour);
+  }
+}
+
 .toggleContainer {
   width: 6rem;
   display: flex;

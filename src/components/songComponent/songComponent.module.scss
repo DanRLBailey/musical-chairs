@@ -12,13 +12,26 @@
       display: flex;
       gap: var(--margin-xs);
     }
+
+    .settingsContainer {
+      .header {
+        padding: var(--padding-sm) 0;
+      }
+
+      .settings {
+        display: grid;
+        grid-auto-rows: 1fr;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--margin-xs);
+      }
+    }
   }
 
   .songContent {
     flex: 1;
     height: 100dvh;
     overflow: auto;
-    padding: 2rem 5rem 10rem;
+    padding: 4rem 10rem 10rem;
 
     .songDetails {
       display: flex;

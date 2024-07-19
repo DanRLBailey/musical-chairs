@@ -17,4 +17,16 @@
   &.missingChordTiming {
     color: var(--text-alert-colour);
   }
+
+  div {
+    span {
+      transition: var(--transition);
+      display: flex;
+      justify-content: center;
+
+      &.hidden {
+        color: transparent;
+      }
+    }
+  }
 }

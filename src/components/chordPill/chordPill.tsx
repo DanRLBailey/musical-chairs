@@ -18,6 +18,7 @@ interface ChordPillProps {
     wordIndex: number,
     chordIndex: number
   ) => void;
+  hiddenMode?: boolean;
 }
 
 export const formatSeconds = (
@@ -45,19 +46,17 @@ export const formatSeconds = (
 export const ChordPill = (props: ChordPillProps) => {
   const [hovering, setHovering] = useState<boolean>(false);
 
+  const active =
+    props.chordTiming !== null &&
+    (props.chordTiming <= props.currentTime || props.chordTiming === 0) &&
+    (!props.nextChord ||
+      (props.nextChord.timing && props.nextChord.timing > props.currentTime));
+
   return (
     <div
-      className={`${styles.chordPillContainer} ${false ? styles.active : ""} ${
+      className={`${styles.chordPillContainer} ${
         !props.hasChordTiming ? styles.missingChordTiming : ""
-      } ${
-        props.chordTiming !== null &&
-        (props.chordTiming <= props.currentTime || props.chordTiming === 0) &&
-        (!props.nextChord ||
-          (props.nextChord.timing &&
-            props.nextChord.timing > props.currentTime))
-          ? styles.active
-          : ""
-      }`}
+      } ${active ? styles.active : ""}`}
       id={`chordPill-${props.overallChordIndex}`}
       onClick={() => {
         if (props.removeChordFromSongWord)
@@ -71,7 +70,9 @@ export const ChordPill = (props: ChordPillProps) => {
       onMouseLeave={() => setHovering(false)}
     >
       <div key={`chord-${props.chordIndex}`}>
-        {props.chord.chord}
+        <span className={props.hiddenMode && !active ? styles.hidden : ""}>
+          {props.chord.chord}
+        </span>
         {props.hasChordTiming && (
           <Tooltip key={`timing-${props.chordIndex}`} hovering={hovering}>
             {formatSeconds(props.chordTiming ?? 0)}

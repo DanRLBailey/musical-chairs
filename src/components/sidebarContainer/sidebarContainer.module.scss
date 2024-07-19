@@ -1,12 +1,10 @@
-//Parent: display: flex;
-//Parent Content: flex: 1;
-//  height: 100dvh;
-//  overflow: auto;
-
 .sidebarContainer {
   $width: 20rem;
   display: flex;
   transition: var(--transition);
+  position: fixed;
+  height: 100dvh;
+  z-index: 1;
 
   &.closed {
     margin-left: calc($width * -1);

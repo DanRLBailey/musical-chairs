@@ -25,7 +25,12 @@
       width: $width;
       height: 100%;
 
-      &:first-of-type {
+      .tabColName {
+        display: block;
+      }
+
+      &:first-of-type,
+      &.includesLine {
         border-right: $border;
       }
 

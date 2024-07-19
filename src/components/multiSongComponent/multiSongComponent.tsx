@@ -17,6 +17,8 @@ import { ChordViewer } from "../chordViewer/chordViewer";
 import allChordsJson from "@/public/chords.json";
 import { NetworkContext } from "@/context/networkContext/networkContext";
 import { TextInput } from "../textInput/textInput";
+import { Setting } from "../songComponent/songComponent";
+import { Toggle } from "../toggle/toggle";
 
 interface MultiSongComponentProps {
   songs: Song[];
@@ -37,6 +39,13 @@ export const MultiSongComponent = (props: MultiSongComponentProps) => {
   const [nextSongDelay, setNextSongDelay] = useState<number>(0);
   const [isPlaying, setIsPlaying] = useState<boolean>(true);
   const [endOfPlaylist, setEndOfPlaylist] = useState<boolean>(false);
+  const [settings, setSettings] = useState<Setting>({
+    autoscroll: true,
+    showChordPopup: true,
+    showPopupTiming: true,
+    hiddenMode: false,
+    // showCountdown: true,
+  });
 
   const { isOnline } = useContext(NetworkContext);
 
@@ -103,11 +112,12 @@ export const MultiSongComponent = (props: MultiSongComponentProps) => {
       setHighlightedChord(allChords[index]);
 
       const el = document.getElementById(`chordPill-${index}`);
-      el?.scrollIntoView({
-        behavior: "smooth",
-        block: "center",
-        inline: "nearest",
-      });
+      if (settings.autoscroll)
+        el?.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+          inline: "nearest",
+        });
     }
   }, [currentTime]);
 
@@ -177,6 +187,27 @@ export const MultiSongComponent = (props: MultiSongComponentProps) => {
           label="Delay"
           type={"number"}
         />
+        <div className={styles.settingsContainer}>
+          <span className={styles.header}>Settings</span>
+          <div className={styles.settings}>
+            {Object.keys(settings).map((setting, index) => {
+              return (
+                <Toggle
+                  key={index}
+                  toggled={settings[setting]}
+                  setToggled={(toggled) =>
+                    setSettings({
+                      ...settings,
+                      [setting]: toggled,
+                    })
+                  }
+                  title={setting}
+                  type="button"
+                />
+              );
+            })}
+          </div>
+        </div>
       </SidebarContainer>
       <div className={styles.songContent}>
         <div className={styles.songDetails}>
@@ -185,15 +216,21 @@ export const MultiSongComponent = (props: MultiSongComponentProps) => {
             {songs[currentSongIndex].artist}
           </span>
           <div className={styles.extraDetails}>
-            <span className={styles.subHeading}>
-              Capo: {songs[currentSongIndex].capo}
-            </span>
-            <span className={styles.subHeading}>
-              Key: {songs[currentSongIndex].key}
-            </span>
-            <span className={styles.subHeading}>
-              Tuning: {songs[currentSongIndex].tuning}
-            </span>
+            {songs[currentSongIndex].capo && (
+              <span className={styles.subHeading}>
+                Capo: {songs[currentSongIndex].capo}
+              </span>
+            )}
+            {songs[currentSongIndex].key && (
+              <span className={styles.subHeading}>
+                Key: {songs[currentSongIndex].key}
+              </span>
+            )}
+            {songs[currentSongIndex].tuning && (
+              <span className={styles.subHeading}>
+                Tuning: {songs[currentSongIndex].tuning}
+              </span>
+            )}
           </div>
           <div className={styles.chordList}>
             {uniqueChords.map((c, cIndex) => {
@@ -254,6 +291,7 @@ export const MultiSongComponent = (props: MultiSongComponentProps) => {
                               lineIndex={lineIndex}
                               wordIndex={wordIndex}
                               chordIndex={chordIndex}
+                              hiddenMode={settings.hiddenMode}
                             />
                           );
                         })}
@@ -297,7 +335,7 @@ export const MultiSongComponent = (props: MultiSongComponentProps) => {
           />
         )}
       </BottomBarContainer>
-      {currentTime > 0 && highlightedChord && (
+      {currentTime > 0 && highlightedChord && settings.showChordPopup && (
         //TODO: Bug: Timings not getting reset properly when scrubbing
         <SongHeader>
           {highlightedChord.chord

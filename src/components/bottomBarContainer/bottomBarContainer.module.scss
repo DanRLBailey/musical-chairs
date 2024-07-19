@@ -12,6 +12,7 @@
   display: flex;
   flex-direction: column;
   transition: var(--transition);
+  z-index: 2;
 
   &.sidebarOpen {
     $width: 20rem;

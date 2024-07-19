@@ -9,7 +9,7 @@ interface BottomBarContainerProps {
 
 export const BottomBarContainer = (props: BottomBarContainerProps) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(
-    props.isSidebarOpen ?? true
+    props.isSidebarOpen ?? false
   );
 
   useEffect(() => {

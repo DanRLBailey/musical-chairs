@@ -17,7 +17,7 @@ interface SidebarContainerProps {
 }
 
 export const SidebarContainer = (props: SidebarContainerProps) => {
-  const [isOpen, setIsOpen] = useState<boolean>(true);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const [profileHover, setProfileHover] = useState<boolean>(false);
   const [popupOpen, setPopupOpen] = useState<boolean>(false);
 

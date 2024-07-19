@@ -8,6 +8,7 @@ interface ChordViewerProps {
   currentTime: number;
   countdown?: number;
   type: string;
+  showTiming?: boolean;
 }
 
 export const ChordViewer = (props: ChordViewerProps) => {
@@ -85,14 +86,16 @@ export const ChordViewer = (props: ChordViewerProps) => {
             );
           })}
         </div>
-        <input
-          type="range"
-          min={initialCurrentTime}
-          max={initialCurrentTime + countdownVal}
-          value={props.currentTime}
-          onChange={() => {}}
-          step={0.01}
-        ></input>
+        {props.showTiming !== false && (
+          <input
+            type="range"
+            min={initialCurrentTime}
+            max={initialCurrentTime + countdownVal}
+            value={props.currentTime}
+            onChange={() => {}}
+            step={0.01}
+          ></input>
+        )}
       </div>
     );
 };

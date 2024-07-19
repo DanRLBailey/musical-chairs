@@ -30,7 +30,7 @@ export const MusicPlayer = (props: MusicPlayerProps) => {
   const [playing, setPlaying] = useState<boolean>(false);
   const [maxTime, setMaxTime] = useState<number>(0);
   const [currentTime, setCurrentTime] = useState<number>(0);
-  const [volume, setVolume] = useState<number>(0.2);
+  const [volume, setVolume] = useState<number>(0.5);
   const [addWordToggle, setAddWordToggle] = useState<boolean>(false);
   const [hasWindow, setHasWindow] = useState(false);
 

@@ -35,11 +35,16 @@ import Link from "next/link";
 import { NetworkContext } from "@/context/networkContext/networkContext";
 import { UserContext } from "@/context/userContext/userContext";
 import { DropdownContainer } from "../dropdownContainer/dropdownContainer";
+import { Toggle } from "../toggle/toggle";
 
 interface SongComponentProps {
   existingSong?: Song;
   editing?: boolean;
   setIsEditing?: (isEditing: boolean) => void;
+}
+
+export interface Setting {
+  [key: string]: boolean;
 }
 
 export const SongComponent = (props: SongComponentProps) => {
@@ -54,6 +59,13 @@ export const SongComponent = (props: SongComponentProps) => {
   const [currentChordIndex, setCurrentChordIndex] = useState<number>(-1);
   const [highlightedChord, setHighlightedChord] = useState<Chord>();
   const [sidebarOpen, setSidebarOpen] = useState<boolean>();
+  const [settings, setSettings] = useState<Setting>({
+    autoscroll: true,
+    showChordPopup: true,
+    showPopupTiming: true,
+    hiddenMode: false,
+    // showCountdown: true,
+  });
 
   const { isOnline } = useContext(NetworkContext);
   const { user } = useContext(UserContext);
@@ -65,52 +77,6 @@ export const SongComponent = (props: SongComponentProps) => {
   }, [currentChord]);
 
   const router = useRouter();
-
-  // function convertOldSong() {
-  //   const nSong: Song = {
-  //     name: song.name,
-  //     artist: song.artist,
-  //     slug: `${song.name.toLowerCase().split(" ").join("-")}-${song.artist
-  //       .toLowerCase()
-  //       .split(" ")
-  //       .join("-")}`,
-  //     difficulty: 0,
-  //     capo: 0,
-  //     key: "A",
-  //     tuning: "Standard",
-  //     duration: 175,
-  //     lines: [],
-  //     link: song.link,
-  //   } as Song;
-
-  //   oldSong.forEach((section) =>
-  //     section.Lines.forEach((line, lineIndex) => {
-  //       const newLine: Line = { words: [] };
-
-  //       line.forEach((word, wordIndex) => {
-  //         const parts = word.split(/[*^]/);
-  //         const lyric =
-  //           lineIndex == 0 && wordIndex == 0 && parts[0] == ""
-  //             ? section.Section
-  //             : parts[0];
-  //         parts.shift();
-  //         const chords = parts;
-
-  //         const newWord: Word = {
-  //           lyric: lyric,
-  //           chords: chords.map((chord) => {
-  //             return { chord: chord } as Chord;
-  //           }),
-  //         };
-  //         newLine.words.push(newWord);
-  //       });
-
-  //       nSong.lines.push(newLine);
-  //     })
-  //   );
-
-  //   console.log(nSong);
-  // }
 
   useEffect(() => {
     if (!props.existingSong) title("New Song");
@@ -172,11 +138,12 @@ export const SongComponent = (props: SongComponentProps) => {
       setHighlightedChord(allChords[index]);
 
       const el = document.getElementById(`chordPill-${index}`);
-      el?.scrollIntoView({
-        behavior: "smooth",
-        block: "center",
-        inline: "nearest",
-      });
+      if (settings.autoscroll)
+        el?.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+          inline: "nearest",
+        });
     }
   }, [currentTime]);
 
@@ -531,12 +498,12 @@ export const SongComponent = (props: SongComponentProps) => {
             {(song.instrument.includes("guitar") ||
               song.instrument.includes("bass") ||
               song.instrument == "") && (
-            <TabList
-              existingTabs={song.tabs ?? []}
-              onTabPressed={(tab) => setCurrentChord(tab)}
-              currentSelected={validChord ? -1 : null}
-              onTabsChange={onTabChange}
-            />
+              <TabList
+                existingTabs={song.tabs ?? []}
+                onTabPressed={(tab) => setCurrentChord(tab)}
+                currentSelected={validChord ? -1 : null}
+                onTabsChange={onTabChange}
+              />
             )}
             <div className={styles.list}>
               <DropdownContainer
@@ -567,6 +534,27 @@ export const SongComponent = (props: SongComponentProps) => {
                 Edit
               </Link>
             )}
+            <div className={styles.settingsContainer}>
+              <span className={styles.header}>Settings</span>
+              <div className={styles.settings}>
+                {Object.keys(settings).map((setting, index) => {
+                  return (
+                    <Toggle
+                      key={index}
+                      toggled={settings[setting]}
+                      setToggled={(toggled) =>
+                        setSettings({
+                          ...settings,
+                          [setting]: toggled,
+                        })
+                      }
+                      title={setting}
+                      type="button"
+                    />
+                  );
+                })}
+              </div>
+            </div>
           </div>
         )}
       </SidebarContainer>
@@ -576,9 +564,15 @@ export const SongComponent = (props: SongComponentProps) => {
           <span className={styles.subHeading}>{song.artist}</span>
           {!props.editing && (
             <div className={styles.extraDetails}>
-              <span className={styles.subHeading}>Capo: {song.capo}</span>
-              <span className={styles.subHeading}>Key: {song.key}</span>
-              <span className={styles.subHeading}>Tuning: {song.tuning}</span>
+              {song.capo && (
+                <span className={styles.subHeading}>Capo: {song.capo}</span>
+              )}
+              {song.key && (
+                <span className={styles.subHeading}>Key: {song.key}</span>
+              )}
+              {song.tuning && (
+                <span className={styles.subHeading}>Tuning: {song.tuning}</span>
+              )}
             </div>
           )}
           <div className={styles.chordList}>
@@ -640,7 +634,16 @@ export const SongComponent = (props: SongComponentProps) => {
                               lineIndex={lineIndex}
                               wordIndex={wordIndex}
                               chordIndex={chordIndex}
-                              removeChordFromSongWord={removeChordFromSongWord}
+                              removeChordFromSongWord={() =>
+                                props.editing
+                                  ? removeChordFromSongWord(
+                                      lineIndex,
+                                      wordIndex,
+                                      chordIndex
+                                    )
+                                  : null
+                              }
+                              hiddenMode={settings.hiddenMode}
                             />
                           );
                         })}
@@ -693,36 +696,42 @@ export const SongComponent = (props: SongComponentProps) => {
           />
         )}
       </BottomBarContainer>
-      {!props.editing && currentTime > 0 && highlightedChord && (
-        //TODO: Bug: Timings not getting reset properly when scrubbing
-        <SongHeader>
-          {highlightedChord.chord
-            .split("/")
-            .every((part) => isValidChordPart(part).valid) && (
-            <ChordViewer
-              chordName={highlightedChord.chord}
-              chord={(allChordsJson as ChordObj)[highlightedChord.chord][0]}
-              currentTime={currentTime}
-              countdown={getTimingTillNextChord()}
-              type={song.instrument}
-            />
-          )}
-          {!highlightedChord.chord
-            .split("/")
-            .every((part) => isValidChordPart(part).valid) &&
-            song.tabs &&
-            song.instrument.includes("guitar") && (
-              <TabViewer
-                tab={
-                  song.tabs.find((tab) => tab.name == highlightedChord.chord) ??
-                  song.tabs[0]
-                }
+      {!props.editing &&
+        currentTime > 0 &&
+        highlightedChord &&
+        settings.showChordPopup && (
+          //TODO: Bug: Timings not getting reset properly when scrubbing
+          <SongHeader>
+            {highlightedChord.chord
+              .split("/")
+              .every((part) => isValidChordPart(part).valid) && (
+              <ChordViewer
+                chordName={highlightedChord.chord}
+                chord={(allChordsJson as ChordObj)[highlightedChord.chord][0]}
                 currentTime={currentTime}
                 countdown={getTimingTillNextChord()}
+                type={song.instrument}
+                showTiming={settings.showPopupTiming}
               />
             )}
-        </SongHeader>
-      )}
+            {!highlightedChord.chord
+              .split("/")
+              .every((part) => isValidChordPart(part).valid) &&
+              song.tabs &&
+              song.instrument.includes("guitar") && (
+                <TabViewer
+                  tab={
+                    song.tabs.find(
+                      (tab) => tab.name == highlightedChord.chord
+                    ) ?? song.tabs[0]
+                  }
+                  currentTime={currentTime}
+                  countdown={getTimingTillNextChord()}
+                  showTiming={settings.showPopupTiming}
+                />
+              )}
+          </SongHeader>
+        )}
       {/* TODO: Add controls key for adding timings */}
     </div>
   );

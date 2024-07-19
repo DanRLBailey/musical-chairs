@@ -6,6 +6,7 @@ interface TabViewerProps {
   tab: Tab | undefined;
   currentTime: number;
   countdown?: number;
+  showTiming?: boolean;
 }
 
 export const TabViewer = (props: TabViewerProps) => {
@@ -45,8 +46,17 @@ export const TabViewer = (props: TabViewerProps) => {
         </div>
         {currentTab.cols.map((tabCol, tabColIndex) => {
           return (
-            <div key={tabColIndex} className={styles.tabCol}>
-              <span>{tabCol.chord ?? ""}</span>
+            <div
+              key={tabColIndex}
+              className={`${styles.tabCol} ${
+                tabCol.chord?.toString().includes("|")
+                  ? styles.includesLine
+                  : ""
+              }`}
+            >
+              <span className={styles.tabColName}>
+                {tabCol.chord?.toString().replaceAll("|", "") ?? ""}
+              </span>
               <span>{tabCol.e ?? ""}</span>
               <span>{tabCol.B ?? ""}</span>
               <span>{tabCol.G ?? ""}</span>
@@ -57,14 +67,16 @@ export const TabViewer = (props: TabViewerProps) => {
           );
         })}
       </div>
-      <input
-        type="range"
-        min={initialCurrentTime}
-        max={initialCurrentTime + countdownVal}
-        value={props.currentTime}
-        onChange={() => {}}
-        step={0.01}
-      ></input>
+      {props.showTiming !== false && (
+        <input
+          type="range"
+          min={initialCurrentTime}
+          max={initialCurrentTime + countdownVal}
+          value={props.currentTime}
+          onChange={() => {}}
+          step={0.01}
+        ></input>
+      )}
     </div>
   );
 };
