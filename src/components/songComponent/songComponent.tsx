@@ -389,8 +389,9 @@ export const SongComponent = (props: SongComponentProps) => {
       })
         .then((res) => res.json())
         .then((json) => {
+          if (json["error"]) throw new Error(json["error"]);
           console.log(json); //TODO: Update to notification
-          //TODO: push to song page only when successful
+          router.push(`/song/${song.slug}`);
         })
         .catch((err) => {
           console.error(err);
@@ -527,13 +528,34 @@ export const SongComponent = (props: SongComponentProps) => {
               onChordPressed={(chord) => setCurrentChord(chord)}
               currentSelected={validChord ? null : -1}
             />
+            {(song.instrument.includes("guitar") ||
+              song.instrument.includes("bass") ||
+              song.instrument == "") && (
             <TabList
               existingTabs={song.tabs ?? []}
               onTabPressed={(tab) => setCurrentChord(tab)}
               currentSelected={validChord ? -1 : null}
               onTabsChange={onTabChange}
             />
-            {/* TODO: Add Instrument Select */}
+            )}
+            <div className={styles.list}>
+              <DropdownContainer
+                values={["Draft", "Published"]}
+                onValueChange={(newVal) =>
+                  setSong({ ...song, status: newVal.toLowerCase() })
+                }
+                label="Status"
+                placeholder="Draft"
+              />
+              <DropdownContainer
+                values={["Public", "Private"]}
+                onValueChange={(newVal) =>
+                  setSong({ ...song, access: newVal.toLowerCase() })
+                }
+                label="Access"
+                placeholder="Public"
+              />
+            </div>
             <button onClick={handleSaveButtonClick}>Save</button>
             {/* <button onClick={convertOldSong}>Convert</button> */}
           </div>

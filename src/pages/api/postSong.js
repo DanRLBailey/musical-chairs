@@ -15,12 +15,17 @@ export default async (req, res) => {
   const duration = body["duration"];
   const difficulty = body["difficulty"];
   const tabs = body["tabs"];
+  const instrument = body["instrument"];
+  const status = body["status"];
+  const access = body["access"];
+
+  const randomNum = Math.floor(Math.random() * 90000) + 10000;
 
   const query = `INSERT INTO songs2 VALUES (
   null,
-  '${name.replaceAll("'", "'")}',
-  '${artist.replaceAll("'", "'")}',
-  '${slug.replaceAll("'", "")}',
+  '${name.replaceAll("'", "\\'")}',
+  '${artist.replaceAll("'", "\\'")}',
+  '${slug.replaceAll("'", "")}-${randomNum}',
   '${JSON.stringify(lines).replaceAll("'", "\\'")}',
   '${link}',
   ${capo ? parseInt(capo) : 0},
@@ -30,24 +35,13 @@ export default async (req, res) => {
   ${difficulty ? parseInt(difficulty) : 0},
   NOW(),
   NOW(),
-  1,
+  ${userId},
   0,
   '${JSON.stringify(tabs) ?? null}',
-  'guitar',
-  'published',
-  'public'
+  '${instrument != "" ? instrument : "guitar"}',
+  '${status != "" ? status : "published"}',
+  '${access != "" ? access : "public"}'
   )`;
-
-  //TODO: Update "1" to the user id
-
-  //TODO: Update "guitar" to the instrument select (once implemented)
-
-  //TODO: Update "published" to the draft level (once implemented)
-
-  //TODO: Update "public" to the access level (once implemented)
-
-  //TODO: First check if slug exists, then add a "version" modifier if so
-  //  In case of duplicate songs
 
   try {
     const result = await executeQuery({

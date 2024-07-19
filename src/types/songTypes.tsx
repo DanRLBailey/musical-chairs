@@ -11,8 +11,8 @@ export interface Song {
   duration: number;
   difficulty: number;
   instrument: string;
-  status: "draft" | "published";
-  access: "public" | "private";
+  status: string;
+  access: string;
   saved?: boolean;
 }
 
@@ -37,7 +37,7 @@ export interface Tab {
 }
 
 export interface TabColumn {
-  [key: string]: string | number | undefined;
+  [key: string | number]: string | string[] | number | number[] | undefined;
 }
 
 export interface ChordObj {

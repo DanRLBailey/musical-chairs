@@ -15,10 +15,13 @@ export default async (req, res) => {
   const duration = body["duration"];
   const difficulty = body["difficulty"];
   const tabs = body["tabs"];
+  const instrument = body["instrument"];
+  const status = body["status"];
+  const access = body["access"];
 
   const query = `UPDATE songs2 SET
-  name = '${name}',
-  artist = '${artist}',
+  name = '${name.replaceAll("'", "\\'")}',
+  artist = '${artist.replaceAll("'", "\\'")}',
   \`lines\` = '${JSON.stringify(lines).replaceAll("'", "\\'")}',
   link = '${link}',
   capo = ${capo ? parseInt(capo) : 0},
@@ -27,7 +30,10 @@ export default async (req, res) => {
   duration = ${duration ? parseInt(duration) : 0},
   difficulty = ${difficulty ? parseInt(difficulty) : 0},
   last_updated = NOW(),
-  tabs = '${JSON.stringify(tabs)}'
+  tabs = '${JSON.stringify(tabs)}',
+  instrument = '${instrument}',
+  status = '${status}',
+  access = '${access}'
   WHERE slug = '${slug}'
   `;
 
