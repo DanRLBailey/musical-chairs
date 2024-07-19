@@ -1,0 +1,19 @@
+.keyboardContainer {
+  .keyboard {
+    $width: 1.75rem;
+    $widthModifier: 3.5;
+
+    display: flex;
+    padding-left: calc($width / $widthModifier);
+    overflow: hidden;
+    border-radius: var(--border-radius-lg);
+
+    &:not(.ghost) {
+      border-top: 20px solid black;
+    }
+
+    .scale {
+      display: flex;
+    }
+  }
+}

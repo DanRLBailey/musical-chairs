@@ -35,6 +35,8 @@ import Link from "next/link";
 import { NetworkContext } from "@/context/networkContext/networkContext";
 import { UserContext } from "@/context/userContext/userContext";
 import { DropdownContainer } from "../dropdownContainer/dropdownContainer";
+import { ModalContainer } from "../modalContainer/modalContainer";
+import { KeyboardViewer } from "../keyboardViewer/keyboardViewer";
 
 interface SongComponentProps {
   existingSong?: Song;
@@ -54,9 +56,14 @@ export const SongComponent = (props: SongComponentProps) => {
   const [currentChordIndex, setCurrentChordIndex] = useState<number>(-1);
   const [highlightedChord, setHighlightedChord] = useState<Chord>();
   const [sidebarOpen, setSidebarOpen] = useState<boolean>();
+  const [x, setX] = useState<number>(0);
 
   const { isOnline } = useContext(NetworkContext);
   const { user } = useContext(UserContext);
+
+  useEffect(() => {
+    console.log(x);
+  }, [x]);
 
   useEffect(() => {
     if (!currentChord) return;
@@ -531,12 +538,12 @@ export const SongComponent = (props: SongComponentProps) => {
             {(song.instrument.includes("guitar") ||
               song.instrument.includes("bass") ||
               song.instrument == "") && (
-            <TabList
-              existingTabs={song.tabs ?? []}
-              onTabPressed={(tab) => setCurrentChord(tab)}
-              currentSelected={validChord ? -1 : null}
-              onTabsChange={onTabChange}
-            />
+              <TabList
+                existingTabs={song.tabs ?? []}
+                onTabPressed={(tab) => setCurrentChord(tab)}
+                currentSelected={validChord ? -1 : null}
+                onTabsChange={onTabChange}
+              />
             )}
             <div className={styles.list}>
               <DropdownContainer
@@ -724,6 +731,55 @@ export const SongComponent = (props: SongComponentProps) => {
         </SongHeader>
       )}
       {/* TODO: Add controls key for adding timings */}
+      {/* <ModalContainer modalOpen setModalOpen={() => {}} size="lg">
+        <button
+          onClick={() => {
+            setX(x + 1);
+          }}
+        >
+          click
+        </button>
+        <KeyboardViewer
+          tab={{
+            name: "Test",
+            cols: [
+              {
+                3: ["C", "Db", "E", "G"],
+              },
+              {
+                4: ["C", "Db", "E", "G"],
+              },
+              {
+                5: ["C", "Db", "E", "G"],
+              },
+              {
+                4: ["C", "Db", "E", "G"],
+              },
+              {
+                3: ["C", "Db", "E", "G"],
+              },
+              {
+                3: ["C", "Db", "E", "G"],
+              },
+              {
+                4: ["C", "Db", "E", "G"],
+              },
+              {
+                5: ["C", "Db", "E", "G"],
+              },
+              {
+                4: ["C", "Db", "E", "G"],
+              },
+              {
+                3: ["C", "Db", "E", "G"],
+              },
+            ],
+          }}
+          // tab={song.tabs ? song.tabs[0] : undefined}
+          noOfSteps={5}
+          currentIndex={x}
+        />
+      </ModalContainer> */}
     </div>
   );
 };
