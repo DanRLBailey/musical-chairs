@@ -105,43 +105,43 @@ export const TabEditor = (props: TabEditorProps) => {
           return (
             <div key={tabColIndex} className={styles.tabCol}>
               <input
-                value={tabCol.chord ?? ""}
+                value={(tabCol.chord as string) ?? ""}
                 onChange={(e) =>
                   handleTabChange(e.target.value, tabColIndex, "chord")
                 }
               />
               <input
-                value={tabCol.e ?? ""}
+                value={(tabCol.e as string) ?? ""}
                 onChange={(e) =>
                   handleTabChange(e.target.value, tabColIndex, "e")
                 }
               />
               <input
-                value={tabCol.B ?? ""}
+                value={(tabCol.B as string) ?? ""}
                 onChange={(e) =>
                   handleTabChange(e.target.value, tabColIndex, "B")
                 }
               />
               <input
-                value={tabCol.G ?? ""}
+                value={(tabCol.G as string) ?? ""}
                 onChange={(e) =>
                   handleTabChange(e.target.value, tabColIndex, "G")
                 }
               />
               <input
-                value={tabCol.D ?? ""}
+                value={(tabCol.D as string) ?? ""}
                 onChange={(e) =>
                   handleTabChange(e.target.value, tabColIndex, "D")
                 }
               />
               <input
-                value={tabCol.A ?? ""}
+                value={(tabCol.A as string) ?? ""}
                 onChange={(e) =>
                   handleTabChange(e.target.value, tabColIndex, "A")
                 }
               />
               <input
-                value={tabCol.E ?? ""}
+                value={(tabCol.E as string) ?? ""}
                 onChange={(e) =>
                   handleTabChange(e.target.value, tabColIndex, "E")
                 }

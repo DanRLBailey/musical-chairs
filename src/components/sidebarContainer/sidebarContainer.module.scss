@@ -2,9 +2,6 @@
   $width: 20rem;
   display: flex;
   transition: var(--transition);
-  position: fixed;
-  height: 100dvh;
-  z-index: 1;
 
   &.closed {
     margin-left: calc($width * -1);
