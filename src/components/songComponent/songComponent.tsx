@@ -587,7 +587,7 @@ export const SongComponent = (props: SongComponentProps) => {
           <span className={styles.subHeading}>{song.artist}</span>
           {!props.editing && (
             <div className={styles.extraDetails}>
-              {song.capo && (
+              {song.capo > 0 && (
                 <span className={styles.subHeading}>Capo: {song.capo}</span>
               )}
               {song.key && (
