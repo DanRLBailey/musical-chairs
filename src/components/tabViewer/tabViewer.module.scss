@@ -1,3 +1,5 @@
+@import "@/styles/breakpoints.scss";
+
 .tabViewerContainer {
   $gap: var(--padding-xxs);
   $border: 2px solid white;
@@ -90,6 +92,26 @@
       &:hover {
         background-color: var(--secondary-colour-dark);
       }
+    }
+  }
+
+  @include max-breakpoint(sm) {
+    // font-size: 0.8rem;
+
+    .tabName {
+      display: flex;
+      justify-content: center;
+    }
+
+    .tabContainer {
+      overflow-x: auto;
+      overflow-y: hidden;
+      justify-content: center;
+    }
+
+    input[type="range"] {
+      margin-left: 0;
+      width: 100%;
     }
   }
 }

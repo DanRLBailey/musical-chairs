@@ -1,3 +1,5 @@
+@import "@/styles/breakpoints.scss";
+
 .songHeaderContainer {
   position: fixed;
   top: var(--margin-md);
@@ -6,6 +8,19 @@
   background-color: var(--background-colour-dark);
   border-radius: var(--border-radius-md);
   // width: calc(100% - 20rem - var(--margin-md) * 2);
-  max-width: 45%;
+  max-width: 95%;
   transition: var(--transition);
+  z-index: 5;
+
+  @include max-breakpoint(sm) {
+    top: auto;
+    bottom: 70px;
+    right: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    max-width: none;
+    border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;
+    padding: var(--padding-xxs);
+  }
 }

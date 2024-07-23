@@ -1,3 +1,5 @@
+@import "@/styles/breakpoints.scss";
+
 .multiSongComponentContainer {
   width: 100dvw;
   height: 100dvh;
@@ -195,6 +197,13 @@
           }
         }
       }
+    }
+  }
+
+  @include max-breakpoint(sm) {
+    .songContent {
+      padding: 10dvw;
+      padding-bottom: 40dvh;
     }
   }
 }

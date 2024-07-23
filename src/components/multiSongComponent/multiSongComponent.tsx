@@ -17,7 +17,7 @@ import { ChordViewer } from "../chordViewer/chordViewer";
 import allChordsJson from "@/public/chords.json";
 import { NetworkContext } from "@/context/networkContext/networkContext";
 import { TextInput } from "../textInput/textInput";
-import { Setting } from "../songComponent/songComponent";
+import { getSettingsFromLocal, Setting } from "../songComponent/songComponent";
 import { Toggle } from "../toggle/toggle";
 
 interface MultiSongComponentProps {
@@ -39,13 +39,7 @@ export const MultiSongComponent = (props: MultiSongComponentProps) => {
   const [nextSongDelay, setNextSongDelay] = useState<number>(0);
   const [isPlaying, setIsPlaying] = useState<boolean>(true);
   const [endOfPlaylist, setEndOfPlaylist] = useState<boolean>(false);
-  const [settings, setSettings] = useState<Setting>({
-    autoscroll: true,
-    showChordPopup: true,
-    showPopupTiming: true,
-    hiddenMode: false,
-    // showCountdown: true,
-  });
+  const [settings, setSettings] = useState<Setting>(getSettingsFromLocal());
 
   const { isOnline } = useContext(NetworkContext);
 
@@ -120,6 +114,10 @@ export const MultiSongComponent = (props: MultiSongComponentProps) => {
         });
     }
   }, [currentTime]);
+
+  useEffect(() => {
+    localStorage.setItem("songSettings", JSON.stringify(settings));
+  }, [settings]);
 
   const getTimingTillNextChord = () => {
     const currentChordTiming = allChords[currentChordIndex]?.timing ?? null;
@@ -291,6 +289,7 @@ export const MultiSongComponent = (props: MultiSongComponentProps) => {
                               lineIndex={lineIndex}
                               wordIndex={wordIndex}
                               chordIndex={chordIndex}
+                              highlightChord={settings.highlightChords}
                               hiddenMode={settings.hiddenMode}
                             />
                           );

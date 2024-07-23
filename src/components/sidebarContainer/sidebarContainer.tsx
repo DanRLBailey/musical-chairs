@@ -16,8 +16,20 @@ interface SidebarContainerProps {
   onSidebarToggle?: (isOpen: boolean) => void;
 }
 
+const getSidebarOpenFromLocal = () => {
+  if (typeof window === "undefined") return false;
+  const localSidebar = localStorage.getItem("sidebarOpen");
+
+  if (!localSidebar) {
+    localStorage.setItem("sidebarOpen", "false");
+    return false;
+  }
+
+  return localSidebar == "true";
+};
+
 export const SidebarContainer = (props: SidebarContainerProps) => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(getSidebarOpenFromLocal());
   const [profileHover, setProfileHover] = useState<boolean>(false);
   const [popupOpen, setPopupOpen] = useState<boolean>(false);
 
@@ -26,11 +38,9 @@ export const SidebarContainer = (props: SidebarContainerProps) => {
 
   useEffect(() => {
     if (props.onSidebarToggle) props.onSidebarToggle(isOpen);
-  }, [isOpen]);
 
-  const email = "danbailey.813@gmail.com";
-  const password = "poopooPeepee";
-  const displayName = "Dan";
+    localStorage.setItem("sidebarOpen", isOpen.toString());
+  }, [isOpen]);
 
   const handleLoginButton = () => {
     router.push("/login");

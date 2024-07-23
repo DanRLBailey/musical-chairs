@@ -49,7 +49,7 @@ export const TabViewer = (props: TabViewerProps) => {
             <div
               key={tabColIndex}
               className={`${styles.tabCol} ${
-                tabCol.chord?.toString().includes("|")
+                tabCol.chord?.toString().includes("|") || tabCol.separator
                   ? styles.includesLine
                   : ""
               }`}

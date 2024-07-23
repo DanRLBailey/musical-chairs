@@ -14,29 +14,72 @@
   }
 
   .tabContainer {
-    display: flex;
+    display: inline-flex;
     flex-direction: row;
-    gap: $gap;
 
     .tabCol {
-      display: flex;
-      flex-direction: column;
-      gap: $gap;
       width: $width;
       height: 100%;
+      display: flex;
 
-      &:first-of-type {
+      &:first-of-type,
+      &.separator {
         border-right: $border;
       }
 
-      & > * {
-        height: $width;
+      &.remove {
+        border-radius: var(--border-radius-sm);
+        background-color: var(--alert-colour);
       }
 
-      & > *:first-child {
-        border-bottom: $border;
-        border-bottom-left-radius: 0;
-        border-bottom-right-radius: 0;
+      .col {
+        display: flex;
+        flex-direction: column;
+        gap: $gap;
+        flex: 1;
+
+        & > * {
+          height: $width;
+        }
+
+        & > *:first-child {
+          border-bottom: $border;
+          border-bottom-left-radius: 0;
+          border-bottom-right-radius: 0;
+        }
+      }
+
+      .columnButtonContainer {
+        position: relative;
+        width: calc($gap / 3);
+        margin-left: calc($gap / 3);
+        margin-right: calc($gap / 3);
+
+        div {
+          position: absolute;
+          display: flex;
+          left: -1.7rem;
+          top: -1rem;
+          gap: $gap;
+
+          button {
+            display: none;
+            border-radius: 50rem;
+            height: 1rem;
+            width: 1rem;
+          }
+        }
+      }
+
+      &:hover {
+        .columnButtonContainer {
+          background-color: var(--primary-colour);
+          div {
+            button {
+              display: flex;
+            }
+          }
+        }
       }
     }
 

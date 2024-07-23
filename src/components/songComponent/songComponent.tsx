@@ -47,6 +47,31 @@ export interface Setting {
   [key: string]: boolean;
 }
 
+export const getSettingsFromLocal = () => {
+  const defaultSettings: Setting = {
+    autoscroll: true,
+    hiddenMode: false,
+    showChordPopup: true,
+    showPopupTiming: true,
+    highlightChords: true,
+    highlightLyrics: true,
+    // showCountdown: true,
+  };
+
+  if (typeof window === "undefined") return defaultSettings;
+  const localSettings = localStorage.getItem("songSettings");
+
+  if (!localSettings) {
+    localStorage.setItem("songSettings", JSON.stringify(defaultSettings));
+    return defaultSettings;
+  }
+
+  return {
+    ...defaultSettings,
+    ...JSON.parse(localSettings),
+  };
+};
+
 export const SongComponent = (props: SongComponentProps) => {
   const [song, setSong] = useState<Song>(props.existingSong ?? songTemplate);
   const [textAreaVal, setTextAreaVal] = useState<string>("");
@@ -59,13 +84,7 @@ export const SongComponent = (props: SongComponentProps) => {
   const [currentChordIndex, setCurrentChordIndex] = useState<number>(-1);
   const [highlightedChord, setHighlightedChord] = useState<Chord>();
   const [sidebarOpen, setSidebarOpen] = useState<boolean>();
-  const [settings, setSettings] = useState<Setting>({
-    autoscroll: true,
-    showChordPopup: true,
-    showPopupTiming: true,
-    hiddenMode: false,
-    // showCountdown: true,
-  });
+  const [settings, setSettings] = useState<Setting>(getSettingsFromLocal());
 
   const { isOnline } = useContext(NetworkContext);
   const { user } = useContext(UserContext);
@@ -146,6 +165,10 @@ export const SongComponent = (props: SongComponentProps) => {
         });
     }
   }, [currentTime]);
+
+  useEffect(() => {
+    localStorage.setItem("songSettings", JSON.stringify(settings));
+  }, [settings]);
 
   const addChordToSongWord = (lineIndex: number, wordIndex: number) => {
     if (!currentChord) return;
@@ -629,11 +652,22 @@ export const SongComponent = (props: SongComponentProps) => {
                               nextChord={nextChord}
                               hasChordTiming={hasChordTiming}
                               chordTiming={chordTiming}
-                              currentTime={currentTime}
+                              currentTime={
+                                ((chordTiming &&
+                                  nextChord &&
+                                  nextChord.timing) ||
+                                  chordTiming == 0) &&
+                                currentTime >= chordTiming &&
+                                nextChord.timing &&
+                                currentTime <= nextChord.timing
+                                  ? currentTime
+                                  : -1
+                              }
                               overallChordIndex={overallChordIndex}
                               lineIndex={lineIndex}
                               wordIndex={wordIndex}
                               chordIndex={chordIndex}
+                              highlightChord={settings.highlightChords}
                               removeChordFromSongWord={() =>
                                 props.editing
                                   ? removeChordFromSongWord(
@@ -654,6 +688,7 @@ export const SongComponent = (props: SongComponentProps) => {
                             ? styles.missingWordTiming
                             : ""
                         } ${hasLyric ? styles.hasLyric : ""} ${
+                          settings.highlightLyrics &&
                           word.timing &&
                           word.timing <= currentTime &&
                           (!nextWord ||

@@ -37,7 +37,13 @@ export interface Tab {
 }
 
 export interface TabColumn {
-  [key: string | number]: string | string[] | number | number[] | undefined;
+  [key: string | number]:
+    | string
+    | string[]
+    | number
+    | number[]
+    | undefined
+    | boolean;
 }
 
 export interface ChordObj {

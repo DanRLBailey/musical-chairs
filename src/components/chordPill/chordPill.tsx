@@ -13,6 +13,7 @@ interface ChordPillProps {
   lineIndex: number;
   wordIndex: number;
   chordIndex: number;
+  highlightChord: boolean;
   removeChordFromSongWord?: (
     lineIndex: number,
     wordIndex: number,
@@ -47,6 +48,8 @@ export const ChordPill = (props: ChordPillProps) => {
   const [hovering, setHovering] = useState<boolean>(false);
 
   const active =
+    props.highlightChord &&
+    props.currentTime > 0 &&
     props.chordTiming !== null &&
     (props.chordTiming <= props.currentTime || props.chordTiming === 0) &&
     (!props.nextChord ||
