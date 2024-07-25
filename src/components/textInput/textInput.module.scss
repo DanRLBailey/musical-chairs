@@ -79,4 +79,10 @@
       border-bottom-left-radius: 0;
     }
   }
+
+  .errorMessage {
+    color: var(--alert-colour);
+    font-weight: bold;
+    font-size: 0.8rem;
+  }
 }

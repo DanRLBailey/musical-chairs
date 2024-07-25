@@ -419,6 +419,14 @@ export const SongComponent = (props: SongComponentProps) => {
     return timingDiff;
   };
 
+  const verifyString = (str: string, matcher: RegExp = /["\\]/) => {
+    const match = str.match(matcher);
+
+    if (!match) return false;
+
+    return match.length > 0;
+  };
+
   let overallChordIndex = -1;
   return (
     <div className={styles.songComponentContainer}>
@@ -518,6 +526,12 @@ export const SongComponent = (props: SongComponentProps) => {
               onValueChange={(newVal) => handleTextAreaChange(newVal as string)}
               type="textArea"
               required
+              isError={verifyString(textAreaVal)}
+              errorMessage={
+                verifyString(textAreaVal)
+                  ? 'Please remove any " or \\'
+                  : undefined
+              }
             />
             <ChordList
               existingChords={uniqueChords}

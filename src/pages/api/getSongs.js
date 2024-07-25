@@ -18,6 +18,7 @@ export default async (req, res) => {
         user_id = ${userId ?? 1}
         AND deleted = false
         ${!userId ? `AND access = "public"` : ""}
+        ${!userId ? `AND status = "published"` : ""}
       )
       ${parseInt(saved) && saved.length > 0 ? `OR (id IN (${saved}))` : ""}`,
     });

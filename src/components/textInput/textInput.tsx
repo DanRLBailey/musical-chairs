@@ -12,6 +12,7 @@ interface TextInputProps {
   buttonText?: string | React.ReactNode;
   disabled?: boolean;
   isError?: boolean;
+  errorMessage?: string;
   loading?: boolean;
   success?: boolean;
   required?: boolean;
@@ -89,6 +90,9 @@ export const TextInput = (props: TextInputProps) => {
           ></textarea>
         )}
       </div>
+      {props.errorMessage && (
+        <span className={styles.errorMessage}>{props.errorMessage}</span>
+      )}
     </div>
   );
 };
