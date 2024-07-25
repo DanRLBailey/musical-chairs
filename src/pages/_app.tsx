@@ -4,6 +4,7 @@ import Head from "next/head";
 import favicon from "@/public/favicon.ico";
 import { NetworkProvider } from "@/context/networkContext/networkContext";
 import { UserProvider } from "@/context/userContext/userContext";
+import { ToastProvider } from "@/context/toastContext/toastContext";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -13,7 +14,9 @@ export default function App({ Component, pageProps }: AppProps) {
       </Head>
       <NetworkProvider>
         <UserProvider>
-          <Component {...pageProps} />
+          <ToastProvider>
+            <Component {...pageProps} />
+          </ToastProvider>
         </UserProvider>
       </NetworkProvider>
     </>

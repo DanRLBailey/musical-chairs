@@ -1,7 +1,3 @@
-const email = "danbailey.813@gmail.com";
-const password = "poopooPeepee";
-const displayName = "Dan";
-
 export const loginUser = () => {
   fetch("/api/loginUser", {
     method: "POST",

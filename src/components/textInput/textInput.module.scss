@@ -3,28 +3,38 @@
   flex-direction: column;
   font-size: 0.9rem;
 
-  .label {
-    text-align: left;
+  .labelContainer {
     display: flex;
+    gap: var(--margin-xxs);
 
-    div {
-      background-color: var(--primary-colour);
-      padding: 0 var(--padding-xs);
-      border-radius: var(--border-radius-xs) var(--border-radius-xs) 0 0;
+    .label {
+      text-align: left;
       display: flex;
-      justify-content: space-between;
-      gap: var(--padding-xxs);
-      transition: var(--transition);
 
-      .requiredIcon {
-        width: 20px;
+      div {
+        background-color: var(--primary-colour);
+        padding: 0 var(--padding-xs);
+        border-radius: var(--border-radius-xs) var(--border-radius-xs) 0 0;
+        display: flex;
+        justify-content: space-between;
+        gap: var(--padding-xxs);
+        transition: var(--transition);
+      }
+
+      &.error {
+        div {
+          background-color: var(--alert-colour);
+        }
       }
     }
 
-    &.error {
-      div {
-        background-color: var(--alert-colour);
-      }
+    .requiredIcon {
+      font-size: 1.75rem;
+      line-height: 1rem;
+      color: var(--secondary-colour);
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
     }
   }
 

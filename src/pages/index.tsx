@@ -79,7 +79,6 @@ export default function HomePage() {
       .then((res) => res.json())
       .then((json) => {
         setSongs(json);
-        console.log(json);
         setLoading(false);
       })
       .catch((err) => {

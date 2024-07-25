@@ -31,11 +31,16 @@ export const TextInput = (props: TextInputProps) => {
   return (
     <div className={styles.textInputContainer}>
       {props.label && (
-        <div className={`${styles.label} ${props.isError ? styles.error : ""}`}>
-          <div>
-            <span>{props.label} </span>
-            {props.required && <ErrorIcon className={styles.requiredIcon} />}
+        <div className={styles.labelContainer}>
+          <div
+            className={`${styles.label} ${props.isError ? styles.error : ""}`}
+          >
+            <div>
+              <span>{props.label} </span>
+            </div>
           </div>
+          {props.required && <span className={styles.requiredIcon}>*</span>}
+          {/* {props.required && <ErrorIcon className={styles.requiredIcon} />} */}
         </div>
       )}
       <div className={styles.input}>
@@ -77,7 +82,9 @@ export const TextInput = (props: TextInputProps) => {
           <textarea
             value={props.value}
             onChange={(e) => props.onValueChange(e.target.value)}
-            className={props.label ? styles.withLabel : ""}
+            className={`${props.label ? styles.withLabel : ""} ${
+              props.isError ? styles.error : ""
+            }`}
             placeholder={props.placeholder ?? ""}
           ></textarea>
         )}

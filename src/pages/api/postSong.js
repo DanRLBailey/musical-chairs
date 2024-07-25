@@ -19,13 +19,11 @@ export default async (req, res) => {
   const status = body["status"];
   const access = body["access"];
 
-  const randomNum = Math.floor(Math.random() * 90000) + 10000;
-
   const query = `INSERT INTO songs2 VALUES (
   null,
   '${name.replaceAll("'", "\\'")}',
   '${artist.replaceAll("'", "\\'")}',
-  '${slug.replaceAll("'", "")}-${randomNum}',
+  '${slug.replaceAll("'", "")}',
   '${JSON.stringify(lines).replaceAll("'", "\\'")}',
   '${link}',
   ${capo ? parseInt(capo) : 0},

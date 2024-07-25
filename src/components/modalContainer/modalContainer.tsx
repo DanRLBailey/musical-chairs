@@ -35,7 +35,6 @@ export const ModalContainer = (props: ModalContainerProps) => {
   const getSize = () => {
     switch (props.size) {
       case "sm":
-        console.log("es emming");
         return styles.sm;
       case "md":
         return styles.md;

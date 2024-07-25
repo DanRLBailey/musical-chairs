@@ -36,6 +36,7 @@ import { NetworkContext } from "@/context/networkContext/networkContext";
 import { UserContext } from "@/context/userContext/userContext";
 import { DropdownContainer } from "../dropdownContainer/dropdownContainer";
 import { Toggle } from "../toggle/toggle";
+import { ToastContext } from "@/context/toastContext/toastContext";
 
 interface SongComponentProps {
   existingSong?: Song;
@@ -56,6 +57,7 @@ export const getSettingsFromLocal = () => {
     highlightChords: true,
     highlightLyrics: true,
     // showCountdown: true,
+    // showChords: true,
   };
 
   if (typeof window === "undefined") return defaultSettings;
@@ -88,6 +90,7 @@ export const SongComponent = (props: SongComponentProps) => {
 
   const { isOnline } = useContext(NetworkContext);
   const { user } = useContext(UserContext);
+  const { toastList, showToast } = useContext(ToastContext);
 
   useEffect(() => {
     if (!currentChord) return;
@@ -352,10 +355,12 @@ export const SongComponent = (props: SongComponentProps) => {
 
   const handleSaveButtonClick = () => {
     const postNewSong = () => {
+      const randomNum = Math.floor(Math.random() * 90000) + 10000;
+
       song.slug = `${song.name.toLowerCase().split(" ").join("-")}-${song.artist
         .toLowerCase()
         .split(" ")
-        .join("-")}`;
+        .join("-")}=${randomNum}`;
 
       fetch("/api/postSong", {
         method: "POST",
@@ -364,11 +369,12 @@ export const SongComponent = (props: SongComponentProps) => {
         .then((res) => res.json())
         .then((json) => {
           if (json["error"]) throw new Error(json["error"]);
-          console.log(json); //TODO: Update to notification
-          router.push(`/song/${song.slug}`); //TODO: push only when successful
+          showToast(`Added song: ${song.name} - ${song.artist}`, "success");
+          router.push(`/song/${song.slug}`);
         })
         .catch((err) => {
           console.error(err);
+          showToast("Error creating song", "error");
         });
     };
 
@@ -380,11 +386,11 @@ export const SongComponent = (props: SongComponentProps) => {
         .then((res) => res.json())
         .then((json) => {
           if (json["error"]) throw new Error(json["error"]);
-          console.log(json); //TODO: Update to notification
+          showToast(`Updated song: ${song.name} - ${song.artist}`, "success");
           router.push(`/song/${song.slug}`);
         })
         .catch((err) => {
-          console.error(err);
+          showToast("Error saving song", "error");
         });
     };
 
@@ -771,3 +777,6 @@ export const SongComponent = (props: SongComponentProps) => {
     </div>
   );
 };
+function showToast(arg0: string, arg1: string) {
+  throw new Error("Function not implemented.");
+}

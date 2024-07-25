@@ -58,6 +58,12 @@
   --alert-colour-rgb: 212, 44, 44;
   --alert-colour: rgb(var(--alert-colour-rgb));
 
+  --info-colour-rgb: 38, 99, 190;
+  --info-colour: rgb(var(--info-colour-rgb));
+
+  --warning-colour-rgb: 214, 186, 62;
+  --warning-colour: rgb(var(--warning-colour-rgb));
+
   /* Text Colours */
   --text-colour-rgb: 255, 255, 255;
   --text-colour: rgba(var(--text-colour-rgb));

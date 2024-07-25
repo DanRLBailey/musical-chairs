@@ -1,0 +1,68 @@
+.toastContainer {
+  background-color: var(--background-colour-light);
+  min-width: 10dvw;
+  border-radius: var(--border-radius-sm);
+  box-shadow: var(--box-shadow);
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  pointer-events: all;
+  transition: var(--transition);
+  margin-right: -25dvw;
+  max-width: 25dvw;
+
+  &.open {
+    margin-right: 0;
+  }
+
+  .content {
+    padding: var(--padding-md);
+    display: flex;
+    gap: var(--margin-sm);
+    text-transform: capitalize;
+  }
+
+  .timer {
+    height: 5px;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+
+    &.closed {
+      width: 0%;
+    }
+  }
+
+  &.success {
+    color: var(--success-colour);
+
+    .timer {
+      background-color: var(--success-colour);
+    }
+  }
+
+  &.error {
+    color: var(--alert-colour);
+
+    .timer {
+      background-color: var(--alert-colour);
+    }
+  }
+
+  &.warning {
+    color: var(--warning-colour);
+
+    .timer {
+      background-color: var(--warning-colour);
+    }
+  }
+
+  &.info {
+    color: var(--info-colour);
+
+    .timer {
+      background-color: var(--info-colour);
+    }
+  }
+}

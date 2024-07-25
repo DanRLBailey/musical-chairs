@@ -1,0 +1,13 @@
+.toastContextContainer {
+  position: fixed;
+  width: 100dvw;
+  height: 100dvh;
+  pointer-events: none;
+  z-index: 20;
+  padding: var(--margin-lg);
+  gap: var(--margin-sm);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
