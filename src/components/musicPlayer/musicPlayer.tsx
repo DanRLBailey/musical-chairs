@@ -23,6 +23,7 @@ interface MusicPlayerProps {
   keepPlaying?: boolean;
   onEnded?: () => void;
   isPlaying?: boolean;
+  showPlayerTicks?: boolean;
 }
 
 export const MusicPlayer = (props: MusicPlayerProps) => {
@@ -143,30 +144,32 @@ export const MusicPlayer = (props: MusicPlayerProps) => {
         {!playing ? <PlayArrowIcon /> : <PauseIcon />}
       </button>
       <div className={styles.scrubberContainer}>
-        <div className={styles.overlayContainer}>
-          {allChords.map((chord, chordIndex) => {
-            if (!chord.timing && chord.timing != 0) return;
+        {props.showPlayerTicks && (
+          <div className={styles.overlayContainer}>
+            {allChords.map((chord, chordIndex) => {
+              if (!chord.timing && chord.timing != 0) return;
 
-            return (
-              <div
-                key={chordIndex}
-                className={styles.chord}
-                style={{ left: `${(chord.timing / maxTime) * 100}%` }}
-              ></div>
-            );
-          })}
-          {allWords.map((word, wordIndex) => {
-            if (!word.timing && word.timing != 0) return;
+              return (
+                <div
+                  key={chordIndex}
+                  className={styles.chord}
+                  style={{ left: `${(chord.timing / maxTime) * 100}%` }}
+                ></div>
+              );
+            })}
+            {allWords.map((word, wordIndex) => {
+              if (!word.timing && word.timing != 0) return;
 
-            return (
-              <div
-                key={wordIndex}
-                className={styles.word}
-                style={{ left: `${(word.timing / maxTime) * 100}%` }}
-              ></div>
-            );
-          })}
-        </div>
+              return (
+                <div
+                  key={wordIndex}
+                  className={styles.word}
+                  style={{ left: `${(word.timing / maxTime) * 100}%` }}
+                ></div>
+              );
+            })}
+          </div>
+        )}
         <input
           type="range"
           min={0}

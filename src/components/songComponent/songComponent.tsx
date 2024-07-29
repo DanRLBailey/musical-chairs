@@ -58,6 +58,7 @@ export const getSettingsFromLocal = () => {
     highlightLyrics: true,
     // showCountdown: true,
     // showChords: true,
+    showPlayerTicks: true,
   };
 
   if (typeof window === "undefined") return defaultSettings;
@@ -90,7 +91,7 @@ export const SongComponent = (props: SongComponentProps) => {
 
   const { isOnline } = useContext(NetworkContext);
   const { user } = useContext(UserContext);
-  const { toastList, showToast } = useContext(ToastContext);
+  const { showToast } = useContext(ToastContext);
 
   useEffect(() => {
     if (!currentChord) return;
@@ -360,7 +361,7 @@ export const SongComponent = (props: SongComponentProps) => {
       song.slug = `${song.name.toLowerCase().split(" ").join("-")}-${song.artist
         .toLowerCase()
         .split(" ")
-        .join("-")}=${randomNum}`;
+        .join("-")}-${randomNum}`;
 
       fetch("/api/postSong", {
         method: "POST",
@@ -748,6 +749,7 @@ export const SongComponent = (props: SongComponentProps) => {
             onReady={(maxTime) =>
               setSong({ ...song, duration: maxTime as number })
             }
+            showPlayerTicks={settings.showPlayerTicks}
           />
         )}
       </BottomBarContainer>
