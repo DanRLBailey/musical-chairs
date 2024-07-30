@@ -15,6 +15,7 @@ export const DropdownContainer = (props: DropdownContainerProps) => {
     props.placeholder ?? ""
   );
   const [dropdownActive, setDropdownActive] = useState<boolean>(false);
+  const [hasSelectedValue, setHasSelectedValue] = useState<boolean>(false);
 
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -36,9 +37,7 @@ export const DropdownContainer = (props: DropdownContainerProps) => {
   }, [dropdownActive]);
 
   useEffect(() => {
-    props.onValueChange(
-      selectedValue == props.placeholder ? "" : selectedValue
-    );
+    props.onValueChange(selectedValue);
   }, [selectedValue]);
 
   const formatText = (text: string) => {
@@ -55,21 +54,20 @@ export const DropdownContainer = (props: DropdownContainerProps) => {
       )}
       <div
         className={`${styles.dropdownSelect} ${
-          props.placeholder && selectedValue == props.placeholder
-            ? styles.placeholder
-            : ""
+          props.placeholder && !hasSelectedValue ? styles.placeholder : ""
         } ${dropdownActive ? styles.focus : ""} ${
           props.label ? styles.withLabel : ""
         }`}
         onClick={() => setDropdownActive(!dropdownActive)}
       >
         <span>{formatText(selectedValue)}</span>
-        {props.placeholder && selectedValue != props.placeholder && (
+        {props.placeholder && hasSelectedValue && (
           <CloseIcon
             className={`${styles.icon} ${styles.closeIcon}`}
             onClick={(e) => {
               e.stopPropagation();
               setSelectedValue(props.placeholder ?? "");
+              setHasSelectedValue(false);
             }}
           />
         )}
@@ -85,6 +83,7 @@ export const DropdownContainer = (props: DropdownContainerProps) => {
             key={index}
             onClick={() => {
               setSelectedValue(value);
+              setHasSelectedValue(true);
               setDropdownActive(false);
             }}
           >

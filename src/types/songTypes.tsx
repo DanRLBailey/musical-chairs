@@ -67,6 +67,6 @@ export const songTemplate: Song = {
   duration: 0,
   difficulty: 0,
   instrument: "guitar",
-  status: "published",
+  status: "draft",
   access: "public",
 };

@@ -29,7 +29,7 @@ const getSidebarOpenFromLocal = () => {
 };
 
 export const SidebarContainer = (props: SidebarContainerProps) => {
-  const [isOpen, setIsOpen] = useState<boolean>(getSidebarOpenFromLocal());
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const [profileHover, setProfileHover] = useState<boolean>(false);
   const [popupOpen, setPopupOpen] = useState<boolean>(false);
 

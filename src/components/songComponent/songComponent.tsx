@@ -551,20 +551,20 @@ export const SongComponent = (props: SongComponentProps) => {
             )}
             <div className={styles.list}>
               <DropdownContainer
-                values={["Draft", "Published"]}
+                values={["draft", "published"]}
                 onValueChange={(newVal) =>
                   setSong({ ...song, status: newVal.toLowerCase() })
                 }
                 label="Status"
-                placeholder="Draft"
+                placeholder="draft"
               />
               <DropdownContainer
-                values={["Public", "Private"]}
+                values={["public", "private"]}
                 onValueChange={(newVal) =>
                   setSong({ ...song, access: newVal.toLowerCase() })
                 }
                 label="Access"
-                placeholder="Public"
+                placeholder="public"
               />
             </div>
             <button onClick={handleSaveButtonClick}>Save</button>

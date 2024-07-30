@@ -37,8 +37,8 @@ export default async (req, res) => {
   0,
   '${JSON.stringify(tabs) ?? null}',
   '${instrument != "" ? instrument : "guitar"}',
-  '${status != "" ? status : "published"}',
-  '${access != "" ? access : "draft"}'
+  '${status != "" ? status : "draft"}',
+  '${access != "" ? access : "public"}'
   )`;
 
   try {
