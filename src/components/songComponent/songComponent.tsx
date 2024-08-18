@@ -121,7 +121,8 @@ export const SongComponent = (props: SongComponentProps) => {
   const { user } = useContext(UserContext);
   const { showToast } = useContext(ToastContext);
 
-  const isMobile = window.innerWidth < 568;
+  const isMobile =
+    typeof window !== "undefined" ? window.innerWidth < 568 : false;
 
   useEffect(() => {
     if (!currentChord) return;
