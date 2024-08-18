@@ -22,7 +22,6 @@ import { TextInput } from "../textInput/textInput";
 import ReactPlayer from "react-player";
 import { BottomBarContainer } from "../bottomBarContainer/bottomBarContainer";
 import { MusicPlayer } from "../musicPlayer/musicPlayer";
-import { ChordPill } from "../chordPill/chordPill";
 import { useRouter } from "next/router";
 import { TabList } from "../tabList/tabList";
 import { isValidChordPart } from "@/helpers/chords";
@@ -37,6 +36,7 @@ import { UserContext } from "@/context/userContext/userContext";
 import { DropdownContainer } from "../dropdownContainer/dropdownContainer";
 import { Toggle } from "../toggle/toggle";
 import { ToastContext } from "@/context/toastContext/toastContext";
+import { SongLine } from "../songLine/songLine";
 
 interface SongComponentProps {
   existingSong?: Song;
@@ -45,20 +45,48 @@ interface SongComponentProps {
 }
 
 export interface Setting {
-  [key: string]: boolean;
+  [key: string]: {
+    toggled: boolean;
+    allowInMobile: boolean;
+  };
 }
 
 export const getSettingsFromLocal = () => {
   const defaultSettings: Setting = {
-    autoscroll: true,
-    hiddenMode: false,
-    showChordPopup: true,
-    showPopupTiming: true,
-    highlightChords: true,
-    highlightLyrics: true,
+    autoscroll: {
+      toggled: true,
+      allowInMobile: true,
+    },
+    hiddenMode: {
+      toggled: false,
+      allowInMobile: true,
+    },
+    showChordPopup: {
+      toggled: true,
+      allowInMobile: false,
+    },
+    showPopupTiming: {
+      toggled: true,
+      allowInMobile: true,
+    },
+    highlightChords: {
+      toggled: true,
+      allowInMobile: true,
+    },
+    highlightLyrics: {
+      toggled: true,
+      allowInMobile: true,
+    },
     // showCountdown: true,
     // showChords: true,
-    showPlayerTicks: true,
+    showPlayerTicks: {
+      toggled: true,
+      allowInMobile: true,
+    },
+    showTabsInline: {
+      toggled: false,
+      allowInMobile: false,
+    },
   };
 
   if (typeof window === "undefined") return defaultSettings;
@@ -92,6 +120,8 @@ export const SongComponent = (props: SongComponentProps) => {
   const { isOnline } = useContext(NetworkContext);
   const { user } = useContext(UserContext);
   const { showToast } = useContext(ToastContext);
+
+  const isMobile = window.innerWidth < 568;
 
   useEffect(() => {
     if (!currentChord) return;
@@ -161,12 +191,19 @@ export const SongComponent = (props: SongComponentProps) => {
       setHighlightedChord(allChords[index]);
 
       const el = document.getElementById(`chordPill-${index}`);
-      if (settings.autoscroll)
-        el?.scrollIntoView({
-          behavior: "smooth",
-          block: "center",
-          inline: "nearest",
-        });
+
+      if (settings.autoscroll.toggled && el) {
+        const scroll = document.getElementById("scrollContainer");
+
+        const y = el.offsetTop;
+        const offset = -100;
+
+        if (scroll)
+          scroll.scrollTo({
+            top: y + offset,
+            behavior: "smooth",
+          });
+      }
     }
   }, [currentTime]);
 
@@ -428,7 +465,6 @@ export const SongComponent = (props: SongComponentProps) => {
     return match.length > 0;
   };
 
-  let overallChordIndex = -1;
   return (
     <div className={styles.songComponentContainer}>
       <SidebarContainer
@@ -573,7 +609,7 @@ export const SongComponent = (props: SongComponentProps) => {
         )}
         {!props.editing && (
           <div className={styles.songSidebar}>
-            {isOnline && user.isLoggedIn && (
+            {isOnline && user.isLoggedIn && !isMobile && (
               <Link href={`/edit/${song.slug}`} className="button">
                 Edit
               </Link>
@@ -585,15 +621,19 @@ export const SongComponent = (props: SongComponentProps) => {
                   return (
                     <Toggle
                       key={index}
-                      toggled={settings[setting]}
+                      toggled={settings[setting].toggled}
                       setToggled={(toggled) =>
                         setSettings({
                           ...settings,
-                          [setting]: toggled,
+                          [setting]: {
+                            toggled: toggled,
+                            allowInMobile: settings[setting].allowInMobile,
+                          },
                         })
                       }
                       title={setting}
                       type="button"
+                      disabled={!settings[setting].allowInMobile && isMobile}
                     />
                   );
                 })}
@@ -602,7 +642,7 @@ export const SongComponent = (props: SongComponentProps) => {
           </div>
         )}
       </SidebarContainer>
-      <div className={styles.songContent}>
+      <div className={styles.songContent} id="scrollContainer">
         <div className={styles.songDetails}>
           <span className={styles.heading}>{song.name}</span>
           <span className={styles.subHeading}>{song.artist}</span>
@@ -632,99 +672,25 @@ export const SongComponent = (props: SongComponentProps) => {
         <div className={styles.songContainer}>
           {song.lines.map((line, lineIndex) => {
             return (
-              <div key={lineIndex} className={styles.songLine}>
-                {line.words.map((word, wordIndex) => {
-                  const wordTiming =
-                    word.timing || word.timing == 0 ? word.timing : null;
-                  const hasWordTiming = wordTiming || wordTiming == 0;
-
-                  const hasLyric =
-                    !word.lyric.includes("[") &&
-                    !word.lyric.includes("]") &&
-                    word.lyric != "";
-
-                  const nextWord =
-                    allWordsFiltered[
-                      allWordsFiltered.findIndex((w) => w == word) + 1
-                    ];
-
-                  return (
-                    <div key={wordIndex} className={styles.songWord}>
-                      <div className={styles.songChord}>
-                        {word.chords.map((chord, chordIndex) => {
-                          overallChordIndex++;
-                          const chordTiming =
-                            chord.timing || chord.timing == 0
-                              ? chord.timing
-                              : null;
-
-                          const hasChordTiming =
-                            chordTiming || chordTiming == 0;
-
-                          const nextChord =
-                            allChords[
-                              allChords.findIndex((c) => c == chord) + 1
-                            ];
-
-                          return (
-                            <ChordPill
-                              key={chordIndex}
-                              chord={chord}
-                              nextChord={nextChord}
-                              hasChordTiming={hasChordTiming}
-                              chordTiming={chordTiming}
-                              currentTime={
-                                ((chordTiming &&
-                                  nextChord &&
-                                  nextChord.timing) ||
-                                  chordTiming == 0) &&
-                                currentTime >= chordTiming &&
-                                nextChord.timing &&
-                                currentTime <= nextChord.timing
-                                  ? currentTime
-                                  : -1
-                              }
-                              overallChordIndex={overallChordIndex}
-                              lineIndex={lineIndex}
-                              wordIndex={wordIndex}
-                              chordIndex={chordIndex}
-                              highlightChord={settings.highlightChords}
-                              removeChordFromSongWord={() =>
-                                props.editing
-                                  ? removeChordFromSongWord(
-                                      lineIndex,
-                                      wordIndex,
-                                      chordIndex
-                                    )
-                                  : null
-                              }
-                              hiddenMode={settings.hiddenMode}
-                            />
-                          );
-                        })}
-                      </div>
-                      <div
-                        className={`${styles.songLyric} ${
-                          !hasWordTiming && hasLyric
-                            ? styles.missingWordTiming
-                            : ""
-                        } ${hasLyric ? styles.hasLyric : ""} ${
-                          settings.highlightLyrics &&
-                          word.timing &&
-                          word.timing <= currentTime &&
-                          (!nextWord ||
-                            (nextWord.timing && nextWord.timing > currentTime))
-                            ? styles.active
-                            : ""
-                        }`}
-                        onClick={() => addChordToSongWord(lineIndex, wordIndex)}
-                      >
-                        <span>{word.lyric}</span>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
+              <SongLine
+                song={song}
+                line={line}
+                lineIndex={lineIndex}
+                allChords={allChords}
+                allWordsFiltered={allWordsFiltered}
+                currentTime={currentTime}
+                settings={settings}
+                editing={props.editing}
+                isMobile={isMobile}
+                removeChordFromSongWord={(
+                  lineIndex: number,
+                  wordIndex: number,
+                  chordIndex: number
+                ) => removeChordFromSongWord(lineIndex, wordIndex, chordIndex)}
+                addChordToSongWord={(lineIndex: number, wordIndex: number) =>
+                  addChordToSongWord(lineIndex, wordIndex)
+                }
+              />
             );
           })}
         </div>
@@ -749,14 +715,23 @@ export const SongComponent = (props: SongComponentProps) => {
             onReady={(maxTime) =>
               setSong({ ...song, duration: maxTime as number })
             }
-            showPlayerTicks={settings.showPlayerTicks}
+            showPlayerTicks={settings.showPlayerTicks.toggled}
           />
         )}
       </BottomBarContainer>
       {!props.editing &&
         currentTime > 0 &&
         highlightedChord &&
-        settings.showChordPopup && (
+        (settings.showChordPopup.toggled || isMobile) &&
+        (highlightedChord.chord
+          .split("/")
+          .every((part) => isValidChordPart(part).valid) ||
+          (!highlightedChord.chord
+            .split("/")
+            .every((part) => isValidChordPart(part).valid) &&
+            song.tabs &&
+            song.instrument.includes("guitar") &&
+            (!settings.showTabsInline.toggled || isMobile))) && (
           //TODO: Bug: Timings not getting reset properly when scrubbing
           <SongHeader>
             {highlightedChord.chord
@@ -768,14 +743,15 @@ export const SongComponent = (props: SongComponentProps) => {
                 currentTime={currentTime}
                 countdown={getTimingTillNextChord()}
                 type={song.instrument}
-                showTiming={settings.showPopupTiming}
+                showTiming={settings.showPopupTiming.toggled}
               />
             )}
             {!highlightedChord.chord
               .split("/")
               .every((part) => isValidChordPart(part).valid) &&
               song.tabs &&
-              song.instrument.includes("guitar") && (
+              song.instrument.includes("guitar") &&
+              (!settings.showTabsInline.toggled || isMobile) && (
                 <TabViewer
                   tab={
                     song.tabs.find(
@@ -784,7 +760,7 @@ export const SongComponent = (props: SongComponentProps) => {
                   }
                   currentTime={currentTime}
                   countdown={getTimingTillNextChord()}
-                  showTiming={settings.showPopupTiming}
+                  showTiming={settings.showPopupTiming.toggled}
                 />
               )}
           </SongHeader>

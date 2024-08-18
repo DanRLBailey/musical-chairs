@@ -1,4 +1,5 @@
 import { Chord, Line, Song, Word } from "@/types/songTypes";
+import { isValidChordPart } from "./chords";
 
 interface PartsFromSong {
   (song: Song): { allLines: Line[]; allWords: Word[]; allChords: Chord[] };
@@ -147,4 +148,28 @@ export const getIndecesOfLatestWord = (song: Song) => {
   });
 
   return { latestWord, lineIndex, wordIndex };
+};
+
+export const getTabsInLine = (line: Line) => {
+  return [...line.words].flatMap((word) =>
+    [...word.chords].filter(
+      (chord) =>
+        !chord.chord.split("/").every((part) => isValidChordPart(part).valid)
+    )
+  );
+};
+
+export const getNoOfChordsBeforeCurrentLine = (
+  song: Song,
+  line: Line,
+  lineIndex: number
+) => {
+  const { allLines } = getPartsFromSong(song, lineIndex);
+  const lines = allLines.filter((line, index) => index < lineIndex);
+
+  const chords = lines.flatMap((line) =>
+    line.words.flatMap((word) => word.chords)
+  );
+
+  return chords.length;
 };

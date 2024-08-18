@@ -4,7 +4,7 @@ import { Tab, TabColumn } from "@/types/songTypes";
 
 interface TabViewerProps {
   tab: Tab | undefined;
-  currentTime: number;
+  currentTime?: number;
   countdown?: number;
   showTiming?: boolean;
 }
@@ -20,7 +20,7 @@ export const TabViewer = (props: TabViewerProps) => {
     if (!props.countdown) return;
 
     setCountdownVal(props.countdown);
-    setInitialCurrentTime(props.currentTime);
+    setInitialCurrentTime(props.currentTime ?? 0);
   }, [props.countdown]);
 
   useEffect(() => {
@@ -44,7 +44,7 @@ export const TabViewer = (props: TabViewerProps) => {
           <span>A</span>
           <span>E</span>
         </div>
-        {currentTab.cols.map((tabCol, tabColIndex) => {
+        {currentTab.cols?.map((tabCol, tabColIndex) => {
           return (
             <div
               key={tabColIndex}

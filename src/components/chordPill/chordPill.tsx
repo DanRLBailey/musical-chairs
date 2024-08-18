@@ -20,6 +20,7 @@ interface ChordPillProps {
     chordIndex: number
   ) => void;
   hiddenMode?: boolean;
+  showInline?: boolean;
 }
 
 export const formatSeconds = (
@@ -60,7 +61,9 @@ export const ChordPill = (props: ChordPillProps) => {
       className={`${styles.chordPillContainer} ${
         !props.hasChordTiming ? styles.missingChordTiming : ""
       } ${active ? styles.active : ""}`}
-      id={`chordPill-${props.overallChordIndex}`}
+      id={`chordPill${props.showInline ? "-inline" : ""}-${
+        props.overallChordIndex
+      }`}
       onClick={() => {
         if (props.removeChordFromSongWord)
           props.removeChordFromSongWord(

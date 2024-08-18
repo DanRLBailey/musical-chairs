@@ -19,6 +19,7 @@ import { NetworkContext } from "@/context/networkContext/networkContext";
 import { TextInput } from "../textInput/textInput";
 import { getSettingsFromLocal, Setting } from "../songComponent/songComponent";
 import { Toggle } from "../toggle/toggle";
+import { SongLine } from "../songLine/songLine";
 
 interface MultiSongComponentProps {
   songs: Song[];
@@ -42,6 +43,8 @@ export const MultiSongComponent = (props: MultiSongComponentProps) => {
   const [settings, setSettings] = useState<Setting>(getSettingsFromLocal());
 
   const { isOnline } = useContext(NetworkContext);
+
+  const isMobile = window.innerWidth < 568;
 
   useEffect(() => {
     if (!currentChord) return;
@@ -106,12 +109,18 @@ export const MultiSongComponent = (props: MultiSongComponentProps) => {
       setHighlightedChord(allChords[index]);
 
       const el = document.getElementById(`chordPill-${index}`);
-      if (settings.autoscroll)
-        el?.scrollIntoView({
-          behavior: "smooth",
-          block: "center",
-          inline: "nearest",
-        });
+      if (settings.autoscroll.toggled && el) {
+        const scroll = document.getElementById("scrollContainer");
+
+        const y = el.offsetTop;
+        const offset = -100;
+
+        if (scroll)
+          scroll.scrollTo({
+            top: y + offset,
+            behavior: "smooth",
+          });
+      }
     }
   }, [currentTime]);
 
@@ -159,7 +168,6 @@ export const MultiSongComponent = (props: MultiSongComponentProps) => {
     }, nextSongDelay * 1000);
   };
 
-  let overallChordIndex = -1;
   return (
     <div className={styles.multiSongComponentContainer}>
       <SidebarContainer
@@ -192,22 +200,26 @@ export const MultiSongComponent = (props: MultiSongComponentProps) => {
               return (
                 <Toggle
                   key={index}
-                  toggled={settings[setting]}
+                  toggled={settings[setting].toggled}
                   setToggled={(toggled) =>
                     setSettings({
                       ...settings,
-                      [setting]: toggled,
+                      [setting]: {
+                        toggled: toggled,
+                        allowInMobile: settings[setting].allowInMobile,
+                      },
                     })
                   }
                   title={setting}
                   type="button"
+                  disabled={!settings[setting].allowInMobile && isMobile}
                 />
               );
             })}
           </div>
         </div>
       </SidebarContainer>
-      <div className={styles.songContent}>
+      <div className={styles.songContent} id="scrollContainer">
         <div className={styles.songDetails}>
           <span className={styles.heading}>{songs[currentSongIndex].name}</span>
           <span className={styles.subHeading}>
@@ -243,78 +255,19 @@ export const MultiSongComponent = (props: MultiSongComponentProps) => {
         <div className={styles.songContainer}>
           {songs[currentSongIndex].lines.map((line, lineIndex) => {
             return (
-              <div key={lineIndex} className={styles.songLine}>
-                {line.words.map((word, wordIndex) => {
-                  const wordTiming =
-                    word.timing || word.timing == 0 ? word.timing : null;
-                  const hasWordTiming = wordTiming || wordTiming == 0;
-
-                  const hasLyric =
-                    !word.lyric.includes("[") &&
-                    !word.lyric.includes("]") &&
-                    word.lyric != "";
-
-                  const nextWord =
-                    allWordsFiltered[
-                      allWordsFiltered.findIndex((w) => w == word) + 1
-                    ];
-
-                  return (
-                    <div key={wordIndex} className={styles.songWord}>
-                      <div className={styles.songChord}>
-                        {word.chords.map((chord, chordIndex) => {
-                          overallChordIndex++;
-                          const chordTiming =
-                            chord.timing || chord.timing == 0
-                              ? chord.timing
-                              : null;
-
-                          const hasChordTiming =
-                            chordTiming || chordTiming == 0;
-
-                          const nextChord =
-                            allChords[
-                              allChords.findIndex((c) => c == chord) + 1
-                            ];
-
-                          return (
-                            <ChordPill
-                              key={chordIndex}
-                              chord={chord}
-                              nextChord={nextChord}
-                              hasChordTiming={hasChordTiming}
-                              chordTiming={chordTiming}
-                              currentTime={currentTime}
-                              overallChordIndex={overallChordIndex}
-                              lineIndex={lineIndex}
-                              wordIndex={wordIndex}
-                              chordIndex={chordIndex}
-                              highlightChord={settings.highlightChords}
-                              hiddenMode={settings.hiddenMode}
-                            />
-                          );
-                        })}
-                      </div>
-                      <div
-                        className={`${styles.songLyric} ${
-                          !hasWordTiming && hasLyric
-                            ? styles.missingWordTiming
-                            : ""
-                        } ${hasLyric ? styles.hasLyric : ""} ${
-                          word.timing &&
-                          word.timing <= currentTime &&
-                          (!nextWord ||
-                            (nextWord.timing && nextWord.timing > currentTime))
-                            ? styles.active
-                            : ""
-                        }`}
-                      >
-                        <span>{word.lyric}</span>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
+              <SongLine
+                song={songs[currentSongIndex]}
+                line={line}
+                lineIndex={lineIndex}
+                allChords={allChords}
+                allWordsFiltered={allWordsFiltered}
+                currentTime={currentTime}
+                settings={settings}
+                editing={false}
+                isMobile={isMobile}
+                removeChordFromSongWord={() => {}}
+                addChordToSongWord={() => {}}
+              />
             );
           })}
         </div>
@@ -331,41 +284,56 @@ export const MultiSongComponent = (props: MultiSongComponentProps) => {
             isPlaying={isPlaying}
             keepPlaying={!endOfPlaylist}
             onEnded={handleSongEnded}
+            showPlayerTicks={settings.showPlayerTicks.toggled}
           />
         )}
       </BottomBarContainer>
-      {currentTime > 0 && highlightedChord && settings.showChordPopup && (
-        //TODO: Bug: Timings not getting reset properly when scrubbing
-        <SongHeader>
-          {highlightedChord.chord
-            .split("/")
-            .every((part) => isValidChordPart(part).valid) && (
-            <ChordViewer
-              chordName={highlightedChord.chord}
-              chord={(allChordsJson as ChordObj)[highlightedChord.chord][0]}
-              currentTime={currentTime}
-              countdown={getTimingTillNextChord()}
-              type={songs[currentSongIndex].instrument}
-            />
-          )}
-          {/* TODO: Fix undefined */}
-          {!highlightedChord.chord
+      {currentTime > 0 &&
+        highlightedChord &&
+        (settings.showChordPopup.toggled || isMobile) &&
+        (highlightedChord.chord
+          .split("/")
+          .every((part) => isValidChordPart(part).valid) ||
+          (!highlightedChord.chord
             .split("/")
             .every((part) => isValidChordPart(part).valid) &&
             songs[currentSongIndex].tabs &&
-            songs[currentSongIndex].instrument == "guitar" && (
-              <TabViewer
-                tab={
-                  songs[currentSongIndex].tabs?.find(
-                    (tab) => tab.name == highlightedChord.chord
-                  ) ?? undefined
-                }
+            songs[currentSongIndex].instrument.includes("guitar") &&
+            (!settings.showTabsInline.toggled || isMobile))) && (
+          //TODO: Bug: Timings not getting reset properly when scrubbing
+          <SongHeader>
+            {highlightedChord.chord
+              .split("/")
+              .every((part) => isValidChordPart(part).valid) && (
+              <ChordViewer
+                chordName={highlightedChord.chord}
+                chord={(allChordsJson as ChordObj)[highlightedChord.chord][0]}
                 currentTime={currentTime}
                 countdown={getTimingTillNextChord()}
+                type={songs[currentSongIndex].instrument}
+                showTiming={settings.showPopupTiming.toggled}
               />
             )}
-        </SongHeader>
-      )}
+            {/* TODO: Fix undefined */}
+            {!highlightedChord.chord
+              .split("/")
+              .every((part) => isValidChordPart(part).valid) &&
+              songs[currentSongIndex].tabs &&
+              songs[currentSongIndex].instrument == "guitar" &&
+              (!settings.showTabsInline.toggled || isMobile) && (
+                <TabViewer
+                  tab={
+                    songs[currentSongIndex].tabs?.find(
+                      (tab) => tab.name == highlightedChord.chord
+                    ) ?? undefined
+                  }
+                  currentTime={currentTime}
+                  countdown={getTimingTillNextChord()}
+                  showTiming={settings.showPopupTiming.toggled}
+                />
+              )}
+          </SongHeader>
+        )}
       {/* TODO: Add controls key for adding timings */}
     </div>
   );

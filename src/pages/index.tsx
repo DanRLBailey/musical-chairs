@@ -228,6 +228,11 @@ export default function HomePage() {
               <AddIcon />
             </Link>
           )}
+          <button onClick={getRandomSong} title="Random song">
+            <ShuffleIcon />
+          </button>
+        </div>
+        <div className={styles.sidebarHeaderButtons}>
           <button
             onClick={() => setFilterModalOpen(!filterModalOpen)}
             title="Filter"
@@ -237,12 +242,7 @@ export default function HomePage() {
           <button onClick={() => setSortModalOpen(!sortModalOpen)} title="Sort">
             <SortIcon />
           </button>
-        </div>
-        <div className={styles.sidebarHeaderButtons}>
-          <button onClick={getRandomSong} title="Random song">
-            <ShuffleIcon />
-          </button>
-          <button
+          {/* <button
             className={creatingPlaylist ? "active" : ""}
             onClick={() => {
               setCreatingPlaylist(!creatingPlaylist);
@@ -251,7 +251,7 @@ export default function HomePage() {
             title="Playlist"
           >
             <PlaylistAddIcon />
-          </button>
+          </button> */}
         </div>
         <TextInput
           value={search}

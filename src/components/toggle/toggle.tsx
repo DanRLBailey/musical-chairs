@@ -8,6 +8,7 @@ interface ToggleProps {
   rightSideText?: string | React.ReactNode;
   title?: string;
   type?: "toggle" | "button";
+  disabled?: boolean;
 }
 
 export const Toggle = (props: ToggleProps) => {
@@ -23,8 +24,10 @@ export const Toggle = (props: ToggleProps) => {
       <div
         className={`${styles.toggleButtonContainer} ${
           props.toggled ? styles.toggled : ""
-        }`}
-        onClick={() => props.setToggled(!props.toggled)}
+        } ${props.disabled ? styles.disabled : ""}`}
+        onClick={() =>
+          !props.disabled ? props.setToggled(!props.toggled) : null
+        }
       >
         {props.title && formatText(props.title)}
         {!props.title && props.toggled}
@@ -34,8 +37,12 @@ export const Toggle = (props: ToggleProps) => {
 
   return (
     <div
-      className={styles.toggleContainer}
-      onClick={() => props.setToggled(!props.toggled)}
+      className={`${styles.toggleContainer} ${
+        props.disabled ? styles.disabled : ""
+      }`}
+      onClick={() =>
+        !props.disabled ? props.setToggled(!props.toggled) : null
+      }
     >
       <span>{props.leftSideText}</span>
       <div

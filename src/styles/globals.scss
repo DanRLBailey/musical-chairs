@@ -46,6 +46,9 @@
   --background-colour-light-2-rgb: 37, 37, 37;
   --background-colour-light-2: rgb(var(--background-colour-light-2-rgb));
 
+  --background-colour-light-3-rgb: 57, 57, 57;
+  --background-colour-light-3: rgb(var(--background-colour-light-3-rgb));
+
   --background-colour-dark-rgb: 15, 15, 15;
   --background-colour-dark: rgb(var(--background-colour-dark-rgb));
 
@@ -70,6 +73,9 @@
 
   --text-colour-grey-rgb: 200, 200, 200;
   --text-colour-grey: rgba(var(--text-colour-grey-rgb));
+
+  --text-colour-grey-2-rgb: 150, 150, 150;
+  --text-colour-grey-2: rgba(var(--text-colour-grey-2-rgb));
 
   --text-colour-dark-rgb: 15, 15, 15;
   --text-colour-dark: rgba(var(--text-colour-dark-rgb));

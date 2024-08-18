@@ -73,6 +73,7 @@
         flex-direction: row;
         gap: 0.5rem;
         padding: var(--padding-md) 0;
+        flex-wrap: wrap;
 
         .chordPill {
           background-color: var(--background-colour-light-2);
@@ -90,98 +91,6 @@
 
     .songContainer {
       padding-top: var(--padding-md);
-
-      .songLine {
-        display: flex;
-        align-items: flex-end;
-        gap: 0.5rem;
-        margin-bottom: 1rem;
-        flex-wrap: wrap;
-
-        .songWord {
-          display: flex;
-          flex-direction: column;
-          text-align: left;
-          min-width: 1rem;
-          gap: 0.25rem;
-
-          .songChord {
-            display: flex;
-            flex-direction: row;
-            align-items: flex-end;
-            gap: 0.5rem;
-          }
-
-          .songLyric {
-            cursor: pointer;
-
-            &.hasLyric {
-              span {
-                position: relative;
-                &:after {
-                  position: absolute;
-                  content: "";
-                  width: 100%;
-                  height: 50%;
-                  background-color: rgba(0, 0, 0, 0.2);
-                  bottom: -50%;
-                  left: 0;
-                  border-radius: var(--border-radius-xs);
-                }
-              }
-            }
-
-            &.missingWordTiming {
-              span {
-                &:after {
-                  background-color: rgba(var(--alert-colour-rgb), 0.2);
-                }
-              }
-            }
-
-            &.active {
-              span {
-                &:after {
-                  background-color: rgba(var(--primary-colour-rgb), 0.8);
-                }
-              }
-            }
-
-            &:hover {
-              span {
-                &::before {
-                  transform: scale(1);
-                  opacity: 0.8;
-                }
-              }
-            }
-
-            span {
-              display: inline-block;
-              position: relative;
-              line-height: 1;
-
-              &::before {
-                z-index: -1;
-                $padding-block: var(--padding-xs);
-                $padding-inline: var(--padding-xxs);
-                content: "";
-                width: calc(100% + #{$padding-inline} / 2);
-                height: calc(100% + #{$padding-block} / 2);
-                padding: $padding-block $padding-inline;
-                background-color: var(--background-colour-light);
-                border-radius: var(--border-radius-xs);
-                position: absolute;
-                top: calc(#{$padding-block} * -1);
-                left: calc(#{$padding-inline} * -1);
-                transform: scale(0.85);
-                transition: 0.2s ease-out;
-                opacity: 0;
-              }
-            }
-          }
-        }
-      }
     }
   }
 
