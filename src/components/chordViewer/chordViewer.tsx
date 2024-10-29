@@ -61,12 +61,21 @@ export const ChordViewer = (props: ChordViewerProps) => {
                 <div>
                   {fret == "x" && <span className={styles.muted}>X</span>}{" "}
                   {fret == "0" && <span className={styles.open}></span>}
-                </div>
-                <div>
-                  {(parseInt(fret) - fretOffset).toString() == "1" && (
-                    <span className={styles.fret}></span>
+                  {fretOffset <= 0 && (
+                    <>
+                      {(parseInt(fret) - fretOffset).toString() == "1" && (
+                        <span className={styles.fret}></span>
+                      )}
+                    </>
                   )}
                 </div>
+                {fretOffset > 0 && (
+                  <div>
+                    {(parseInt(fret) - fretOffset).toString() == "1" && (
+                      <span className={styles.fret}></span>
+                    )}
+                  </div>
+                )}
                 <div>
                   {(parseInt(fret) - fretOffset).toString() == "2" && (
                     <span className={styles.fret}></span>
@@ -82,6 +91,7 @@ export const ChordViewer = (props: ChordViewerProps) => {
                     <span className={styles.fret}></span>
                   )}
                 </div>
+                {fretOffset <= 0 && <div></div>}
               </div>
             );
           })}
