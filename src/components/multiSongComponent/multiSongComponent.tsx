@@ -20,6 +20,7 @@ import { TextInput } from "../textInput/textInput";
 import { getSettingsFromLocal, Setting } from "../songComponent/songComponent";
 import { Toggle } from "../toggle/toggle";
 import { SongLine } from "../songLine/songLine";
+import { RangeSlider } from "../rangeSlider/rangeSlider";
 
 interface MultiSongComponentProps {
   songs: Song[];
@@ -41,6 +42,8 @@ export const MultiSongComponent = (props: MultiSongComponentProps) => {
   const [isPlaying, setIsPlaying] = useState<boolean>(true);
   const [endOfPlaylist, setEndOfPlaylist] = useState<boolean>(false);
   const [settings, setSettings] = useState<Setting>(getSettingsFromLocal());
+  const [songSpeed, setSongSpeed] = useState<number>(1);
+  const [volume, setVolume] = useState<number>(0.5);
 
   const { isOnline } = useContext(NetworkContext);
 
@@ -218,6 +221,23 @@ export const MultiSongComponent = (props: MultiSongComponentProps) => {
             })}
           </div>
         </div>
+        <RangeSlider
+          value={songSpeed}
+          min={0.25}
+          max={1.75}
+          step={0.25}
+          onValueChange={(newVal) => setSongSpeed(newVal)}
+          label="Speed"
+        />
+        <RangeSlider
+          value={volume}
+          min={0}
+          max={1}
+          step={0.01}
+          onValueChange={(newVal) => setVolume(newVal)}
+          label="Volume"
+          format={(val) => `${parseInt((val * 100).toString())}%`}
+        />
       </SidebarContainer>
       <div className={styles.songContent} id="scrollContainer">
         <div className={styles.songDetails}>
@@ -285,6 +305,8 @@ export const MultiSongComponent = (props: MultiSongComponentProps) => {
             keepPlaying={!endOfPlaylist}
             onEnded={handleSongEnded}
             showPlayerTicks={settings.showPlayerTicks.toggled}
+            speed={songSpeed}
+            volume={volume}
           />
         )}
       </BottomBarContainer>
