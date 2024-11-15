@@ -3,10 +3,11 @@ import executeQuery from "@/lib/db";
 export default async (req, res) => {
   const body = JSON.parse(req.body);
   const email = body["email"];
+  const username = body["username"];
 
   try {
     const existingUser = await executeQuery({
-      query: `SELECT * FROM users2 WHERE email = "${email}"`,
+      query: `SELECT * FROM users2 WHERE email = "${email}" OR user_name = "${username}"`,
     });
 
     if (!existingUser || existingUser.length <= 0)

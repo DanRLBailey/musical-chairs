@@ -317,8 +317,11 @@ export default function HomePage() {
                 );
             }
           )}
-        {(!songs || songs.length == 0 || loading) && (
-          <LoadingSpinner multiplier={2} />
+        {loading && <LoadingSpinner multiplier={2} />}
+        {!loading && songs && songs.length == 0 && (
+          <>
+            <span>No songs found, create some now!</span>
+          </>
         )}
       </div>
       {filterModalOpen && (

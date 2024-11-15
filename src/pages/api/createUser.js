@@ -23,7 +23,7 @@ export default async (req, res) => {
         "user",
         "${displayName}",
         "${username}",
-        []
+        NULL
       )`,
     });
 

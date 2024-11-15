@@ -4,6 +4,7 @@ import { TextInput } from "@/components/textInput/textInput";
 import { UserContext } from "@/context/userContext/userContext";
 import { useRouter } from "next/router";
 import { title } from "@/constants/document";
+import { ToastContext } from "@/context/toastContext/toastContext";
 
 export default function CreateUserPage() {
   const [email, setEmail] = useState<string>("");
@@ -13,6 +14,7 @@ export default function CreateUserPage() {
 
   const { user, setUser } = useContext(UserContext);
   const router = useRouter();
+  const { showToast } = useContext(ToastContext);
 
   useEffect(() => {
     title("Create User");
@@ -30,7 +32,11 @@ export default function CreateUserPage() {
     })
       .then((res) => res.json())
       .then((json) => {
-        console.log(json, "User Created"); //TODO: Move to notification
+        showToast("User Created", "success");
+
+        setTimeout(() => {
+          router.push("/");
+        }, 1000);
       })
       .catch((err) => {
         console.error(err);
@@ -52,7 +58,7 @@ export default function CreateUserPage() {
         if (!json.userExists) {
           await createNewUser();
         } else {
-          console.log("User already exists, please log in"); //TODO: Move to notification
+          showToast("User with that email or username already exists", "error");
         }
       })
       .catch((err) => {
