@@ -1,0 +1,128 @@
+.multiHandleRangeSliderContainer {
+  $height: 2rem;
+  font-size: 0.9rem;
+
+  &:hover {
+    .labelContainer {
+      .refreshIcon {
+        font-size: var(--font-size-lg);
+        margin-left: 0;
+      }
+    }
+  }
+
+  .labelContainer {
+    display: flex;
+    align-items: center;
+    gap: var(--padding-xxs);
+
+    .label {
+      text-align: left;
+      display: flex;
+      z-index: 1;
+
+      span {
+        background-color: var(--primary-colour);
+        padding: 0 var(--padding-xs);
+        border-radius: var(--border-radius-xs) var(--border-radius-xs) 0 0;
+      }
+    }
+
+    .refreshIcon {
+      cursor: pointer;
+      font-size: var(--font-size-md);
+      transition: var(--transition-quick);
+      color: var(--secondary-colour);
+      margin-left: -1.5rem;
+    }
+  }
+
+  .slider {
+    $outline-width: 2px;
+
+    position: relative;
+    width: 100%;
+    height: $height;
+    background-color: rgba(0, 0, 0, 0.2);
+    border: none;
+    border-radius: var(--border-radius-xs);
+    outline-offset: calc($outline-width * -1);
+    transition: var(--transition);
+    outline: $outline-width solid transparent;
+
+    display: flex;
+    justify-content: space-between;
+    padding: 0 var(--padding-sm);
+    color: rgba(255, 255, 255, 0.2);
+
+    &.withLabel {
+      border-top-left-radius: 0;
+    }
+
+    &:hover {
+      outline: $outline-width solid var(--primary-colour-darker);
+    }
+
+    &:focus,
+    &.focused {
+      outline: $outline-width solid var(--primary-colour);
+    }
+
+    .track {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: $height;
+    }
+
+    input[type="range"] {
+      $thumbWidth: 5px;
+
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: $height;
+      -webkit-appearance: none;
+      appearance: none;
+      background: transparent;
+      cursor: pointer;
+      pointer-events: none;
+
+      &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        pointer-events: auto;
+        height: $height;
+        width: $thumbWidth;
+        background-color: var(--secondary-colour);
+        transition: var(--transition);
+
+        &:hover {
+          background-color: var(--secondary-colour-dark);
+        }
+      }
+
+      &:first-of-type {
+        &::-webkit-slider-thumb {
+          border-radius: var(--border-radius-xs);
+        }
+      }
+    }
+  }
+
+  .indicator {
+    height: $height;
+    padding-top: var(--padding-xxs);
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    color: rgba(255, 255, 255, 0.2);
+
+    & > div {
+      background-color: var(--primary-colour-dark);
+      flex: 1;
+      height: 10%;
+    }
+  }
+}

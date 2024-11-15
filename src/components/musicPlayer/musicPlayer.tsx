@@ -24,6 +24,8 @@ interface MusicPlayerProps {
   onEnded?: () => void;
   isPlaying?: boolean;
   showPlayerTicks?: boolean;
+  speed: number;
+  volume: number;
 }
 
 export const MusicPlayer = (props: MusicPlayerProps) => {
@@ -31,7 +33,6 @@ export const MusicPlayer = (props: MusicPlayerProps) => {
   const [playing, setPlaying] = useState<boolean>(false);
   const [maxTime, setMaxTime] = useState<number>(0);
   const [currentTime, setCurrentTime] = useState<number>(0);
-  const [volume, setVolume] = useState<number>(0.5);
   const [addWordToggle, setAddWordToggle] = useState<boolean>(false);
   const [hasWindow, setHasWindow] = useState(false);
 
@@ -132,11 +133,12 @@ export const MusicPlayer = (props: MusicPlayerProps) => {
             onProgress={() => setCurrentTime(player.current.getCurrentTime())}
             width="auto"
             height="inherit"
-            volume={volume}
+            volume={props.volume}
             onEnded={() => {
               if (!props.keepPlaying) setPlaying(false);
               if (props.onEnded) props.onEnded();
             }}
+            playbackRate={props.speed}
           />
         )}
       </div>
@@ -189,19 +191,6 @@ export const MusicPlayer = (props: MusicPlayerProps) => {
           />
         </div>
       )}
-      <div className={styles.volumeContainer}>
-        <VolumeUpIcon />
-        <div>
-          <input
-            type="range"
-            min={0}
-            max={1}
-            value={volume}
-            step={0.01}
-            onChange={(e) => setVolume(parseFloat(e.target.value))}
-          />
-        </div>
-      </div>
     </div>
   );
 };

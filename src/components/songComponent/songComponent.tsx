@@ -37,6 +37,7 @@ import { DropdownContainer } from "../dropdownContainer/dropdownContainer";
 import { Toggle } from "../toggle/toggle";
 import { ToastContext } from "@/context/toastContext/toastContext";
 import { SongLine } from "../songLine/songLine";
+import { RangeSlider } from "../rangeSlider/rangeSlider";
 
 interface SongComponentProps {
   existingSong?: Song;
@@ -116,6 +117,8 @@ export const SongComponent = (props: SongComponentProps) => {
   const [highlightedChord, setHighlightedChord] = useState<Chord>();
   const [sidebarOpen, setSidebarOpen] = useState<boolean>();
   const [settings, setSettings] = useState<Setting>(getSettingsFromLocal());
+  const [songSpeed, setSongSpeed] = useState<number>(1);
+  const [volume, setVolume] = useState<number>(0.5);
 
   const { isOnline } = useContext(NetworkContext);
   const { user } = useContext(UserContext);
@@ -640,6 +643,23 @@ export const SongComponent = (props: SongComponentProps) => {
                 })}
               </div>
             </div>
+            <RangeSlider
+              value={songSpeed}
+              min={0.25}
+              max={1.75}
+              step={0.25}
+              onValueChange={(newVal) => setSongSpeed(newVal)}
+              label="Speed"
+            />
+            <RangeSlider
+              value={volume}
+              min={0}
+              max={1}
+              step={0.01}
+              onValueChange={(newVal) => setVolume(newVal)}
+              label="Volume"
+              format={(val) => `${parseInt((val * 100).toString())}%`}
+            />
           </div>
         )}
       </SidebarContainer>
@@ -717,6 +737,8 @@ export const SongComponent = (props: SongComponentProps) => {
               setSong({ ...song, duration: maxTime as number })
             }
             showPlayerTicks={settings.showPlayerTicks.toggled}
+            speed={songSpeed}
+            volume={volume}
           />
         )}
       </BottomBarContainer>
