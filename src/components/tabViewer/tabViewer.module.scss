@@ -80,7 +80,8 @@
     overflow: hidden;
     background-color: rgba(255, 255, 255, 0.05);
 
-    &::-webkit-slider-thumb {
+    &::-webkit-slider-thumb,
+    &::-moz-range-thumb {
       -webkit-appearance: none;
       pointer-events: auto;
       height: $height;

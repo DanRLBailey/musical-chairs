@@ -89,7 +89,8 @@
       cursor: pointer;
       pointer-events: none;
 
-      &::-webkit-slider-thumb {
+      &::-webkit-slider-thumb,
+      &::-moz-range-thumb {
         -webkit-appearance: none;
         appearance: none;
         pointer-events: auto;
@@ -104,19 +105,22 @@
       }
 
       &:first-of-type {
-        &::-webkit-slider-thumb {
+        &::-webkit-slider-thumb,
+        &::-moz-range-thumb {
           border-radius: var(--border-radius-xs) 0 0 var(--border-radius-xs);
         }
       }
 
       &:last-of-type {
-        &::-webkit-slider-thumb {
+        &::-webkit-slider-thumb,
+        &::-moz-range-thumb {
           border-radius: 0 var(--border-radius-xs) var(--border-radius-xs) 0;
         }
       }
 
       &.equal {
-        &::-webkit-slider-thumb {
+        &::-webkit-slider-thumb,
+        &::-moz-range-thumb {
           border-radius: var(--border-radius-xs);
         }
       }

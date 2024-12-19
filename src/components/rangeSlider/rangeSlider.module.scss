@@ -89,7 +89,8 @@
       cursor: pointer;
       pointer-events: none;
 
-      &::-webkit-slider-thumb {
+      &::-webkit-slider-thumb,
+      &::-moz-range-thumb {
         -webkit-appearance: none;
         appearance: none;
         pointer-events: auto;
@@ -104,7 +105,8 @@
       }
 
       &:first-of-type {
-        &::-webkit-slider-thumb {
+        &::-webkit-slider-thumb,
+        &::-moz-range-thumb {
           border-radius: var(--border-radius-xs);
         }
       }
